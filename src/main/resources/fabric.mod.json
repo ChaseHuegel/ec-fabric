@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
-  "version": "${version}",
+  "id": "ecfabric",
+  "version": "v1.0.0",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "EternalCraft",
+  "description": "A private SMP mod.",
   "authors": [
-    "Me!"
+    "chase"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://chasehuegel.io/",
+    "sources": ""
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/ecfabric/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.chasehuegel.ecfabric.EternalCraft"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "ecfabric.mixins.json"
   ],
 
   "depends": {
