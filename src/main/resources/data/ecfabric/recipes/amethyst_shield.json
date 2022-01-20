@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "minecraft:shield"
+    },
+
+    "addition": {
+        "item": "minecraft:amethyst_shard"
+    },
+
+    "result": {
+        "item": "ecfabric:amethyst_shield"
+    }
+}

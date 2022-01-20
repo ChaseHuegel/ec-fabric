@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.chasehuegel.ecfabric.EternalCraft"
+    ],
+    "client": [
+      "io.chasehuegel.ecfabric.EternalCraftClient"
     ]
   },
   "mixins": [

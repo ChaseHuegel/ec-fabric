@@ -15,7 +15,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -185,12 +184,12 @@ public class WaterCan extends Item {
 
     public static ItemStack getFilledStack(ItemStack stack, PlayerEntity player, Fluid fluid) {
         if (!player.getAbilities().creativeMode) {
-            Item item = Items.EMPTY_CAN;
+            Item item = CustomItems.EMPTY_CAN;
 
             if (fluid.isIn(FluidTags.WATER))
-                item = Items.WATER_CAN;
+                item = CustomItems.WATER_CAN;
             else if (fluid.isIn(FluidTags.LAVA))
-                item = Items.LAVA_CAN;
+                item = CustomItems.LAVA_CAN;
 
             ItemStack itemStack = new ItemStack(item);
             return itemStack;
@@ -200,7 +199,7 @@ public class WaterCan extends Item {
 
     public static ItemStack getFilledStack(ItemStack stack, PlayerEntity player) {
         if (!player.getAbilities().creativeMode) {
-            ItemStack itemStack = new ItemStack(Items.WATER_CAN);
+            ItemStack itemStack = new ItemStack(CustomItems.WATER_CAN);
             return itemStack;
         }
         return stack;
@@ -208,7 +207,7 @@ public class WaterCan extends Item {
 
     public static ItemStack getPartialStack(ItemStack stack, PlayerEntity player, int amount) {
         if (!player.getAbilities().creativeMode) {
-            ItemStack itemStack = new ItemStack(Items.WATER_CAN);
+            ItemStack itemStack = new ItemStack(CustomItems.WATER_CAN);
             itemStack.setDamage(itemStack.getMaxDamage() - amount);
             return itemStack;
         }
@@ -217,7 +216,7 @@ public class WaterCan extends Item {
 
     public static ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {
         if (!player.getAbilities().creativeMode) {
-            return new ItemStack(Items.EMPTY_CAN);
+            return new ItemStack(CustomItems.EMPTY_CAN);
         }
         return stack;
     }

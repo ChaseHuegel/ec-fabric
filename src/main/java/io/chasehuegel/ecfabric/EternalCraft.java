@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.chasehuegel.ecfabric.item.CustomItemGroup;
-import io.chasehuegel.ecfabric.item.Items;
+import io.chasehuegel.ecfabric.item.CustomItems;
 
 public class EternalCraft implements ModInitializer {
 	public static final String Namespace = "ecfabric";
@@ -17,7 +17,7 @@ public class EternalCraft implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		Items.Initialize();
+		CustomItems.Initialize();
 		CustomItemGroup.Initialize();
 	}
 }
