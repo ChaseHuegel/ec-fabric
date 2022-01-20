@@ -1,0 +1,14 @@
+{
+    "itemGroup.ecfabric.tools": "Tools",
+    "itemGroup.ecfabric.combat": "Combat",
+
+    "item.ecfabric.empty_can": "Empty Can",
+    "item.ecfabric.water_can": "Water Can",
+    "item.ecfabric.lava_can": "Lava Can",
+
+    "item.ecfabric.amethyst_axe": "Amethyst Axe",
+    "item.ecfabric.amethyst_hoe": "Amethyst Hoe",
+    "item.ecfabric.amethyst_pickaxe": "Amethyst Pickaxe",
+    "item.ecfabric.amethyst_shovel": "Amethyst Shovel",
+    "item.ecfabric.amethyst_sword": "Amethyst Sword"
+}

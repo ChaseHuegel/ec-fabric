@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "ecfabric:item/wooden_watering_can",
-		"particle": "ecfabric:item/wooden_watering_can"
+		"0": "ecfabric:item/lava_can",
+		"particle": "ecfabric:item/lava_can"
 	},
 	"elements": [
 		{
