@@ -18,6 +18,7 @@ public class CustomItems {
     public static final Item WATER_CAN = CustomItems.register("water_can", new WaterCan(Fluids.WATER, new FabricItemSettings().group(CustomItemGroup.ECFABRIC).maxDamage(16)));
     public static final Item LAVA_CAN = CustomItems.register("lava_can", new WaterCan(Fluids.LAVA, new FabricItemSettings().group(CustomItemGroup.ECFABRIC).maxDamage(16)));
     
+    public static final Item AMETHYST_INGOT = CustomItems.register("amethyst_ingot", new Item(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SWORD = CustomItems.register("amethyst_sword", new CustomSwordItem(CustomToolMaterials.AMETHYST, 3, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SHOVEL = CustomItems.register("amethyst_shovel", new CustomShovelItem(CustomToolMaterials.AMETHYST, 1, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_PICKAXE = CustomItems.register("amethyst_pickaxe", new CustomPickaxeItem(CustomToolMaterials.AMETHYST, 1, -2.8f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
@@ -30,6 +31,8 @@ public class CustomItems {
     public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SHIELD = CustomItems.register("amethyst_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(436).group(CustomItemGroup.ECFABRIC), 140, 22, Items.AMETHYST_SHARD));
     public static final Item AMETHYST_AMULET = CustomItems.register("amethyst_amulet", new AmethystAmulet(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    
+    public static final Item GOLDEN_SHIELD = CustomItems.register("golden_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.ECFABRIC), 60, 50, Items.GOLD_INGOT));
     
     public static void Initialize() {}
 

@@ -2,7 +2,7 @@
     "type": "minecraft:smithing",
     
     "base": {
-        "item": "minecraft:shield"
+        "item": "minecraft:golden_hoe"
     },
 
     "addition": {
@@ -10,6 +10,6 @@
     },
 
     "result": {
-        "item": "ecfabric:amethyst_shield"
+        "item": "ecfabric:amethyst_hoe"
     }
 }

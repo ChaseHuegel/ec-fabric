@@ -2,17 +2,23 @@ package io.chasehuegel.ecfabric.item;
 
 import org.jetbrains.annotations.Nullable;
 import io.chasehuegel.ecfabric.EternalCraft;
+import net.fabricmc.fabric.impl.transfer.fluid.CauldronStorage;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.FluidDrainable;
+import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
@@ -46,47 +52,50 @@ public class WaterCan extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
-        BlockHitResult blockHitResult = WaterCan.raycast(world, player, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = WaterCan.raycast(world, player, RaycastContext.FluidHandling.SOURCE_ONLY);
         
-        if (blockHitResult.getType() == HitResult.Type.MISS) {
+        if (hitResult.getType() == HitResult.Type.MISS) {
             return TypedActionResult.pass(itemStack);
         }
 
-        if (blockHitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            Direction direction = blockHitResult.getSide();
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockPos blockPos = hitResult.getBlockPos();
+            Direction direction = hitResult.getSide();
             BlockPos blockPos2 = blockPos.offset(direction);
 
             if (!world.canPlayerModifyAt(player, blockPos) || !player.canPlaceOn(blockPos2, direction, itemStack)) {
                 return TypedActionResult.fail(itemStack);
             }
+            
+            BlockState blockState = world.getBlockState(blockPos);
+            FluidState fluidState = world.getFluidState(blockPos);
+            Fluid blockFluid = fluidState.getFluid();
 
-            if (this.fluid == Fluids.EMPTY) {
-                BlockState blockState = world.getBlockState(blockPos);
-                FluidState fluidState = world.getFluidState(blockPos);
-                Fluid blockFluid = fluidState.getFluid();
+            if (blockState.getBlock() instanceof CauldronBlock) {
+                blockFluid = CauldronStorage.get(world, blockPos).getResource().getFluid();
+            }
+
+            if (this.fluid == Fluids.EMPTY || this.fluid == blockFluid) {
+                boolean filled = false;
 
                 if (blockState.getBlock() instanceof FluidDrainable && !((FluidDrainable)blockState.getBlock()).tryDrainFluid(world, blockPos, blockState).isEmpty()) {
                     world.emitGameEvent((Entity)player, GameEvent.FLUID_PICKUP, blockPos);
-                    
-                    if (itemStack.getDamage() > 0) {
-                        itemStack.damage(-1, EternalCraft.Random, (player instanceof ServerPlayerEntity) ? (ServerPlayerEntity)player : null);
-                    }
-                    else {
-                        if (blockFluid == Fluids.WATER){
-                            itemStack = WaterCan.getFilledStack(itemStack, player, Fluids.WATER);
-                        } else if (blockFluid == Fluids.LAVA){
-                            itemStack = WaterCan.getFilledStack(itemStack, player, Fluids.LAVA);
-                        }
-                    }
-                    
-                    this.playFillingSound(player, world, blockPos);
-                    player.incrementStat(Stats.USED.getOrCreateStat(this));
-                    
-                    return TypedActionResult.success(itemStack, world.isClient());
+                    filled = true;
+                } else if (blockState.getBlock() instanceof CauldronBlock && blockState.get(LeveledCauldronBlock.LEVEL) > 0) {
+                    player.incrementStat(Stats.USE_CAULDRON);
+                    LeveledCauldronBlock.decrementFluidLevel(blockState, world, blockPos);
+                    filled = true;
                 }
 
-                return TypedActionResult.fail(itemStack);
+                if (filled) {
+                    this.playFillingSound(player, world, blockPos);
+                    player.incrementStat(Stats.USED.getOrCreateStat(this));
+                    itemStack = refillStack(itemStack, player, blockFluid);
+
+                    return TypedActionResult.success(itemStack, world.isClient());
+                } else {
+                    return TypedActionResult.fail(itemStack);
+                }
             }
 
             if (this.pourFluid(player, world, blockPos)) {
@@ -109,6 +118,7 @@ public class WaterCan extends Item {
 
             return TypedActionResult.fail(itemStack);
         }
+
         return TypedActionResult.pass(itemStack);
     }
 
@@ -137,49 +147,78 @@ public class WaterCan extends Item {
         else if (this.fluid == Fluids.LAVA)
             farmlandParticle = ParticleTypes.FLAME;
 
+        // for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 0, 1)))
         boolean didPour = false;
-        for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 0, 1))) {
-            if (world.getBlockState(blockPos).getBlock() instanceof FarmlandBlock) {
-                BlockState blockState = world.getBlockState(blockPos);
+        BlockPos blockPos = pos;
+        if (world.getBlockState(blockPos).getBlock() instanceof FarmlandBlock) {
+            BlockState blockState = world.getBlockState(blockPos);
 
-                if ((this.fluid == Fluids.LAVA && blockState.get(Properties.MOISTURE) > 0) || 
-                    (this.fluid == Fluids.WATER && blockState.get(Properties.MOISTURE) < FarmlandBlock.MAX_MOISTURE))
-                {
-                    if (this.fluid == Fluids.WATER)
-                    world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, FarmlandBlock.MAX_MOISTURE), Block.NOTIFY_LISTENERS);
-                    else if (this.fluid == Fluids.LAVA)
-                    world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, 0), Block.NOTIFY_LISTENERS);
-                    
-                    world.emitGameEvent((Entity)player, GameEvent.BLOCK_CHANGE, blockPos);
+            if ((this.fluid == Fluids.LAVA && blockState.get(Properties.MOISTURE) > 0) || 
+                (this.fluid == Fluids.WATER && blockState.get(Properties.MOISTURE) < FarmlandBlock.MAX_MOISTURE))
+            {
+                if (this.fluid == Fluids.WATER)
+                world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, FarmlandBlock.MAX_MOISTURE), Block.NOTIFY_LISTENERS);
+                else if (this.fluid == Fluids.LAVA)
+                world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, 0), Block.NOTIFY_LISTENERS);
+                
+                world.emitGameEvent((Entity)player, GameEvent.BLOCK_CHANGE, blockPos);
 
-                    int i = blockPos.getX();
-                    int j = blockPos.getY() + 1;
-                    int k = blockPos.getZ();
+                int i = blockPos.getX();
+                int j = blockPos.getY() + 1;
+                int k = blockPos.getZ();
 
-                    for (int l = 0; l < 8; ++l) {
-                        world.addParticle(farmlandParticle, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0, 0.0, 0.0);
-                    }
-
-                    BlockState blockStateAbove = world.getBlockState(blockPos.up());
-
-                    if (blockStateAbove.getBlock() instanceof CropBlock) {
-                        CropBlock cropBlock = (CropBlock)blockStateAbove.getBlock();
-
-                        if (this.fluid.isIn(FluidTags.WATER)) {
-                            if (cropBlock.canGrow(world, EternalCraft.Random, blockPos.up(), blockStateAbove)) {
-                                cropBlock.applyGrowth(world, blockPos.up(), blockStateAbove);
-                            }
-                        } else if (this.fluid.isIn(FluidTags.LAVA)) {
-                            world.breakBlock(blockPos.up(), false);
-                        }
-                    }
-
-                    didPour = true;
+                for (int l = 0; l < 8; ++l) {
+                    world.addParticle(farmlandParticle, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0, 0.0, 0.0);
                 }
+
+                BlockState blockStateAbove = world.getBlockState(blockPos.up());
+
+                if (blockStateAbove.getBlock() instanceof CropBlock) {
+                    CropBlock cropBlock = (CropBlock)blockStateAbove.getBlock();
+
+                    if (this.fluid.isIn(FluidTags.WATER)) {
+                        if (cropBlock.canGrow(world, EternalCraft.Random, blockPos.up(), blockStateAbove)) {
+                            cropBlock.applyGrowth(world, blockPos.up(), blockStateAbove);
+                        }
+                    } else if (this.fluid.isIn(FluidTags.LAVA)) {
+                        world.breakBlock(blockPos.up(), false);
+                    }
+                }
+
+                didPour = true;
             }
         }
 
         return didPour;
+    }
+
+    public boolean tryEquip(ItemStack itemStack, World world, PlayerEntity player) {
+        EquipmentSlot equipmentSlot = EquipmentSlot.HEAD;
+        ItemStack itemStack2 = player.getEquippedStack(equipmentSlot);
+
+        if (itemStack2.isEmpty()) {
+            player.equipStack(equipmentSlot, itemStack.copy());
+            
+            if (!world.isClient()) {
+                player.incrementStat(Stats.USED.getOrCreateStat(this));
+            }
+
+            itemStack.setCount(0);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static ItemStack refillStack(ItemStack itemStack, PlayerEntity player, Fluid fluid) {
+        if (fluid == Fluids.WATER){
+            itemStack = WaterCan.getFilledStack(itemStack, player, Fluids.WATER);
+        } else if (fluid == Fluids.LAVA){
+            itemStack = WaterCan.getFilledStack(itemStack, player, Fluids.LAVA);
+        }
+
+        return itemStack;
     }
 
     public static ItemStack getFilledStack(ItemStack stack, PlayerEntity player, Fluid fluid) {
@@ -194,6 +233,7 @@ public class WaterCan extends Item {
             ItemStack itemStack = new ItemStack(item);
             return itemStack;
         }
+
         return stack;
     }
 
@@ -202,6 +242,7 @@ public class WaterCan extends Item {
             ItemStack itemStack = new ItemStack(CustomItems.WATER_CAN);
             return itemStack;
         }
+
         return stack;
     }
 
@@ -211,6 +252,7 @@ public class WaterCan extends Item {
             itemStack.setDamage(itemStack.getMaxDamage() - amount);
             return itemStack;
         }
+
         return stack;
     }
 
@@ -218,6 +260,7 @@ public class WaterCan extends Item {
         if (!player.getAbilities().creativeMode) {
             return new ItemStack(CustomItems.EMPTY_CAN);
         }
+        
         return stack;
     }
 

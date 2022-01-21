@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        { "item": "minecraft:amethyst_shard" },
+        { "item": "minecraft:amethyst_shard" },
+        { "item": "minecraft:amethyst_shard" },
+        { "item": "minecraft:amethyst_shard" },
+        { "item": "minecraft:gold_ingot" },
+        { "item": "minecraft:gold_ingot" },
+        { "item": "minecraft:gold_ingot" },
+        { "item": "minecraft:gold_ingot" }
+    ],
+    "result": {
+        "item": "ecfabric:amethyst_ingot",
+        "count": 1
+    }
+}

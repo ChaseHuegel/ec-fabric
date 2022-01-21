@@ -5,6 +5,7 @@
     "item.ecfabric.water_can": "Water Can",
     "item.ecfabric.lava_can": "Lava Can",
 
+    "item.ecfabric.amethyst_ingot": "Amethyst Ingot",
     "item.ecfabric.amethyst_amulet": "Amethyst Amulet",
     "item.ecfabric.amethyst_dagger": "Amethyst Dagger",
     "item.ecfabric.amethyst_greatsword": "Amethyst Greatsword",
@@ -16,5 +17,7 @@
     "item.ecfabric.amethyst_pickaxe": "Amethyst Pickaxe",
     "item.ecfabric.amethyst_shovel": "Amethyst Shovel",
     "item.ecfabric.amethyst_sword": "Amethyst Sword",
-    "item.ecfabric.amethyst_shield": "Amethyst Shield"
+    "item.ecfabric.amethyst_shield": "Amethyst Shield",
+
+    "item.ecfabric.golden_shield": "Golden Shield"
 }

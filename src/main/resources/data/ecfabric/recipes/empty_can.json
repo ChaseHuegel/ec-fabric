@@ -1,13 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "   ",
-        "PIP",
-        " P "
+        "C  ",
+        "CIC",
+        " C "
     ],
     "key": {
-        "P": {
-            "tag": "minecraft:planks"
+        "C": {
+            "item": "minecraft:copper_ingot"
         },
         "I": {
             "item": "minecraft:iron_ingot"
