@@ -6,7 +6,6 @@
     "item.ecfabric.lava_can": "Lava Can",
 
     "item.ecfabric.amethyst_ingot": "Amethyst Ingot",
-    "item.ecfabric.amethyst_amulet": "Amethyst Amulet",
     "item.ecfabric.amethyst_dagger": "Amethyst Dagger",
     "item.ecfabric.amethyst_greatsword": "Amethyst Greatsword",
     "item.ecfabric.amethyst_mace": "Amethyst Mace",
@@ -22,6 +21,25 @@
     "item.ecfabric.amethyst_chestplate": "Amethyst Chestplate",
     "item.ecfabric.amethyst_leggings": "Amethyst Leggings",
     "item.ecfabric.amethyst_boots": "Amethyst Boots",
+    "item.ecfabric.amethyst_amulet": "Amethyst Amulet",
+
+    "item.ecfabric.steel_ingot": "Steel Ingot",
+    "item.ecfabric.steel_dagger": "Steel Dagger",
+    "item.ecfabric.steel_greatsword": "Steel Greatsword",
+    "item.ecfabric.steel_mace": "Steel Mace",
+    "item.ecfabric.steel_spear": "Steel Spear",
+    "item.ecfabric.steel_staff": "Steel Staff",
+    "item.ecfabric.steel_axe": "Steel Axe",
+    "item.ecfabric.steel_hoe": "Steel Hoe",
+    "item.ecfabric.steel_pickaxe": "Steel Pickaxe",
+    "item.ecfabric.steel_shovel": "Steel Shovel",
+    "item.ecfabric.steel_sword": "Steel Sword",
+    "item.ecfabric.steel_shield": "Steel Shield",
+    "item.ecfabric.steel_helmet": "Steel Helmet",
+    "item.ecfabric.steel_chestplate": "Steel Chestplate",
+    "item.ecfabric.steel_leggings": "Steel Leggings",
+    "item.ecfabric.steel_boots": "Steel Boots",
+    "item.ecfabric.steel_link": "Steel Link",
 
     "item.ecfabric.golden_shield": "Golden Shield"
 }

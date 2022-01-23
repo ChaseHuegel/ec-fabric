@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:iron_greatsword"
+    },
+
+    "addition": {
+        "item": "ecfabric:steel_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:steel_greatsword"
+    }
+}

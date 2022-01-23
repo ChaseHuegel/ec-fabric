@@ -11,7 +11,8 @@ import net.minecraft.util.Lazy;
 
 public enum CustomArmorMaterials implements ArmorMaterial
 {
-    AMETHYST("amethyst", 12, new int[]{2, 3, 5, 2}, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0f, 0.0f, () -> Ingredient.ofItems(Items.LEATHER));
+    AMETHYST("amethyst", 12, new int[]{2, 3, 5, 2}, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0f, 0.0f, () -> Ingredient.ofItems(Items.LEATHER)),
+    STEEL("steel", 20, new int[]{3, 5, 7, 2}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.STEEL_INGOT));
     // LEATHER("leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.LEATHER)),
     // CHAIN("chainmail", 15, new int[]{1, 4, 5, 2}, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.IRON_INGOT)),
     // IRON("iron", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.IRON_INGOT)),
