@@ -1,11 +1,20 @@
 package io.chasehuegel.ecfabric.item;
 
 import java.util.Optional;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 import io.chasehuegel.ecfabric.EternalCraft;
 import io.chasehuegel.ecfabric.item.Trinkets.AmethystAmulet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -29,10 +38,14 @@ public class CustomItems {
     public static final Item AMETHYST_MACE = CustomItems.register("amethyst_mace", new CustomMaceItem(CustomToolMaterials.AMETHYST, 2, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SPEAR = CustomItems.register("amethyst_spear", new CustomSpearItem(CustomToolMaterials.AMETHYST, 1, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item AMETHYST_SHIELD = CustomItems.register("amethyst_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(436).group(CustomItemGroup.ECFABRIC), 140, 22, Items.AMETHYST_SHARD));
+    public static final Item AMETHYST_SHIELD = CustomItems.register("amethyst_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.ECFABRIC), 140, 22, 0f, 2f, 0f, Items.AMETHYST_SHARD));
     public static final Item AMETHYST_AMULET = CustomItems.register("amethyst_amulet", new AmethystAmulet(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item AMETHYST_HELMET = CustomItems.register("amethyst_helmet", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item AMETHYST_CHESTPLATE = CustomItems.register("amethyst_chestplate", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item AMETHYST_LEGGINGS = CustomItems.register("amethyst_leggings", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item AMETHYST_BOOTS = CustomItems.register("amethyst_boots", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     
-    public static final Item GOLDEN_SHIELD = CustomItems.register("golden_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.ECFABRIC), 60, 50, Items.GOLD_INGOT));
+    public static final Item GOLDEN_SHIELD = CustomItems.register("golden_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.ECFABRIC), 60, 50, 0f, 0f, 0.1f, Items.GOLD_INGOT));
     
     public static void Initialize() {}
 

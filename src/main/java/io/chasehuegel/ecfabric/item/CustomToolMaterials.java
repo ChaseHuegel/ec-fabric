@@ -2,6 +2,7 @@ package io.chasehuegel.ecfabric.item;
 
 import java.util.function.Supplier;
 import net.fabricmc.yarn.constants.MiningLevels;
+import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
