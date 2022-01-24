@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "minecraft:stone_sword"
+    },
+
+    "addition": {
+        "item": "minecraft:crying_obsidian"
+    },
+
+    "result": {
+        "item": "ecfabric:obsidian_sword"
+    }
+}
