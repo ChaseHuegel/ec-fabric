@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " b ",
+        "a  ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:stick"
+        },
+        "b": {
+            "item": "minecraft:cobblestone"
+        }
+    },
+    "result": {
+        "item": "ecfabric:stone_dagger",
+        "count": 1
+    }
+}

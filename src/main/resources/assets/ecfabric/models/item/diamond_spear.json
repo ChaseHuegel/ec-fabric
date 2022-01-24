@@ -1,0 +1,6 @@
+{
+	"parent": "ecfabric:item/_generated_32_forward",
+	"textures": {
+		"layer0": "ecfabric:item/diamond_spear"
+	}
+}

@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:diamond_greatsword"
+    },
+
+    "addition": {
+        "item": "minecraft:netherite_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:netherite_greatsword"
+    }
+}

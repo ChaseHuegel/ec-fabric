@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:diamond_spear"
+    },
+
+    "addition": {
+        "item": "minecraft:netherite_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:netherite_spear"
+    }
+}
