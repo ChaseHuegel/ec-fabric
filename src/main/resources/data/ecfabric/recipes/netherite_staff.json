@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:bone"
+        "item": "minecraft:netherite_ingot"
     },
 
     "result": {
-        "item": "ecfabric:bone_staff"
+        "item": "ecfabric:netherite_staff"
     }
 }

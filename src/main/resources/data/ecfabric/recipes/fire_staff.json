@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:bone"
+        "item": "minecraft:blaze_rod"
     },
 
     "result": {
-        "item": "ecfabric:bone_staff"
+        "item": "ecfabric:fire_staff"
     }
 }

@@ -35,15 +35,14 @@ public class CustomItems {
     public static final Item AMETHYST_GREATSWORD = CustomItems.register("amethyst_greatsword", new CustomGreatswordItem(CustomToolMaterials.AMETHYST, 4, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_MACE = CustomItems.register("amethyst_mace", new CustomMaceItem(CustomToolMaterials.AMETHYST, 2, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SPEAR = CustomItems.register("amethyst_spear", new CustomSpearItem(CustomToolMaterials.AMETHYST, 1, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_SHIELD = CustomItems.register("amethyst_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.ECFABRIC), 100, 22, 0f, 2f, 0f, Items.AMETHYST_SHARD));
     public static final Item AMETHYST_HELMET = CustomItems.register("amethyst_helmet", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_CHESTPLATE = CustomItems.register("amethyst_chestplate", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_LEGGINGS = CustomItems.register("amethyst_leggings", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_BOOTS = CustomItems.register("amethyst_boots", new ArmorItem(CustomArmorMaterials.AMETHYST, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item AMETHYST_AMULET = CustomItems.register("amethyst_amulet", new CustomTrinket(new FabricItemSettings().maxCount(1).group(CustomItemGroup.ECFABRIC),
-                                                ImmutableMultimap.of(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(String.format("%s:movement_speed", EternalCraft.Namespace), 0.1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL))
-                                                ));
+    ImmutableMultimap.of(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(String.format("%s:movement_speed", EternalCraft.Namespace), 0.1, EntityAttributeModifier.Operation.MULTIPLY_TOTAL))
+    ));
     
     public static final Item STEEL_INGOT = CustomItems.register("steel_ingot", new Item(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_SWORD = CustomItems.register("steel_sword", new CustomSwordItem(CustomToolMaterials.STEEL, 3, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
@@ -55,16 +54,15 @@ public class CustomItems {
     public static final Item STEEL_GREATSWORD = CustomItems.register("steel_greatsword", new CustomGreatswordItem(CustomToolMaterials.STEEL, 4, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_MACE = CustomItems.register("steel_mace", new CustomMaceItem(CustomToolMaterials.STEEL, 2, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_SPEAR = CustomItems.register("steel_spear", new CustomSpearItem(CustomToolMaterials.STEEL, 1, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item STEEL_STAFF = CustomItems.register("steel_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_SHIELD = CustomItems.register("steel_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(400).group(CustomItemGroup.ECFABRIC), 200, 15, 2f, 0f, 0f, CustomItems.STEEL_INGOT));
     public static final Item STEEL_HELMET = CustomItems.register("steel_helmet", new ArmorItem(CustomArmorMaterials.STEEL, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_CHESTPLATE = CustomItems.register("steel_chestplate", new ArmorItem(CustomArmorMaterials.STEEL, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_LEGGINGS = CustomItems.register("steel_leggings", new ArmorItem(CustomArmorMaterials.STEEL, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item STEEL_BOOTS = CustomItems.register("steel_boots", new ArmorItem(CustomArmorMaterials.STEEL, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item STEEL_LINK = CustomItems.register("steel_link", new CustomTrinket(new FabricItemSettings().maxCount(1).group(CustomItemGroup.ECFABRIC),
-                                            ImmutableMultimap.of(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(String.format("%s:toughness", EternalCraft.Namespace), 0.25f, EntityAttributeModifier.Operation.MULTIPLY_TOTAL))
-                                            ));
-
+    public static final Item STEEL_LINK = CustomItems.register("steel_link", new CustomTrinket(new FabricItemSettings().group(CustomItemGroup.ECFABRIC),
+    ImmutableMultimap.of(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(String.format("%s:toughness", EternalCraft.Namespace), 0.25f, EntityAttributeModifier.Operation.MULTIPLY_TOTAL))
+    ));
+    
     public static final Item BONE_SWORD = CustomItems.register("bone_sword", new CustomSwordItem(CustomToolMaterials.BONE, 3, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_SHOVEL = CustomItems.register("bone_shovel", new CustomShovelItem(CustomToolMaterials.BONE, 1, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_PICKAXE = CustomItems.register("bone_pickaxe", new CustomPickaxeItem(CustomToolMaterials.BONE, 1, -2.8f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
@@ -74,15 +72,27 @@ public class CustomItems {
     public static final Item BONE_GREATSWORD = CustomItems.register("bone_greatsword", new CustomGreatswordItem(CustomToolMaterials.BONE, 4, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_MACE = CustomItems.register("bone_mace", new CustomMaceItem(CustomToolMaterials.BONE, 2, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_SPEAR = CustomItems.register("bone_spear", new CustomSpearItem(CustomToolMaterials.BONE, 1, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_SHIELD = CustomItems.register("bone_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(250).group(CustomItemGroup.ECFABRIC), 200, 30, 0f, 0f, 0.1f, Items.BONE));
     public static final Item BONE_HELMET = CustomItems.register("bone_helmet", new ArmorItem(CustomArmorMaterials.BONE, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_CHESTPLATE = CustomItems.register("bone_chestplate", new ArmorItem(CustomArmorMaterials.BONE, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_LEGGINGS = CustomItems.register("bone_leggings", new ArmorItem(CustomArmorMaterials.BONE, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_BOOTS = CustomItems.register("bone_boots", new ArmorItem(CustomArmorMaterials.BONE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
-    public static final Item BONE_IDOL = CustomItems.register("bone_idol", new CustomTrinket(new FabricItemSettings().maxCount(1).group(CustomItemGroup.ECFABRIC),
-                                            ImmutableMultimap.of(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(String.format("%s:health", EternalCraft.Namespace), 4f, EntityAttributeModifier.Operation.ADDITION))
-                                            ));
+    public static final Item BONE_IDOL = CustomItems.register("bone_idol", new CustomTrinket(new FabricItemSettings().group(CustomItemGroup.ECFABRIC),
+    ImmutableMultimap.of(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(String.format("%s:health", EternalCraft.Namespace), 4f, EntityAttributeModifier.Operation.ADDITION))
+    ));
+    
+    public static final Item WOODEN_STAFF = CustomItems.register("wooden_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item STEEL_STAFF = CustomItems.register("steel_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item EMERALD_STAFF = CustomItems.register("emerald_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item TIME_STAFF = CustomItems.register("time_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item ENDER_STAFF = CustomItems.register("ender_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item SOUL_STAFF = CustomItems.register("soul_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item FIRE_STAFF = CustomItems.register("fire_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item SEA_STAFF = CustomItems.register("sea_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item NETHERITE_STAFF = CustomItems.register("netherite_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item STAR_STAFF = CustomItems.register("star_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
 
     
     public static void Initialize() {}

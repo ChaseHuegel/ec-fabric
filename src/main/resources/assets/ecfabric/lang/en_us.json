@@ -11,7 +11,6 @@
     "item.ecfabric.amethyst_greatsword": "Amethyst Greatsword",
     "item.ecfabric.amethyst_mace": "Amethyst Mace",
     "item.ecfabric.amethyst_spear": "Amethyst Spear",
-    "item.ecfabric.amethyst_staff": "Amethyst Staff",
     "item.ecfabric.amethyst_axe": "Amethyst Axe",
     "item.ecfabric.amethyst_hoe": "Amethyst Hoe",
     "item.ecfabric.amethyst_pickaxe": "Amethyst Pickaxe",
@@ -23,13 +22,12 @@
     "item.ecfabric.amethyst_leggings": "Amethyst Leggings",
     "item.ecfabric.amethyst_boots": "Amethyst Boots",
     "item.ecfabric.amethyst_amulet": "Amethyst Amulet",
-
+    
     "item.ecfabric.steel_ingot": "Steel Ingot",
     "item.ecfabric.steel_dagger": "Steel Dagger",
     "item.ecfabric.steel_greatsword": "Steel Greatsword",
     "item.ecfabric.steel_mace": "Steel Mace",
     "item.ecfabric.steel_spear": "Steel Spear",
-    "item.ecfabric.steel_staff": "Steel Staff",
     "item.ecfabric.steel_axe": "Steel Axe",
     "item.ecfabric.steel_hoe": "Steel Hoe",
     "item.ecfabric.steel_pickaxe": "Steel Pickaxe",
@@ -41,12 +39,11 @@
     "item.ecfabric.steel_leggings": "Steel Leggings",
     "item.ecfabric.steel_boots": "Steel Boots",
     "item.ecfabric.steel_link": "Steel Link",
-
+    
     "item.ecfabric.bone_dagger": "Bone Dagger",
     "item.ecfabric.bone_greatsword": "Bone Greatsword",
     "item.ecfabric.bone_mace": "Bone Mace",
     "item.ecfabric.bone_spear": "Bone Spear",
-    "item.ecfabric.bone_staff": "Bone Staff",
     "item.ecfabric.bone_axe": "Bone Axe",
     "item.ecfabric.bone_hoe": "Bone Hoe",
     "item.ecfabric.bone_pickaxe": "Bone Pickaxe",
@@ -57,6 +54,18 @@
     "item.ecfabric.bone_chestplate": "Bone Chestplate",
     "item.ecfabric.bone_leggings": "Bone Leggings",
     "item.ecfabric.bone_boots": "Bone Boots",
-    "item.ecfabric.bone_idol": "Bone Idol"
-
+    "item.ecfabric.bone_idol": "Bone Idol",
+    
+    "item.ecfabric.wooden_staff": "Wooden Staff",
+    "item.ecfabric.amethyst_staff": "Amethyst Staff",
+    "item.ecfabric.steel_staff": "Steel Staff",
+    "item.ecfabric.bone_staff": "Bone Staff",
+    "item.ecfabric.fire_staff": "Fire Staff",
+    "item.ecfabric.star_staff": "Star Staff",
+    "item.ecfabric.sea_staff": "Sea Staff",
+    "item.ecfabric.netherite_staff": "Netherite Staff",
+    "item.ecfabric.emerald_staff": "Emerald Staff",
+    "item.ecfabric.soul_staff": "Soul Staff",
+    "item.ecfabric.ender_staff": "Ender Staff",
+    "item.ecfabric.time_staff": "Time Staff"
 }

@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:bone"
+        "item": "minecraft:soul_lantern"
     },
 
     "result": {
-        "item": "ecfabric:bone_staff"
+        "item": "ecfabric:soul_staff"
     }
 }

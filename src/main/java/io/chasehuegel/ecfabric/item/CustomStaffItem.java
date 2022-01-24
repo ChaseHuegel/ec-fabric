@@ -7,8 +7,6 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +21,7 @@ public class CustomStaffItem extends BowItem {
     public static final Predicate<ItemStack> STAFF_PROJECTILES = stack -> stack.isOf(CustomStaffItem.AMMO_ITEM);
     
     public CustomStaffItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override

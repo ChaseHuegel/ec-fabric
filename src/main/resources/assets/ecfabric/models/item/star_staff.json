@@ -1,0 +1,21 @@
+{
+	"parent": "ecfabric:item/_generated_32_forward",
+	"textures": {
+		"layer0": "ecfabric:item/star_staff"
+	},
+    "overrides": [
+        {
+            "predicate": {
+                "casting": 1
+            },
+            "model": "ecfabric:item/star_staff_casting"
+        },
+        {
+            "predicate": {
+                "casting": 1,
+                "charge": 0.9
+            },
+            "model": "ecfabric:item/star_staff_charged"
+        }
+    ]
+}

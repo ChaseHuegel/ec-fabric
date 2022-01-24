@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:bone"
+        "item": "minecraft:emerald"
     },
 
     "result": {
-        "item": "ecfabric:bone_staff"
+        "item": "ecfabric:emerald_staff"
     }
 }

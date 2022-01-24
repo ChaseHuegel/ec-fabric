@@ -11,12 +11,30 @@ import net.minecraft.util.Identifier;
 public class EternalCraftClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        FabricModelPredicateProviderRegistry.register(CustomItems.WOODEN_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.WOODEN_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.AMETHYST_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.AMETHYST_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.STEEL_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.STEEL_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.BONE_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.BONE_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.FIRE_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.FIRE_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.STAR_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.STAR_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.SEA_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.SEA_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.NETHERITE_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.NETHERITE_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.EMERALD_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.EMERALD_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.SOUL_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.SOUL_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.ENDER_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.ENDER_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.TIME_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.TIME_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
     }
 
     private float chargePredicate(ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity) {

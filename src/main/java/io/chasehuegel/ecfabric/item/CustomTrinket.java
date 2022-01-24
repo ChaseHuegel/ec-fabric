@@ -15,7 +15,7 @@ public class CustomTrinket extends TrinketItem {
     private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public CustomTrinket(Settings settings, Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers) {
-        super(settings);
+        super(settings.maxCount(1));
 
         this.attributeModifiers = attributeModifiers;
     }
