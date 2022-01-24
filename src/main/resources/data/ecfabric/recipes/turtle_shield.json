@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:gold_ingot"
+        "item": "minecraft:scute"
     },
 
     "result": {
-        "item": "ecfabric:golden_shield"
+        "item": "ecfabric:turtle_shield"
     }
 }

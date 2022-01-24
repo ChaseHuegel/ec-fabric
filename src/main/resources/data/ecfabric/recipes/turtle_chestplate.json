@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "a a",
+        "aaa",
+        "aaa"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:scute"
+        }
+    },
+    "result": {
+        "item": "ecfabric:turtle_chestplate",
+        "count": 1
+    }
+}

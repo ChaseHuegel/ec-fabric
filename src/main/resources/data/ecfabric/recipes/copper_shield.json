@@ -6,10 +6,10 @@
     },
 
     "addition": {
-        "item": "minecraft:gold_ingot"
+        "item": "minecraft:copper_ingot"
     },
 
     "result": {
-        "item": "ecfabric:golden_shield"
+        "item": "ecfabric:copper_shield"
     }
 }

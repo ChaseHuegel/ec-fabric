@@ -1,9 +1,10 @@
 {
-    "parent": "fabricshieldlib:item/fabric_shield",
+    "parent": "ecfabric:item/amethyst_shield",
     "gui_light": "front",
     "textures": {
-        "shield": "ecfabric:item/turtle_shield"
-    },
+		"0": "ecfabric:item/turtle_shield",
+		"particle": "ecfabric:item/turtle_shield"
+	},
 	"overrides": [
         {
             "predicate": {

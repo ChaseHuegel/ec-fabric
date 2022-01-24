@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aaa",
+        "a a",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:copper_ingot"
+        }
+    },
+    "result": {
+        "item": "ecfabric:copper_helmet",
+        "count": 1
+    }
+}
