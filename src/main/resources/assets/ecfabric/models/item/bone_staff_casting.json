@@ -1,0 +1,6 @@
+{
+	"parent": "ecfabric:item/_generated_casting_32",
+	"textures": {
+		"layer0": "ecfabric:item/bone_staff_casting"
+	}
+}

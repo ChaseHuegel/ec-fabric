@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:wooden_mace"
+    },
+
+    "addition": {
+        "item": "ecfabric:bone"
+    },
+
+    "result": {
+        "item": "ecfabric:bone_mace"
+    }
+}

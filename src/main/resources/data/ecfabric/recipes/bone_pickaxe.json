@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "minecraft:wooden_pickaxe"
+    },
+
+    "addition": {
+        "item": "ecfabric:bone"
+    },
+
+    "result": {
+        "item": "ecfabric:bone_pickaxe"
+    }
+}

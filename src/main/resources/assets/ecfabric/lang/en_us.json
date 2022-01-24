@@ -1,9 +1,10 @@
 {
     "itemGroup.ecfabric.eternalcraft": "Eternal Craft",
-
+    
     "item.ecfabric.empty_can": "Empty Can",
     "item.ecfabric.water_can": "Water Can",
     "item.ecfabric.lava_can": "Lava Can",
+    "item.ecfabric.golden_shield": "Golden Shield",
 
     "item.ecfabric.amethyst_ingot": "Amethyst Ingot",
     "item.ecfabric.amethyst_dagger": "Amethyst Dagger",
@@ -41,5 +42,21 @@
     "item.ecfabric.steel_boots": "Steel Boots",
     "item.ecfabric.steel_link": "Steel Link",
 
-    "item.ecfabric.golden_shield": "Golden Shield"
+    "item.ecfabric.bone_dagger": "Bone Dagger",
+    "item.ecfabric.bone_greatsword": "Bone Greatsword",
+    "item.ecfabric.bone_mace": "Bone Mace",
+    "item.ecfabric.bone_spear": "Bone Spear",
+    "item.ecfabric.bone_staff": "Bone Staff",
+    "item.ecfabric.bone_axe": "Bone Axe",
+    "item.ecfabric.bone_hoe": "Bone Hoe",
+    "item.ecfabric.bone_pickaxe": "Bone Pickaxe",
+    "item.ecfabric.bone_shovel": "Bone Shovel",
+    "item.ecfabric.bone_sword": "Bone Sword",
+    "item.ecfabric.bone_shield": "Bone Shield",
+    "item.ecfabric.bone_helmet": "Bone Helmet",
+    "item.ecfabric.bone_chestplate": "Bone Chestplate",
+    "item.ecfabric.bone_leggings": "Bone Leggings",
+    "item.ecfabric.bone_boots": "Bone Boots",
+    "item.ecfabric.bone_idol": "Bone Idol"
+
 }

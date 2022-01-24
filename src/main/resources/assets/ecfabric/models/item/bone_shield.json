@@ -1,0 +1,15 @@
+{
+    "parent": "fabricshieldlib:item/fabric_shield",
+    "gui_light": "front",
+    "textures": {
+        "shield": "ecfabric:item/bone_shield"
+    },
+	"overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "ecfabric:item/bone_shield_blocking"
+        }
+    ]
+}
