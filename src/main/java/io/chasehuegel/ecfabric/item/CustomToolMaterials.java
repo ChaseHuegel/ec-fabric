@@ -17,7 +17,8 @@ public enum CustomToolMaterials implements ToolMaterial
     // IRON(MiningLevels.IRON, 250, 6.0f, 2.0f, 14, () -> Ingredient.ofItems(Items.IRON_INGOT)),
     STEEL(MiningLevels.IRON, 375, 8.0f, 3.0f, 14, () -> Ingredient.ofItems(CustomItems.STEEL_INGOT)),
     // GOLD(MiningLevels.WOOD, 32, 12.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
-    AMETHYST(MiningLevels.IRON, 196, 14.0f, 3.5f, 28, () -> Ingredient.ofItems(Items.AMETHYST_SHARD));
+    AMETHYST(MiningLevels.IRON, 196, 14.0f, 3.5f, 28, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)),
+    PLATINUM(MiningLevels.DIAMOND, 1024, 9.0f, 3.0f, 22, () -> Ingredient.ofItems(Items.DIAMOND));
     // DIAMOND(MiningLevels.DIAMOND, 1561, 8.0f, 3.0f, 10, () -> Ingredient.ofItems(Items.DIAMOND)),
     // NETHERITE(MiningLevels.NETHERITE, 2031, 9.0f, 4.0f, 15, () -> Ingredient.ofItems(Items.NETHERITE_INGOT));
 

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smelting",
+
+    "ingredient": {
+        "item": "ecfabric:platinum_ore"
+    },
+    
+    "result": "ecfabric:platinum"
+}

@@ -2,7 +2,7 @@
     "type": "minecraft:smithing",
     
     "base": {
-        "item": "ecfabric:golden_staff"
+        "item": "ecfabric:wooden_staff"
     },
 
     "addition": {

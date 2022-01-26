@@ -1,0 +1,15 @@
+{
+	"parent": "ecfabric:item/golden_shield",
+	"textures": {
+		"0": "ecfabric:item/platinum_shield",
+		"particle": "ecfabric:item/platinum_shield"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "ecfabric:item/platinum_shield_blocking"
+        }
+    ]
+}

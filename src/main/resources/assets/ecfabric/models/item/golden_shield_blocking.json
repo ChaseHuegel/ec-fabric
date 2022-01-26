@@ -3,11 +3,11 @@
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [45, -60.5, 0],
-			"translation": [4, -4, 1.75]
+			"translation": [4, -3, -1]
 		},
 		"thirdperson_lefthand": {
 			"rotation": [45, -60.5, 0],
-			"translation": [4, -4, 1.75]
+			"translation": [4, -3, -1]
 		},
 		"firstperson_righthand": {
 			"rotation": [2, 1, 12],

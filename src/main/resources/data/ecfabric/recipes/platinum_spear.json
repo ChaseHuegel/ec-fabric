@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:copper_spear"
+    },
+
+    "addition": {
+        "item": "ecfabric:platinum_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:platinum_spear"
+    }
+}

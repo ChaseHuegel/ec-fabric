@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        { "item": "ecfabric:platinum" },
+        { "item": "ecfabric:platinum" },
+        { "item": "ecfabric:platinum" },
+        { "item": "ecfabric:platinum" },
+        { "item": "minecraft:copper_ingot" },
+        { "item": "minecraft:copper_ingot" },
+        { "item": "minecraft:copper_ingot" },
+        { "item": "minecraft:copper_ingot" }
+    ],
+    "result": {
+        "item": "ecfabric:platinum_ingot",
+        "count": 1
+    }
+}

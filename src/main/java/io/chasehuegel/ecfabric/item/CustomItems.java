@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableMultimap;
 
 import io.chasehuegel.ecfabric.EternalCraft;
+import io.chasehuegel.ecfabric.block.CustomBlocks;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -142,6 +143,25 @@ public class CustomItems {
     public static final Item OBSIDIAN_PEARL = CustomItems.register("obsidian_pearl", new CustomTrinket(new FabricItemSettings().group(CustomItemGroup.ECFABRIC),
                                             ImmutableMultimap.of(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(String.format("%s:armor", EternalCraft.Namespace), 4f, EntityAttributeModifier.Operation.ADDITION))
                                             ));
+
+    public static final Item PLATINUM  = CustomItems.register("platinum", new Item(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_ORE  = CustomItems.register("platinum_ore", new BlockItem(CustomBlocks.PLATINUM_ORE, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_BLOCK  = CustomItems.register("platinum_block", new BlockItem(CustomBlocks.PLATINUM_BLOCK, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_INGOT  = CustomItems.register("platinum_ingot", new Item(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_SWORD = CustomItems.register("platinum_sword", new CustomSwordItem(CustomToolMaterials.PLATINUM, 3, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_SHOVEL = CustomItems.register("platinum_shovel", new CustomShovelItem(CustomToolMaterials.PLATINUM, 1, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_PICKAXE = CustomItems.register("platinum_pickaxe", new CustomPickaxeItem(CustomToolMaterials.PLATINUM, 1, -2.8f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_AXE = CustomItems.register("platinum_axe", new CustomAxeItem(CustomToolMaterials.PLATINUM, 5, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_HOE = CustomItems.register("platinum_hoe", new CustomHoeItem(CustomToolMaterials.PLATINUM, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_DAGGER = CustomItems.register("platinum_dagger", new CustomDaggerItem(CustomToolMaterials.PLATINUM, 0, -1.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_GREATSWORD = CustomItems.register("platinum_greatsword", new CustomGreatswordItem(CustomToolMaterials.PLATINUM, 4, -3.0f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_MACE = CustomItems.register("platinum_mace", new CustomMaceItem(CustomToolMaterials.PLATINUM, 2, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_SPEAR = CustomItems.register("platinum_spear", new CustomSpearItem(CustomToolMaterials.PLATINUM, 1, -2.4f, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_SHIELD = CustomItems.register("platinum_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(350).group(CustomItemGroup.ECFABRIC), 200, 25, 2f, 0f, 0f, CustomItems.PLATINUM));
+    public static final Item PLATINUM_HELMET = CustomItems.register("platinum_helmet", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_CHESTPLATE = CustomItems.register("platinum_chestplate", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_LEGGINGS = CustomItems.register("platinum_leggings", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
+    public static final Item PLATINUM_BOOTS = CustomItems.register("platinum_boots", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     
     public static final Item WOODEN_STAFF = CustomItems.register("wooden_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
     public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.ECFABRIC)));
