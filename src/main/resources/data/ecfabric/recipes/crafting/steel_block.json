@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" },
+        { "item": "ecfabric:steel_ingot" }
+    ],
+    "result": {
+        "item": "ecfabric:steel_block",
+        "count": 1
+    }
+}

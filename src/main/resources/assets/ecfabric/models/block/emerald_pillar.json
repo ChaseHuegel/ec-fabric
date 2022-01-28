@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/emerald_pillar_top",
+    "side": "ecfabric:block/emerald_pillar_side"
+  }
+}

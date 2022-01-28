@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "ecfabric:platinum_block"
+    },
+    
+    "result": "ecfabric:platinum_bricks",
+    "count": 1
+}

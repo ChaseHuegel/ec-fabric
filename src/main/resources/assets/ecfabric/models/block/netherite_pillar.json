@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/netherite_pillar_top",
+    "side": "ecfabric:block/netherite_pillar_side"
+  }
+}

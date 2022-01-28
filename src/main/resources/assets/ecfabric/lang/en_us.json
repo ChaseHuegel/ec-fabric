@@ -1,5 +1,10 @@
 {
-    "itemGroup.ecfabric.eternalcraft": "Eternal Craft",
+    "itemGroup.ecfabric.eternalcraft": "Eternalcraft",
+    "itemGroup.ecfabric.tools": "Eternalcraft Tools",
+    "itemGroup.ecfabric.blocks": "Eternalcraft Blocks",
+    "itemGroup.ecfabric.combat": "Eternalcraft Combat",
+    "itemGroup.ecfabric.trinkets": "Eternalcraft Trinkets",
+    "itemGroup.ecfabric.misc": "Eternalcraft Misc",
     
     "item.ecfabric.empty_can": "Empty Can",
     "item.ecfabric.water_can": "Water Can",
@@ -53,8 +58,6 @@
     "item.ecfabric.copper_cog": "Copper Cog",
 
     "item.ecfabric.platinum": "Platinum",
-    "block.ecfabric.platinum_ore": "Platinum Ore",
-    "block.ecfabric.platinum_block": "Block of Platinum",
     "item.ecfabric.platinum_ingot": "Platinum Ingot",
     "item.ecfabric.platinum_dagger": "Platinum Dagger",
     "item.ecfabric.platinum_greatsword": "Platinum Greatsword",
@@ -144,5 +147,21 @@
     "item.ecfabric.emerald_staff": "Emerald Staff",
     "item.ecfabric.soul_staff": "Soul Staff",
     "item.ecfabric.ender_staff": "Ender Staff",
-    "item.ecfabric.time_staff": "Time Staff"
+    "item.ecfabric.time_staff": "Time Staff",
+
+    "block.ecfabric.platinum_ore": "Platinum Ore",
+    "block.ecfabric.platinum_block": "Block of Platinum",
+    "block.ecfabric.platinum_bricks": "Platinum Bricks",
+    "block.ecfabric.platinum_pillar": "Platinum Pillar",
+    "block.ecfabric.steel_block": "Block of Steel",
+    "block.ecfabric.iron_bricks": "Iron Bricks",
+    "block.ecfabric.iron_pillar": "Iron Pillar",
+    "block.ecfabric.gold_bricks": "Gold Bricks",
+    "block.ecfabric.gold_pillar": "Gold Pillar",
+    "block.ecfabric.diamond_bricks": "Diamond Bricks",
+    "block.ecfabric.diamond_pillar": "Diamond Pillar",
+    "block.ecfabric.netherite_bricks": "Netherite Bricks",
+    "block.ecfabric.netherite_pillar": "Netherite Pillar",
+    "block.ecfabric.emerald_bricks": "Emerald Bricks",
+    "block.ecfabric.emerald_pillar": "Emerald Pillar"
 }

@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "minecraft:diamond_block"
+    },
+    
+    "result": "ecfabric:diamond_bricks",
+    "count": 1
+}
