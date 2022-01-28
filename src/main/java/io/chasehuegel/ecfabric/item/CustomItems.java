@@ -1,7 +1,5 @@
 package io.chasehuegel.ecfabric.item;
 
-import java.util.Optional;
-
 import com.google.common.collect.ImmutableMultimap;
 
 import io.chasehuegel.ecfabric.EternalCraft;
@@ -16,7 +14,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
@@ -192,35 +189,10 @@ public class CustomItems {
     public static final Item EMERALD_BRICKS  = CustomItems.register("emerald_bricks", new BlockItem(CustomBlocks.EMERALD_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item EMERALD_PILLAR  = CustomItems.register("emerald_pillar", new BlockItem(CustomBlocks.EMERALD_PILLAR, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     
+    public static final Item EASTERN_LAMP  = CustomItems.register("eastern_lamp", new BlockItem(CustomBlocks.EASTERN_LAMP, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item PACKED_DIRT  = CustomItems.register("packed_dirt", new BlockItem(CustomBlocks.PACKED_DIRT, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    
     public static void Initialize() {}
-
-    private static <T> Optional<T> createEmptyOptional(T of) {
-        return Optional.empty();
-    }
-
-    private static Item register(Block block) {
-        return CustomItems.register(new BlockItem(block, new FabricItemSettings()));
-    }
-
-    private static Item register(Block block, ItemGroup group) {
-        return CustomItems.register(new BlockItem(block, new FabricItemSettings().group(group)));
-    }
-
-    private static Item register(Block block, Optional<ItemGroup> group2) {
-        return group2.map(group -> CustomItems.register(block, group)).orElseGet(() -> CustomItems.register(block));
-    }
-
-    private static Item register(Block block, ItemGroup group, Block ... blocks) {
-        BlockItem blockItem = new BlockItem(block, new FabricItemSettings().group(group));
-        for (Block block2 : blocks) {
-            Item.BLOCK_ITEMS.put(block2, blockItem);
-        }
-        return CustomItems.register(blockItem);
-    }
-
-    private static Item register(BlockItem item) {
-        return CustomItems.register(item.getBlock(), (Item)item);
-    }
 
     protected static Item register(Block block, Item item) {
         return CustomItems.register(Registry.BLOCK.getId(block), item);

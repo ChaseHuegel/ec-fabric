@@ -1,19 +1,11 @@
 {
   "replace": false,
   "values": [
-    "ecfabric:platinum_ore",
-    "ecfabric:platinum_block",
-    "ecfabric:platinum_pillar",
-    "ecfabric:platinum_bricks",
     "ecfabric:steel_block",
-    "ecfabric:iron_bricks",
-    "ecfabric:iron_pillar",
     "ecfabric:gold_bricks",
     "ecfabric:gold_pillar",
     "ecfabric:diamond_bricks",
     "ecfabric:diamond_pillar",
-    "ecfabric:netherite_bricks",
-    "ecfabric:netherite_pillar",
     "ecfabric:emerald_bricks",
     "ecfabric:emerald_pillar"
   ]

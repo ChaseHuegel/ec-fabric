@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "ecfabric:platinum_ore",
-    "ecfabric:platinum_block"
+    "ecfabric:platinum_block",
+    "ecfabric:platinum_bricks",
+    "ecfabric:platinum_pillar",
+    "ecfabric:netherite_bricks",
+    "ecfabric:netherite_pillar"
   ]
 }

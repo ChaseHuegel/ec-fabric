@@ -27,6 +27,9 @@ public class CustomBlocks {
     public static final Block EMERALD_BRICKS = CustomBlocks.register("emerald_bricks", new Block(AbstractBlock.Settings.copy(Blocks.EMERALD_BLOCK)));
     public static final Block EMERALD_PILLAR = CustomBlocks.register("emerald_pillar", new Block(AbstractBlock.Settings.copy(Blocks.EMERALD_BLOCK)));
     
+    public static final Block EASTERN_LAMP = CustomBlocks.register("eastern_lamp", new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE).sounds(BlockSoundGroup.WOOD)));
+    public static final Block PACKED_DIRT = CustomBlocks.register("packed_dirt", new Block(AbstractBlock.Settings.copy(Blocks.COARSE_DIRT)));
+    
     private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(EternalCraft.Namespace, id), block);
     }

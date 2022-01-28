@@ -163,5 +163,8 @@
     "block.ecfabric.netherite_bricks": "Netherite Bricks",
     "block.ecfabric.netherite_pillar": "Netherite Pillar",
     "block.ecfabric.emerald_bricks": "Emerald Bricks",
-    "block.ecfabric.emerald_pillar": "Emerald Pillar"
+    "block.ecfabric.emerald_pillar": "Emerald Pillar",
+
+    "block.ecfabric.eastern_lamp": "Eastern Lamp",
+    "block.ecfabric.packed_dirt": "Packed Dirt"
 }
