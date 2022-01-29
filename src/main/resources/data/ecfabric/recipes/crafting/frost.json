@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aa ",
+        "   ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:snowball"
+        }
+    },
+    "result": {
+        "item": "ecfabric:frost",
+        "count": 1
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aa ",
+        "aa ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:packed_ice"
+        }
+    },
+    "result": {
+        "item": "ecfabric:packed_ice_bricks",
+        "count": 4
+    }
+}

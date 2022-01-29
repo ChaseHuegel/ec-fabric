@@ -212,6 +212,14 @@ public class CustomItems {
     public static final Item WATTLE_AND_DAUB  = CustomItems.register("wattle_and_daub", new BlockItem(CustomBlocks.WATTLE_AND_DAUB, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item CLAY_TILES  = CustomItems.register("clay_tiles", new BlockItem(CustomBlocks.CLAY_TILES, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item FINE_GLASS  = CustomItems.register("fine_glass", new BlockItem(CustomBlocks.FINE_GLASS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item SNOW_BRICKS  = CustomItems.register("snow_bricks", new BlockItem(CustomBlocks.SNOW_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_SNOW_BRICKS  = CustomItems.register("chiseled_snow_bricks", new BlockItem(CustomBlocks.CHISELED_SNOW_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item PACKED_SNOW  = CustomItems.register("packed_snow", new BlockItem(CustomBlocks.PACKED_SNOW, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item POLISHED_PACKED_ICE  = CustomItems.register("polished_packed_ice", new BlockItem(CustomBlocks.POLISHED_PACKED_ICE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item PACKED_ICE_BRICKS  = CustomItems.register("packed_ice_bricks", new BlockItem(CustomBlocks.PACKED_ICE_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_PACKED_ICE_BRICKS  = CustomItems.register("chiseled_packed_ice_bricks", new BlockItem(CustomBlocks.CHISELED_PACKED_ICE_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item FROST  = CustomItems.register("frost", new BlockItem(CustomBlocks.FROST, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    
     
     public static void Initialize() {}
 

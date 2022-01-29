@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aa ",
+        "aa ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:snow_block"
+        }
+    },
+    "result": {
+        "item": "ecfabric:snow_bricks",
+        "count": 4
+    }
+}

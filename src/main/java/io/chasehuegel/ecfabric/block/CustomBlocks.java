@@ -50,6 +50,14 @@ public class CustomBlocks {
     public static final Block WATTLE_AND_DAUB = CustomBlocks.register("wattle_and_daub", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
     public static final Block CLAY_TILES = CustomBlocks.register("clay_tiles", new Block(AbstractBlock.Settings.copy(Blocks.BRICKS)));
     public static final Block FINE_GLASS = CustomBlocks.register("fine_glass", new GlassBlock(AbstractBlock.Settings.copy(Blocks.GLASS)));
+    public static final Block SNOW_BRICKS = CustomBlocks.register("snow_bricks", new Block(AbstractBlock.Settings.copy(Blocks.SNOW_BLOCK).strength(0.75f)));
+    public static final Block CHISELED_SNOW_BRICKS = CustomBlocks.register("chiseled_snow_bricks", new Block(AbstractBlock.Settings.copy(CustomBlocks.SNOW_BRICKS)));
+    public static final Block PACKED_SNOW = CustomBlocks.register("packed_snow", new Block(AbstractBlock.Settings.copy(Blocks.SNOW_BLOCK).strength(0.75f)));
+    public static final Block POLISHED_PACKED_ICE = CustomBlocks.register("polished_packed_ice", new Block(AbstractBlock.Settings.copy(Blocks.PACKED_ICE).slipperiness(1f).strength(1f)));
+    public static final Block PACKED_ICE_BRICKS = CustomBlocks.register("packed_ice_bricks", new Block(AbstractBlock.Settings.copy(CustomBlocks.POLISHED_PACKED_ICE)));
+    public static final Block CHISELED_PACKED_ICE_BRICKS = CustomBlocks.register("chiseled_packed_ice_bricks", new Block(AbstractBlock.Settings.copy(CustomBlocks.POLISHED_PACKED_ICE)));
+    public static final Block FROST = CustomBlocks.register("frost", new Block(AbstractBlock.Settings.copy(Blocks.SNOW_BLOCK).strength(0.5f)));
+
     
     private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(EternalCraft.Namespace, id), block);

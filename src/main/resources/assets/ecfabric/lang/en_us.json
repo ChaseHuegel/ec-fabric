@@ -186,5 +186,13 @@
     "block.ecfabric.chiseled_mud_bricks": "Chiseled Mud Bricks",
     "block.ecfabric.wattle_and_daub": "Wattle and Daub",
     "block.ecfabric.clay_tiles": "Clay Tiles",
-    "block.ecfabric.fine_glass": "Fine Glass"
+    "block.ecfabric.fine_glass": "Fine Glass",
+
+    "block.ecfabric.snow_bricks": "Snow Bricks",
+    "block.ecfabric.chiseled_snow_bricks": "Chiseled Snow Bricks",
+    "block.ecfabric.packed_snow": "Packed Snow",
+    "block.ecfabric.polished_packed_ice": "Polished Packed Ice",
+    "block.ecfabric.packed_ice_bricks": "Packed Ice Bricks",
+    "block.ecfabric.chiseled_packed_ice_bricks": "Chiseled Packed Ice Bricks",
+    "block.ecfabric.frost": "Frost"
 }
