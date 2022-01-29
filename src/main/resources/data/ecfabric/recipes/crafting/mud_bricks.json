@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aa ",
+        "aa ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "ecfabric:mud"
+        }
+    },
+    "result": {
+        "item": "ecfabric:mud_bricks",
+        "count": 4
+    }
+}

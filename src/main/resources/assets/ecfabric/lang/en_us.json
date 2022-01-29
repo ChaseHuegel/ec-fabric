@@ -166,5 +166,25 @@
     "block.ecfabric.emerald_pillar": "Emerald Pillar",
 
     "block.ecfabric.eastern_lamp": "Eastern Lamp",
-    "block.ecfabric.packed_dirt": "Packed Dirt"
+    "block.ecfabric.packed_dirt": "Packed Dirt",
+    "block.ecfabric.andesite_bricks": "Andesite Bricks",
+    "block.ecfabric.chiseled_andesite": "Chiseled Andesite",
+    "block.ecfabric.chiseled_stone": "Chiseled Stone",
+    "block.ecfabric.diorite_bricks": "Diorite Bricks",
+    "block.ecfabric.chiseled_diorite": "Chiseled Diorite",
+    "block.ecfabric.chiseled_granite": "Chiseled Granite",
+    "block.ecfabric.acacia_planks_carved": "Carved Acacia Planks",
+    "block.ecfabric.oak_planks_carved": "Carved Oak Planks",
+    "block.ecfabric.birch_planks_carved": "Carved Birch Planks",
+    "block.ecfabric.spruce_planks_carved": "Carved Spruce Planks",
+    "block.ecfabric.dark_oak_planks_carved": "Carved Dark Oak Planks",
+    "block.ecfabric.jungle_planks_carved": "Carved Jungle Planks",
+    "block.ecfabric.crimson_planks_carved": "Carved Crimson Planks",
+    "block.ecfabric.warped_planks_carved": "Carved Warped Planks",
+    "block.ecfabric.mud": "Mud",
+    "block.ecfabric.mud_bricks": "Mud Bricks",
+    "block.ecfabric.chiseled_mud_bricks": "Chiseled Mud Bricks",
+    "block.ecfabric.wattle_and_daub": "Wattle and Daub",
+    "block.ecfabric.clay_tiles": "Clay Tiles",
+    "block.ecfabric.fine_glass": "Fine Glass"
 }

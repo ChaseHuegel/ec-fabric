@@ -192,6 +192,27 @@ public class CustomItems {
     public static final Item EASTERN_LAMP  = CustomItems.register("eastern_lamp", new BlockItem(CustomBlocks.EASTERN_LAMP, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item PACKED_DIRT  = CustomItems.register("packed_dirt", new BlockItem(CustomBlocks.PACKED_DIRT, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     
+    public static final Item ANDESITE_BRICKS  = CustomItems.register("andesite_bricks", new BlockItem(CustomBlocks.ANDESITE_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_ANDESITE  = CustomItems.register("chiseled_andesite", new BlockItem(CustomBlocks.CHISELED_ANDESITE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_STONE  = CustomItems.register("chiseled_stone", new BlockItem(CustomBlocks.CHISELED_STONE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item DIORITE_BRICKS  = CustomItems.register("diorite_bricks", new BlockItem(CustomBlocks.DIORITE_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_DIORITE  = CustomItems.register("chiseled_diorite", new BlockItem(CustomBlocks.CHISELED_DIORITE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_GRANITE  = CustomItems.register("chiseled_granite", new BlockItem(CustomBlocks.CHISELED_GRANITE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item ACACIA_PLANKS_CARVED  = CustomItems.register("acacia_planks_carved", new BlockItem(CustomBlocks.ACACIA_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item OAK_PLANKS_CARVED  = CustomItems.register("oak_planks_carved", new BlockItem(CustomBlocks.OAK_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item BIRCH_PLANKS_CARVED  = CustomItems.register("birch_planks_carved", new BlockItem(CustomBlocks.BIRCH_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item SPRUCE_PLANKS_CARVED  = CustomItems.register("spruce_planks_carved", new BlockItem(CustomBlocks.SPRUCE_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item DARK_OAK_PLANKS_CARVED  = CustomItems.register("dark_oak_planks_carved", new BlockItem(CustomBlocks.DARK_OAK_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item JUNGLE_PLANKS_CARVED  = CustomItems.register("jungle_planks_carved", new BlockItem(CustomBlocks.JUNGLE_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CRIMSON_PLANKS_CARVED  = CustomItems.register("crimson_planks_carved", new BlockItem(CustomBlocks.CRIMSON_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item WARPED_PLANKS_CARVED  = CustomItems.register("warped_planks_carved", new BlockItem(CustomBlocks.WARPED_PLANKS_CARVED, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item MUD  = CustomItems.register("mud", new BlockItem(CustomBlocks.MUD, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item MUD_BRICKS  = CustomItems.register("mud_bricks", new BlockItem(CustomBlocks.MUD_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CHISELED_MUD_BRICKS  = CustomItems.register("chiseled_mud_bricks", new BlockItem(CustomBlocks.CHISELED_MUD_BRICKS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item WATTLE_AND_DAUB  = CustomItems.register("wattle_and_daub", new BlockItem(CustomBlocks.WATTLE_AND_DAUB, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item CLAY_TILES  = CustomItems.register("clay_tiles", new BlockItem(CustomBlocks.CLAY_TILES, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    public static final Item FINE_GLASS  = CustomItems.register("fine_glass", new BlockItem(CustomBlocks.FINE_GLASS, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
+    
     public static void Initialize() {}
 
     protected static Item register(Block block, Item item) {

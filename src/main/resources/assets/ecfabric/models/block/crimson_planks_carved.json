@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/crimson_planks_carved_top",
+    "side": "ecfabric:block/crimson_planks_carved"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "ecfabric:mud_bricks"
+    },
+    
+    "result": "ecfabric:chiseled_mud_bricks",
+    "count": 1
+}

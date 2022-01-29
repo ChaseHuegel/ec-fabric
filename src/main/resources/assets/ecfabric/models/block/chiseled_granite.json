@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/chiseled_granite_top",
+    "side": "ecfabric:block/chiseled_granite_side"
+  }
+}

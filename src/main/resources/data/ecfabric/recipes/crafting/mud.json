@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aaa",
+        "aba",
+        "aaa"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:dirt"
+        },
+        "b": {
+            "item": "minecraft:water_bucket"
+        }
+    },
+    "result": {
+        "item": "ecfabric:mud",
+        "count": 8
+    }
+}

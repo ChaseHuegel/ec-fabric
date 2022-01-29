@@ -15,6 +15,15 @@
     "ecfabric:netherite_bricks",
     "ecfabric:netherite_pillar",
     "ecfabric:emerald_bricks",
-    "ecfabric:emerald_pillar"
+    "ecfabric:emerald_pillar",
+    "ecfabric:andesite_bricks",
+    "ecfabric:chiseled_andesite",
+    "ecfabric:chiseled_stone",
+    "ecfabric:diorite_bricks",
+    "ecfabric:chiseled_diorite",
+    "ecfabric:chiseled_granite",
+    "ecfabric:mud_bricks",
+    "ecfabric:chiseled_mud_bricks",
+    "ecfabric:clay_tiles"
   ]
 }

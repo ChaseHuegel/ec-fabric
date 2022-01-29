@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "minecraft:jungle_planks"
+    },
+    
+    "result": "ecfabric:jungle_planks_carved",
+    "count": 1
+}

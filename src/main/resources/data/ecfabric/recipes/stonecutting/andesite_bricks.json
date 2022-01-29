@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "minecraft:andesite"
+    },
+    
+    "result": "ecfabric:andesite_bricks",
+    "count": 1
+}
