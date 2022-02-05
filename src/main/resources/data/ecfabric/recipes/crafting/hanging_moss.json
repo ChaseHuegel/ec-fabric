@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "a  ",
+        "a  ",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:moss_block"
+        }
+    },
+    "result": {
+        "item": "ecfabric:hanging_moss",
+        "count": 3
+    }
+}

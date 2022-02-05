@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ecfabric:snow_bricks",
+    "ecfabric:chiseled_snow_bricks",
+    "ecfabric:packed_snow",
+    "ecfabric:frost"
+  ]
+}

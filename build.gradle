@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -26,6 +26,9 @@ repositories {
 	maven {
 		url "https://ladysnake.jfrog.io/artifactory/mods"
 	}
+	maven {
+        url "https://maven.jamieswhiteshirt.com/libs-release"
+    }
 }
 
 dependencies {
@@ -41,7 +44,11 @@ dependencies {
 	modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:v${project.fabric_shield_lib_version}"
 
 	//	Trinkets
-	modImplementation "dev.emi:trinkets:${trinkets_version}"
+	modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+
+	//	Reach and range attributes
+	modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}")
+	include "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}"
 }
 
 processResources {

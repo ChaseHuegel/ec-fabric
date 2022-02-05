@@ -24,6 +24,11 @@
     "ecfabric:chiseled_granite",
     "ecfabric:mud_bricks",
     "ecfabric:chiseled_mud_bricks",
-    "ecfabric:clay_tiles"
+    "ecfabric:clay_tiles",
+    "ecfabric:granite_bricks",
+    "ecfabric:polished_packed_ice",
+    "ecfabric:packed_ice_bricks",
+    "ecfabric:chiseled_packed_ice_bricks",
+    "ecfabric:polished_packed_ice"
   ]
 }

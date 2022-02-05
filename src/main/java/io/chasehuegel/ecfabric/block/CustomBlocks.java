@@ -56,9 +56,16 @@ public class CustomBlocks {
     public static final Block POLISHED_PACKED_ICE = CustomBlocks.register("polished_packed_ice", new Block(AbstractBlock.Settings.copy(Blocks.PACKED_ICE).slipperiness(1f).strength(1f)));
     public static final Block PACKED_ICE_BRICKS = CustomBlocks.register("packed_ice_bricks", new Block(AbstractBlock.Settings.copy(CustomBlocks.POLISHED_PACKED_ICE)));
     public static final Block CHISELED_PACKED_ICE_BRICKS = CustomBlocks.register("chiseled_packed_ice_bricks", new Block(AbstractBlock.Settings.copy(CustomBlocks.POLISHED_PACKED_ICE)));
-    public static final Block FROST = CustomBlocks.register("frost", new Block(AbstractBlock.Settings.copy(Blocks.SNOW_BLOCK).strength(0.5f)));
+    public static final Block FROST = CustomBlocks.register("frost", new CoverBlock(AbstractBlock.Settings.copy(Blocks.SNOW_BLOCK)));
+    public static final Block GRANITE_BRICKS = CustomBlocks.register("granite_bricks", new Block(AbstractBlock.Settings.copy(Blocks.POLISHED_GRANITE)));
+    public static final Block ICICLES = CustomBlocks.register("icicles", new HangingSpikeBlock(AbstractBlock.Settings.copy(Blocks.HANGING_ROOTS).sounds(BlockSoundGroup.GLASS)));
+    public static final Block MOSS = CustomBlocks.register("moss", new CoverBlock(AbstractBlock.Settings.copy(Blocks.MOSS_CARPET)));
+    public static final Block HANGING_MOSS = CustomBlocks.register("hanging_moss", new HangingBlock(AbstractBlock.Settings.copy(Blocks.HANGING_ROOTS)));
+    public static final Block BASKET = CustomBlocks.register("basket", new CoverBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block FUNGUS = CustomBlocks.register("fungus", new CoverBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)));
+    public static final Block CLOVER = CustomBlocks.register("clover", new CoverBlock(AbstractBlock.Settings.copy(Blocks.OXEYE_DAISY)));
+    public static final Block FLOWER_COVER = CustomBlocks.register("flower_cover", new CoverBlock(AbstractBlock.Settings.copy(Blocks.OXEYE_DAISY)));
 
-    
     private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(EternalCraft.Namespace, id), block);
     }

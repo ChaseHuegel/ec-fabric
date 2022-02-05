@@ -164,7 +164,6 @@
     "block.ecfabric.netherite_pillar": "Netherite Pillar",
     "block.ecfabric.emerald_bricks": "Emerald Bricks",
     "block.ecfabric.emerald_pillar": "Emerald Pillar",
-
     "block.ecfabric.eastern_lamp": "Eastern Lamp",
     "block.ecfabric.packed_dirt": "Packed Dirt",
     "block.ecfabric.andesite_bricks": "Andesite Bricks",
@@ -187,12 +186,19 @@
     "block.ecfabric.wattle_and_daub": "Wattle and Daub",
     "block.ecfabric.clay_tiles": "Clay Tiles",
     "block.ecfabric.fine_glass": "Fine Glass",
-
     "block.ecfabric.snow_bricks": "Snow Bricks",
     "block.ecfabric.chiseled_snow_bricks": "Chiseled Snow Bricks",
     "block.ecfabric.packed_snow": "Packed Snow",
     "block.ecfabric.polished_packed_ice": "Polished Packed Ice",
     "block.ecfabric.packed_ice_bricks": "Packed Ice Bricks",
     "block.ecfabric.chiseled_packed_ice_bricks": "Chiseled Packed Ice Bricks",
-    "block.ecfabric.frost": "Frost"
+    "block.ecfabric.frost": "Frost",
+    "block.ecfabric.granite_bricks": "Granite Bricks",
+    "block.ecfabric.icicles": "Icicles",
+    "block.ecfabric.moss": "Moss",
+    "block.ecfabric.hanging_moss": "Hanging Moss",
+    "block.ecfabric.basket": "Basket",
+    "block.ecfabric.fungus": "Fungus",
+    "block.ecfabric.clover": "Clover",
+    "block.ecfabric.flower_cover": "Flowering Buds"
 }

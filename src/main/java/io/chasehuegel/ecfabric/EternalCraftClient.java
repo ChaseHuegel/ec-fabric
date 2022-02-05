@@ -43,6 +43,13 @@ public class EternalCraftClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FINE_GLASS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FROST, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.ICICLES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.MOSS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.HANGING_MOSS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.BASKET, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FUNGUS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.CLOVER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FLOWER_COVER, RenderLayer.getCutout());
     }
 
     private float chargePredicate(ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity) {

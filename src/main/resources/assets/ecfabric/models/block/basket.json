@@ -1,0 +1,10 @@
+{
+  "parent": "block/cauldron",
+  "textures": {
+    "particle": "ecfabric:block/basket_side",
+    "top": "ecfabric:block/basket_top",
+    "bottom": "ecfabric:block/basket_bottom",
+    "side": "ecfabric:block/basket_side_handles",
+    "inside": "ecfabric:block/basket_inner"
+  }
+}

@@ -37,7 +37,6 @@ public class CustomStaffItem extends BowItem {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         boolean bl2;
-        int i;
         float f;
         if (!(user instanceof PlayerEntity)) {
             return;
@@ -51,21 +50,20 @@ public class CustomStaffItem extends BowItem {
         if (itemStack.isEmpty()) {
             itemStack = new ItemStack(CustomStaffItem.AMMO_ITEM);
         }
-        if ((double)(f = BowItem.getPullProgress(i = this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
+        if ((double)(f = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
             return;
         }
 
-        boolean bl3 = bl2 = bl && itemStack.isOf(CustomStaffItem.AMMO_ITEM);
+        bl2 = bl && itemStack.isOf(CustomStaffItem.AMMO_ITEM);
         
         if (!world.isClient) {
-            int k;
             int j;
             int explosionPower = 1;
             
             if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
                 explosionPower += (int)(j * 0.5f + 0.5f);
             }
-            if ((k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack)) > 0) {
+            if (EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) > 0) {
                 explosionPower += 1;
             }
 
