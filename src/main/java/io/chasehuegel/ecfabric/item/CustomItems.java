@@ -244,6 +244,7 @@ public class CustomItems {
     public static final Item CLOVER = CustomItems.register("clover", new BlockItem(CustomBlocks.CLOVER, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item FLOWER_COVER = CustomItems.register("flower_cover", new BlockItem(CustomBlocks.FLOWER_COVER, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     
+    //TODO lang
     public static final Item COPPER_VANE = CustomItems.register("copper_vane", new BlockItem(CustomBlocks.COPPER_VANE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item GLOBE = CustomItems.register("globe", new BlockItem(CustomBlocks.GLOBE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item LAMP = CustomItems.register("lamp", new BlockItem(CustomBlocks.LAMP, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
@@ -259,6 +260,7 @@ public class CustomItems {
     public static final Item FISH_CRATE = CustomItems.register("fish_crate", new BlockItem(CustomBlocks.FISH_CRATE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item POTATO_CRATE = CustomItems.register("potato_crate", new BlockItem(CustomBlocks.POTATO_CRATE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
 
+    //TODO lang
     public static final Item THREAD  = CustomItems.register("thread", new Item(new FabricItemSettings().group(CustomItemGroup.MISC)));
     public static final Item FABRIC  = CustomItems.register("fabric", new Item(new FabricItemSettings().group(CustomItemGroup.MISC)));
     public static final Item WIZARD_HELMET = CustomItems.register("wizard_helmet", new ArmorItem(CustomArmorMaterials.WIZARD, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
@@ -322,6 +324,24 @@ public class CustomItems {
     public static final Item FUR_CHESTPLATE = CustomItems.register("fur_chestplate", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item FUR_LEGGINGS = CustomItems.register("fur_leggings", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item FUR_BOOTS = CustomItems.register("fur_boots", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    
+    //TODO lang
+    public static final Item PILLAGER_HELMET = CustomItems.register("pillager_helmet", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PILLAGER_CHESTPLATE = CustomItems.register("pillager_chestplate", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PILLAGER_LEGGINGS = CustomItems.register("pillager_leggings", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PILLAGER_BOOTS = CustomItems.register("pillager_boots", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PIGLIN_HELMET = CustomItems.register("piglin_helmet", new ArmorItem(CustomArmorMaterials.PIGLIN, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PIGLIN_CHESTPLATE = CustomItems.register("piglin_chestplate", new ArmorItem(CustomArmorMaterials.PIGLIN, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PIGLIN_LEGGINGS = CustomItems.register("piglin_leggings", new ArmorItem(CustomArmorMaterials.PIGLIN, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PIGLIN_BOOTS = CustomItems.register("piglin_boots", new ArmorItem(CustomArmorMaterials.PIGLIN, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item BLAZE_HELMET = CustomItems.register("blaze_helmet", new ArmorItem(CustomArmorMaterials.BLAZE, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item BLAZE_CHESTPLATE = CustomItems.register("blaze_chestplate", new ArmorItem(CustomArmorMaterials.BLAZE, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item BLAZE_LEGGINGS = CustomItems.register("blaze_leggings", new ArmorItem(CustomArmorMaterials.BLAZE, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item BLAZE_BOOTS = CustomItems.register("blaze_boots", new ArmorItem(CustomArmorMaterials.BLAZE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PRISMARINE_HELMET = CustomItems.register("prismarine_helmet", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PRISMARINE_CHESTPLATE = CustomItems.register("prismarine_chestplate", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PRISMARINE_LEGGINGS = CustomItems.register("prismarine_leggings", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PRISMARINE_BOOTS = CustomItems.register("prismarine_boots", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
     public static void Initialize() {}
 
