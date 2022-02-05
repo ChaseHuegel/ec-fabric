@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "bcc",
+        "bcc",
+        "aaa"
+    ],
+    "key": {
+        "a": {
+            "tag": "minecraft:planks"
+        },
+        "b": {
+            "item": "minecraft:stick"
+        },
+        "c": {
+            "item": "minecraft:paper"
+        }
+    },
+    "result": {
+        "item": "ecfabric:globe",
+        "count": 1
+    }
+}

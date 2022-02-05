@@ -29,6 +29,7 @@
     "ecfabric:polished_packed_ice",
     "ecfabric:packed_ice_bricks",
     "ecfabric:chiseled_packed_ice_bricks",
-    "ecfabric:polished_packed_ice"
+    "ecfabric:polished_packed_ice",
+    "ecfabric:copper_vane"
   ]
 }

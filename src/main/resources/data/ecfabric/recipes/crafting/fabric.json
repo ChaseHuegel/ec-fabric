@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        { "item": "ecfabric:thread" },
+        { "item": "ecfabric:thread" },
+        { "item": "ecfabric:thread" },
+        { "item": "ecfabric:thread" }
+    ],
+    "result": {
+        "item": "ecfabric:fabric",
+        "count": 1
+    }
+}

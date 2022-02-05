@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+
+    "ingredient": {
+        "item": "ecfabric:fabric"
+    },
+    
+    "result": "ecfabric:fisherman_chestplate",
+    "count": 1
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "bbb",
+        "bbb",
+        " a "
+    ],
+    "key": {
+        "a": {
+            "item": "ecfabric:crate"
+        },
+        "b": {
+            "item": "minecraft:sweet_berry"
+        }
+    },
+    "result": {
+        "item": "ecfabric:berry_basket",
+        "count": 1
+    }
+}

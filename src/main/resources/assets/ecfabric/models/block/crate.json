@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/crate_top",
+    "side": "ecfabric:block/crate_side"
+  }
+}

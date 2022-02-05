@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/sugar_cane_bundle_top",
+    "side": "ecfabric:block/sugar_cane_bundle_side"
+  }
+}

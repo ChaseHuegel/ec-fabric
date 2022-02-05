@@ -2,9 +2,11 @@ package io.chasehuegel.ecfabric.block;
 
 import io.chasehuegel.ecfabric.EternalCraft;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.GlassBlock;
+import net.minecraft.block.LightningRodBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
@@ -65,6 +67,21 @@ public class CustomBlocks {
     public static final Block FUNGUS = CustomBlocks.register("fungus", new CoverBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)));
     public static final Block CLOVER = CustomBlocks.register("clover", new CoverBlock(AbstractBlock.Settings.copy(Blocks.OXEYE_DAISY)));
     public static final Block FLOWER_COVER = CustomBlocks.register("flower_cover", new CoverBlock(AbstractBlock.Settings.copy(Blocks.OXEYE_DAISY)));
+
+    public static final Block COPPER_VANE = CustomBlocks.register("copper_vane", new LightningRodBlock(AbstractBlock.Settings.copy(Blocks.LIGHTNING_ROD)));
+    public static final Block GLOBE = CustomBlocks.register("globe", new SmallDecorBlock(AbstractBlock.Settings.copy(Blocks.FLOWER_POT)));
+    public static final Block LAMP = CustomBlocks.register("lamp", new SmallDecorBlock(AbstractBlock.Settings.copy(Blocks.FLOWER_POT)));
+    public static final Block BAMBOO_BUNDLE = CustomBlocks.register("bamboo_bundle", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block SUGAR_CANE_BUNDLE = CustomBlocks.register("sugar_cane_bundle", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block STICK_BUNDLE = CustomBlocks.register("stick_bundle", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block CACTUS_BUNDLE = CustomBlocks.register("cactus_bundle", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block CRATE = CustomBlocks.register("crate", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block APPLE_BASKET = CustomBlocks.register("apple_basket", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block BEET_CRATE = CustomBlocks.register("beet_crate", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block BERRY_BASKET = CustomBlocks.register("berry_basket", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block CARROT_CRATE = CustomBlocks.register("carrot_crate", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block FISH_CRATE = CustomBlocks.register("fish_crate", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
+    public static final Block POTATO_CRATE = CustomBlocks.register("potato_crate", new BarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
 
     private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(EternalCraft.Namespace, id), block);

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "bbb",
+        "bbb",
+        " a "
+    ],
+    "key": {
+        "a": {
+            "item": "ecfabric:crate"
+        },
+        "b": {
+            "item": "minecraft:beetroot"
+        }
+    },
+    "result": {
+        "item": "ecfabric:beet_crate",
+        "count": 1
+    }
+}

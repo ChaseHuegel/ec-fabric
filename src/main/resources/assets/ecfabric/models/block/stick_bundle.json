@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/stick_bundle_top",
+    "side": "ecfabric:block/stick_bundle_side"
+  }
+}

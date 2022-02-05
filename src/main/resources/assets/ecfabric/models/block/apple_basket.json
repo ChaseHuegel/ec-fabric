@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+      "particle": "ecfabric:block/apple_basket_side",
+      "north": "ecfabric:block/apple_basket_side",
+      "south": "ecfabric:block/apple_basket_side",
+      "east": "ecfabric:block/apple_basket_side",
+      "west": "ecfabric:block/apple_basket_side",
+      "up": "ecfabric:block/apple_basket_top",
+      "down": "ecfabric:block/crate_top"
+    }
+  }

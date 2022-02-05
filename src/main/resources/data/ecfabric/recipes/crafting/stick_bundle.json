@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aaa",
+        "aaa",
+        "aaa"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "ecfabric:stick_bundle",
+        "count": 1
+    }
+}

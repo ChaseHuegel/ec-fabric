@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "cb ",
+        " b ",
+        "aaa"
+    ],
+    "key": {
+        "a": {
+            "tag": "minecraft:planks"
+        },
+        "b": {
+            "item": "minecraft:stick"
+        },
+        "c": {
+            "item": "minecraft:glass"
+        }
+    },
+    "result": {
+        "item": "ecfabric:lamp",
+        "count": 1
+    }
+}

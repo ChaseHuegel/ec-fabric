@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ecfabric:block/cactus_bundle_top",
+    "side": "ecfabric:block/cactus_bundle_side"
+  }
+}
