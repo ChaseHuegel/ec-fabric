@@ -1,0 +1,27 @@
+{
+    "parent": "item/crossbow",
+    "textures": {
+        "layer0": "ecfabric:item/blowgun"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "pulling": 1
+            },
+            "model": "ecfabric:item/blowgun_pulling"
+        },
+        {
+            "predicate": {
+                "charged": 1
+            },
+            "model": "ecfabric:item/blowgun_arrow"
+        },
+        {
+            "predicate": {
+                "charged": 1,
+                "firework": 1
+            },
+            "model": "ecfabric:item/blowgun_firework"
+        }
+    ]
+}

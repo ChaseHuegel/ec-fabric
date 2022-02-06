@@ -12,6 +12,7 @@ public enum CustomToolMaterials implements ToolMaterial
     // WOOD(MiningLevels.WOOD, 59, 2.0f, 0.0f, 15, () -> Ingredient.fromTag(ItemTags.PLANKS)),
     BONE(MiningLevels.STONE, 160, 5.0f, 2.0f, 18, () -> Ingredient.ofItems(Items.BONE)),
     // STONE(MiningLevels.STONE, 131, 4.0f, 1.0f, 5, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)),
+    BAMBOO(MiningLevels.WOOD, 131, 3.0f, 1.0f, 15, () -> Ingredient.ofItems(Items.BAMBOO)),
     OBSIDIAN(MiningLevels.DIAMOND, 2642, 7.0f, 2.0f, 22, () -> Ingredient.ofItems(Items.CRYING_OBSIDIAN)),
     COPPER(MiningLevels.STONE, 196, 5.0f, 1.5f, 18, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
     // IRON(MiningLevels.IRON, 250, 6.0f, 2.0f, 14, () -> Ingredient.ofItems(Items.IRON_INGOT)),

@@ -1,0 +1,6 @@
+{
+    "parent": "item/crossbow_pulling_0",
+    "textures": {
+        "layer0": "ecfabric:item/blowgun"
+    }
+}

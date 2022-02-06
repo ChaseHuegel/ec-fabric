@@ -52,6 +52,9 @@ public class EternalCraftClient implements ClientModInitializer {
         FabricModelPredicateProviderRegistry.register(CustomItems.TIME_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.COPPER_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.COPPER_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        
+        FabricModelPredicateProviderRegistry.register(CustomItems.BLOWGUN, new Identifier("pull"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.BLOWGUN, new Identifier("pulling"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
 
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FINE_GLASS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FROST, RenderLayer.getCutout());
