@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " ac",
+        "b c",
+        " ac"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:stick"
+        },
+        "b": {
+            "tag": "minecraft:planks"
+        },
+        "c": {
+            "item": "minecraft:string"
+        }
+    },
+    "result": {
+        "item": "ecfabric:longbow",
+        "count": 1
+    }
+}

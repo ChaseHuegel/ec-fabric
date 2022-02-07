@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " a ",
+        " a ",
+        " a "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:bamboo"
+        }
+    },
+    "result": {
+        "item": "ecfabric:blowgun",
+        "count": 1
+    }
+}

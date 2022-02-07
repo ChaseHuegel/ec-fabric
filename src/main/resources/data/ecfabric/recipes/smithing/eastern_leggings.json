@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "minecraft:leather_leggings"
+    },
+
+    "addition": {
+        "item": "ecfabric:steel_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:eastern_leggings"
+    }
+}

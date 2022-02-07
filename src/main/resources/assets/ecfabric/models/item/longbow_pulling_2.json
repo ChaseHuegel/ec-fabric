@@ -1,0 +1,6 @@
+{
+    "parent": "ecfabric:item/longbow",
+    "textures": {
+        "layer0": "ecfabric:item/longbow_pulling_2"
+    }
+}

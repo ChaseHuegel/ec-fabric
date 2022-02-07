@@ -13,6 +13,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -43,6 +44,10 @@ public class CustomItems {
     
     public static final Item BO_STAFF = CustomItems.register("bo_staff", new CustomSpearItem(CustomToolMaterials.BAMBOO, 3, -2f, 1f, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BLOWGUN = CustomItems.register("blowgun", new CrossbowItem(new FabricItemSettings().group(CustomItemGroup.COMBAT).maxCount(1)));
+    public static final Item NUNCHUCK = CustomItems.register("nunchuck", new CustomSpearItem(CustomToolMaterials.BAMBOO, 1, -1f, 0f, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+
+    public static final Item SLING = CustomItems.register("sling", new BowItem(new FabricItemSettings().group(CustomItemGroup.COMBAT).maxCount(1)));
+    public static final Item LONGBOW = CustomItems.register("longbow", new BowItem(new FabricItemSettings().group(CustomItemGroup.COMBAT).maxCount(1)));
     
     public static final Item WOODEN_DAGGER = CustomItems.register("wooden_dagger", new CustomDaggerItem(ToolMaterials.WOOD, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item WOODEN_GREATSWORD = CustomItems.register("wooden_greatsword", new CustomGreatswordItem(ToolMaterials.WOOD, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
@@ -178,6 +183,11 @@ public class CustomItems {
     public static final Item PLATINUM_CHESTPLATE = CustomItems.register("platinum_chestplate", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_LEGGINGS = CustomItems.register("platinum_leggings", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_BOOTS = CustomItems.register("platinum_boots", new ArmorItem(CustomArmorMaterials.PLATINUM, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    
+    public static final Item EASTERN_HELMET = CustomItems.register("eastern_helmet", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item EASTERN_CHESTPLATE = CustomItems.register("eastern_chestplate", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item EASTERN_LEGGINGS = CustomItems.register("eastern_leggings", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item EASTERN_BOOTS = CustomItems.register("eastern_boots", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
     public static final Item WOODEN_STAFF = CustomItems.register("wooden_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
@@ -326,7 +336,7 @@ public class CustomItems {
     public static final Item FUR_CHESTPLATE = CustomItems.register("fur_chestplate", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item FUR_LEGGINGS = CustomItems.register("fur_leggings", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item FUR_BOOTS = CustomItems.register("fur_boots", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    
+
     public static final Item PILLAGER_HELMET = CustomItems.register("pillager_helmet", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PILLAGER_CHESTPLATE = CustomItems.register("pillager_chestplate", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PILLAGER_LEGGINGS = CustomItems.register("pillager_leggings", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
@@ -344,6 +354,10 @@ public class CustomItems {
     public static final Item PRISMARINE_LEGGINGS = CustomItems.register("prismarine_leggings", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PRISMARINE_BOOTS = CustomItems.register("prismarine_boots", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
+    public static final Item COPPER_REBREATHER = CustomItems.register("copper_rebreather", new ArmorItem(CustomArmorMaterials.COPPER_REBREATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
+    public static final Item SCROLL_HOME  = CustomItems.register("scroll_home", new HomeTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
+    public static final Item SCROLL_SPAWN  = CustomItems.register("scroll_spawn", new SpawnTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
+
     public static void Initialize() {}
 
     protected static Item register(Block block, Item item) {

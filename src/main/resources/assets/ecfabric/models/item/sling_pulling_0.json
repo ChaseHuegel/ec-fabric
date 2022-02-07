@@ -1,0 +1,6 @@
+{
+    "parent": "ecfabric:item/sling",
+    "textures": {
+        "layer0": "ecfabric:item/sling_pulling_0"
+    }
+}

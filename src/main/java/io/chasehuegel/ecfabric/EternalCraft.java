@@ -37,6 +37,7 @@ import io.chasehuegel.ecfabric.Generation.HangingBlockFeatureConfig;
 import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItemGroup;
 import io.chasehuegel.ecfabric.item.CustomItems;
+import io.chasehuegel.ecfabric.item.ItemEvents;
 
 public class EternalCraft implements ModInitializer {
 	public static final String Namespace = "ecfabric";
@@ -129,6 +130,7 @@ public class EternalCraft implements ModInitializer {
 		CustomBlocks.Initialize();
 		CustomItems.Initialize();
 		CustomItemGroup.Initialize();
+		ItemEvents.Initialize();
 
 		var platinum_ore = RegistryKey.of(Registry.PLACED_FEATURE_KEY, new Identifier(EternalCraft.Namespace, "overworld_platinum_ore"));
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, platinum_ore.getValue(), PLATINUM_ORE_CONFIG);

@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aaa",
+        "bcb",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:scute"
+        },
+        "b": {
+            "item": "minecraft:copper_ingot"
+        },
+        "c": {
+            "item": "minecraft:glass_bottle"
+        }
+    },
+    "result": {
+        "item": "ecfabric:copper_rebreather",
+        "count": 1
+    }
+}
