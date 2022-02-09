@@ -3,6 +3,8 @@ package io.chasehuegel.ecfabric;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
@@ -38,6 +40,7 @@ import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItemGroup;
 import io.chasehuegel.ecfabric.item.CustomItems;
 import io.chasehuegel.ecfabric.item.ItemEvents;
+import io.chasehuegel.ecfabric.magic.SpellManager;
 
 public class EternalCraft implements ModInitializer {
 	public static final String Namespace = "ecfabric";
@@ -131,6 +134,8 @@ public class EternalCraft implements ModInitializer {
 		CustomItems.Initialize();
 		CustomItemGroup.Initialize();
 		ItemEvents.Initialize();
+
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SpellManager());
 
 		var platinum_ore = RegistryKey.of(Registry.PLACED_FEATURE_KEY, new Identifier(EternalCraft.Namespace, "overworld_platinum_ore"));
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, platinum_ore.getValue(), PLATINUM_ORE_CONFIG);

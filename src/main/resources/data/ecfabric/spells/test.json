@@ -1,0 +1,46 @@
+{
+    "Name": "Test Spell",
+    "MaxLevel": 1,
+    "Component": "minecraft:glowstone_dust",
+    "Type": "PROJECTILE",
+    "Projectile": {
+        "Type": "minecraft:FIREBALL",
+        "Velocity": 3.0
+    },
+    "Summon": {
+        "Type": "minecraft:LIGHTNING_BOLT",
+        "Duration": 0
+    },
+    "Damage": {
+        "Enabled": true,
+        "Target": "OTHER",
+        "Value": 3.0,
+        "Scale": 1.2
+    },
+    "Heal": {
+        "Enabled": true,
+        "Target": "SELF",
+        "Value": 3.0,
+        "Scale": 1.2
+    },
+    "Effect": {
+        "Enabled": true,
+        "Target": "Self",
+        "Type": "minecraft:SPEED",
+        "Duration": 20,
+        "Amplifier": 1,
+        "Scale": 1.2,
+        "Particles": true,
+        "Visible": true
+    },
+    "OnCast": {
+        "Sound": "minecraft:ENTITY_ILLUSIONER_CAST_SPELL",
+        "Particle": "minecraft:FLAME",
+        "ParticleCount": 2
+    },
+    "OnHit": {
+        "Sound": "minecraft:ITEM_FIRECHARGE_USE",
+        "Particle": "minecraft:LAVA",
+        "ParticleCount": 6
+    }
+}
