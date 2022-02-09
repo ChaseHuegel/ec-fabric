@@ -21,19 +21,23 @@ public class SpawnTpItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
-        user.setCurrentHand(hand);
+        if (!user.getEntityWorld().isClient()) {
+            user.setCurrentHand(hand);
 
-        ServerWorld serverWorld = world.isClient ? MinecraftClient.getInstance().getServer().getOverworld() : user.getServer().getOverworld();
+            ServerWorld serverWorld = world.isClient ? MinecraftClient.getInstance().getServer().getOverworld() : user.getServer().getOverworld();
 
-        BlockPos spawnPos = serverWorld.getSpawnPos();
-        user.teleport(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-        user.getItemCooldownManager().set(this, 60);
+            BlockPos spawnPos = serverWorld.getSpawnPos();
+            user.teleport(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+            user.getItemCooldownManager().set(this, 60);
 
-        itemStack.setCount(itemStack.getCount()-1);
+            itemStack.setCount(itemStack.getCount()-1);
 
-        user.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, 1f, 1f);
+            user.playSound(SoundEvents.ENTITY_EVOKER_CAST_SPELL, 1f, 1f);
 
-        return TypedActionResult.consume(itemStack);
+            return TypedActionResult.consume(itemStack);
+        }
+
+        return super.use(world, user, hand);
     }
     
 }

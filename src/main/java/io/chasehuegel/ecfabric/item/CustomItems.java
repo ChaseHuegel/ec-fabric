@@ -355,8 +355,8 @@ public class CustomItems {
     public static final Item PRISMARINE_BOOTS = CustomItems.register("prismarine_boots", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
     public static final Item COPPER_REBREATHER = CustomItems.register("copper_rebreather", new ArmorItem(CustomArmorMaterials.COPPER_REBREATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
-    public static final Item SCROLL_HOME  = CustomItems.register("scroll_home", new HomeTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
-    public static final Item SCROLL_SPAWN  = CustomItems.register("scroll_spawn", new SpawnTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
+    // public static final Item SCROLL_HOME  = CustomItems.register("scroll_home", new HomeTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
+    // public static final Item SCROLL_SPAWN  = CustomItems.register("scroll_spawn", new SpawnTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
 
     public static void Initialize() {}
 
