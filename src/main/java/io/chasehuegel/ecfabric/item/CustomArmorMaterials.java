@@ -31,7 +31,7 @@ public enum CustomArmorMaterials implements ArmorMaterial
     ATLANTIS("atlantis", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     CROWN("crown", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     GRAY_WOLF("gray_wolf", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
-    FUR("fur", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
+    THICK_FUR("thick_fur", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     CLERIC("cleric", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     ANGEL("angel", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     AZALEA("azalea", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),

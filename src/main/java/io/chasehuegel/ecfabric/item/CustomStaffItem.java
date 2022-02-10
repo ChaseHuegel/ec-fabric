@@ -1,7 +1,5 @@
 package io.chasehuegel.ecfabric.item;
 
-import java.util.function.Predicate;
-
 import io.chasehuegel.ecfabric.EternalCraft;
 import io.chasehuegel.ecfabric.magic.Spell;
 import io.chasehuegel.ecfabric.magic.SpellManager;
@@ -13,132 +11,113 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.BowItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class CustomStaffItem extends BowItem {
-    public static final Item AMMO_ITEM = Items.GLOWSTONE_DUST;
-    public static final Predicate<ItemStack> STAFF_PROJECTILES = stack -> stack.isOf(CustomStaffItem.AMMO_ITEM);
-    
+public class CustomStaffItem extends BowItem {    
     public CustomStaffItem(Settings settings) {
         super(settings.maxCount(1));
     }
 
     @Override
-    public Predicate<ItemStack> getProjectiles() {
-        return STAFF_PROJECTILES;
-    }
-
-    @Override
-    public int getRange() {
-        return 32;
-    }
-
-    @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        Spell spell = null;
-
-        if (user instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity)user;
-
-            for (int i = 0; i < player.getInventory().size(); ++i) {
-                ItemStack inventoryStack = player.getInventory().getStack(i);
-
-                spell = SpellManager.GetFromComponent(inventoryStack.getItem());
-
-                if (spell != null) {
-                    break;
-                }
-            }
-        }
-
-        if (spell == null) {
-            return;
-        }
-
-        boolean bl2;
-        float f;
         if (!(user instanceof PlayerEntity)) {
             return;
         }
-        PlayerEntity playerEntity = (PlayerEntity)user;
-        boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
-        ItemStack itemStack = playerEntity.getArrowType(stack);
-        if (itemStack.isEmpty() && !bl) {
-            return;
+        
+        Spell spell = null;
+        ItemStack componentStack = null;
+        PlayerEntity player = (PlayerEntity)user;
+
+        //  Try to find a spell component
+        for (int i = 0; i < player.getInventory().size(); ++i) {
+            ItemStack inventoryStack = player.getInventory().getStack(i);
+
+            spell = SpellManager.GetFromComponent(inventoryStack.getItem());
+
+            if (spell != null) {
+                componentStack = inventoryStack;
+                break;
+            }
         }
-        if (itemStack.isEmpty()) {
-            itemStack = new ItemStack(CustomStaffItem.AMMO_ITEM);
-        }
-        if ((double)(f = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
+
+        float strength = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);        
+        if (spell == null && strength < 0.1f) {
             return;
         }
 
-        bl2 = bl && itemStack.isOf(CustomStaffItem.AMMO_ITEM);
         
         if (!world.isClient) {
-            int j;
-            int explosionPower = 1;
-            
-            if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
-                explosionPower += (int)(j * 0.5f + 0.5f);
-            }
-            if (EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) > 0) {
-                explosionPower += 1;
-            }
-
-            Entity projectile = spell.ProjectileEntity.create((ServerWorld) world, null, null, playerEntity, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
-            projectile.setNoGravity(false);
-            projectile.setPosition(playerEntity.getEyePos());
-            projectile.setVelocity(getProjectileVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, f * spell.ProjectileVelocity, 1.0f));
-
-            if (projectile instanceof ProjectileEntity) {
-                ((ProjectileEntity)projectile).setOwner(playerEntity);
+            switch (spell.Type) {
+                case PROJECTILE:
+                TriggerProjectile(world, player, spell, stack, strength);
+                break;
+                case INSTANT:
+                break;
+                case SUMMON:
+                break;
             }
             
-            if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-                projectile.setOnFire(true);
-            }
-
-            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-            world.spawnEntity(projectile);
+            stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
-
-        world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + f * 0.5f);
         
-        if (!bl2 && !playerEntity.getAbilities().creativeMode) {
-            itemStack.decrement(1);
-            if (itemStack.isEmpty()) {
-                playerEntity.getInventory().removeOne(itemStack);
+        //  Don't consume components in creative mode or with infinity
+        if (!player.getAbilities().creativeMode && EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) <= 0) {
+            componentStack.decrement(1);
+            if (componentStack.isEmpty()) {
+                player.getInventory().removeOne(componentStack);
             }
         }
-
-        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+        
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
+        player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
-    public Vec3d getProjectileVelocity(Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {
-        Vec3d vec3d;
+    private void TriggerProjectile(World world, PlayerEntity player, Spell spell, ItemStack stack, float strength) {
+        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
+        if (powerLevel > 0) {
+            // power += (int)(powerLevel * 0.5f + 0.5f);
+        }
+
+        if (EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) > 0) {
+        }
+
+        Entity projectile = spell.ProjectileEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
+        projectile.setNoGravity(false);
+        projectile.setPosition(player.getEyePos());
+        projectile.setVelocity(getProjectileVelocity(player, player.getPitch(), player.getYaw(), 0.0f, strength * spell.ProjectileVelocity, 1.0f));
+
+        if (projectile instanceof ProjectileEntity) {
+            ((ProjectileEntity)projectile).setOwner(player);
+        }
         
-        float f = -MathHelper.sin(yaw * ((float)Math.PI / 180)) * MathHelper.cos(pitch * ((float)Math.PI / 180));
-        float g = -MathHelper.sin((pitch + roll) * ((float)Math.PI / 180));
-        float h = MathHelper.cos(yaw * ((float)Math.PI / 180)) * MathHelper.cos(pitch * ((float)Math.PI / 180));
-        vec3d = getProjectileVelocity(f, g, h, speed, divergence);
+        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
+            projectile.setOnFire(true);
+        }
+
+        world.spawnEntity(projectile);
+    }
+
+    private Vec3d getProjectileVelocity(Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {        
+        float x = -MathHelper.sin(yaw * ((float)Math.PI / 180)) * MathHelper.cos(pitch * ((float)Math.PI / 180));
+        float y = -MathHelper.sin((pitch + roll) * ((float)Math.PI / 180));
+        float z = MathHelper.cos(yaw * ((float)Math.PI / 180)) * MathHelper.cos(pitch * ((float)Math.PI / 180));
+
         Vec3d shooterVelocity = shooter.getVelocity();
-        vec3d = vec3d.add(shooterVelocity.x, shooter.isOnGround() ? 0.0 : shooterVelocity.y, shooterVelocity.z);
 
-        return vec3d;
+        Vec3d projectileVelocity = calculateProjectileVelocity(x, y, z, speed, divergence);
+        projectileVelocity = projectileVelocity.add(shooterVelocity.x, shooter.isOnGround() ? 0.0 : shooterVelocity.y, shooterVelocity.z);
+
+        return projectileVelocity;
     }
 
-    public Vec3d getProjectileVelocity(double x, double y, double z, float speed, float divergence) {
+    private Vec3d calculateProjectileVelocity(double x, double y, double z, float speed, float divergence) {
         Vec3d vec3d = new Vec3d(x, y, z).normalize().add(EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence).multiply(speed);
         return vec3d;
     }

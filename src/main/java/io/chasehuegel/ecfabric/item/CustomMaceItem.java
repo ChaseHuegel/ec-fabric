@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.math.Vec3d;
 
-public class CustomMaceItem extends CustomAxeItem {
+public class CustomMaceItem extends CustomSwordItem {
     public CustomMaceItem(ToolMaterial material, int attackDamage, float attackSpeed, float attackRange, Settings settings) {
         super(material, attackDamage, attackSpeed, attackRange, settings);
     }

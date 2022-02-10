@@ -332,10 +332,10 @@ public class CustomItems {
     public static final Item GRAY_WOLF_CHESTPLATE = CustomItems.register("gray_wolf_chestplate", new ArmorItem(CustomArmorMaterials.GRAY_WOLF, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GRAY_WOLF_LEGGINGS = CustomItems.register("gray_wolf_leggings", new ArmorItem(CustomArmorMaterials.GRAY_WOLF, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GRAY_WOLF_BOOTS = CustomItems.register("gray_wolf_boots", new ArmorItem(CustomArmorMaterials.GRAY_WOLF, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item FUR_HELMET = CustomItems.register("fur_helmet", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item FUR_CHESTPLATE = CustomItems.register("fur_chestplate", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item FUR_LEGGINGS = CustomItems.register("fur_leggings", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item FUR_BOOTS = CustomItems.register("fur_boots", new ArmorItem(CustomArmorMaterials.FUR, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item THICK_FUR_HELMET = CustomItems.register("thick_fur_helmet", new ArmorItem(CustomArmorMaterials.THICK_FUR, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item THICK_FUR_CHESTPLATE = CustomItems.register("thick_fur_chestplate", new ArmorItem(CustomArmorMaterials.THICK_FUR, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item THICK_FUR_LEGGINGS = CustomItems.register("thick_fur_leggings", new ArmorItem(CustomArmorMaterials.THICK_FUR, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item THICK_FUR_BOOTS = CustomItems.register("thick_fur_boots", new ArmorItem(CustomArmorMaterials.THICK_FUR, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
 
     public static final Item PILLAGER_HELMET = CustomItems.register("pillager_helmet", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PILLAGER_CHESTPLATE = CustomItems.register("pillager_chestplate", new ArmorItem(CustomArmorMaterials.PILLAGER, EquipmentSlot.CHEST, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
