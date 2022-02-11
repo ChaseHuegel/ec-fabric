@@ -1,10 +1,10 @@
 {
-    "Name": "Test Spell",
+    "Name": "Test Spell 3",
     "MaxLevel": 1,
-    "Component": "minecraft:glowstone_dust",
-    "Type": "PROJECTILE",
+    "Component": "minecraft:gunpowder",
+    "Type": "SUMMON",
     "Projectile": {
-        "Type": "minecraft:FIREBALL",
+        "Type": "minecraft:pig",
         "Velocity": 2
     },
     "Summon": {

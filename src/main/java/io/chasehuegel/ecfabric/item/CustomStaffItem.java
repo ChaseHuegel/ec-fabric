@@ -1,20 +1,38 @@
 package io.chasehuegel.ecfabric.item;
 
+import java.util.Arrays;
+
+import org.apache.commons.lang3.reflect.FieldUtils;
+
 import io.chasehuegel.ecfabric.EternalCraft;
 import io.chasehuegel.ecfabric.magic.Spell;
 import io.chasehuegel.ecfabric.magic.SpellManager;
+import io.chasehuegel.ecfabric.magic.SpellScheduler;
+import io.chasehuegel.ecfabric.magic.SpellType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.WitherSkullEntity;
+import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -26,82 +44,227 @@ public class CustomStaffItem extends BowItem {
     }
 
     @Override
+    public int getRange() {
+        return 32;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+
+        if (player.getAbilities().creativeMode || !TryGetSpellComponent(player).isEmpty()) {
+            player.setCurrentHand(hand);
+            return TypedActionResult.consume(itemStack);
+        }
+
+        return TypedActionResult.fail(itemStack);
+    }
+
+    @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (!(user instanceof PlayerEntity)) {
             return;
         }
         
-        Spell spell = null;
-        ItemStack componentStack = null;
         PlayerEntity player = (PlayerEntity)user;
 
         //  Try to find a spell component
-        for (int i = 0; i < player.getInventory().size(); ++i) {
-            ItemStack inventoryStack = player.getInventory().getStack(i);
-
-            spell = SpellManager.GetFromComponent(inventoryStack.getItem());
-
-            if (spell != null) {
-                componentStack = inventoryStack;
-                break;
-            }
-        }
-
-        float strength = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);        
-        if (spell == null && strength < 0.1f) {
+        ItemStack componentStack = TryGetSpellComponent(player);
+        if (componentStack.isEmpty()) {
             return;
         }
 
+        //  Try to find an associated spell
+        Spell spell = SpellManager.TryGetFromComponent(componentStack.getItem());
+        if (spell == null) {
+            return;
+        }
+
+        float strength = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);    
+        Vec3d targetPosition = TryGetTarget(player);
+        if (strength < 0.1f || (targetPosition == null && spell.Type != SpellType.PROJECTILE)) {
+            return;
+        }
+
+        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
+        int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
+        boolean flame = EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0;
+        boolean infinity = EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
         
         if (!world.isClient) {
+            float power = 1f + (powerLevel * 0.5f);
+
+            boolean success = false;
             switch (spell.Type) {
                 case PROJECTILE:
-                TriggerProjectile(world, player, spell, stack, strength);
-                break;
+                    success = TriggerProjectile(world, player, spell, stack, strength, power, punchLevel, flame, infinity);
+                    break;
                 case INSTANT:
-                break;
+                    break;
                 case SUMMON:
-                break;
+                    success = TriggerSummon(world, player, targetPosition, spell, stack, strength, power, punchLevel, flame, infinity);
+                    break;
+            }
+
+            if (!success) {
+                return;
             }
             
             stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
         
         //  Don't consume components in creative mode or with infinity
-        if (!player.getAbilities().creativeMode && EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) <= 0) {
+        if (!player.getAbilities().creativeMode && !infinity) {
             componentStack.decrement(1);
             if (componentStack.isEmpty()) {
                 player.getInventory().removeOne(componentStack);
             }
         }
         
+        player.sendMessage(Text.of(spell.Name), true);
         world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
-    private void TriggerProjectile(World world, PlayerEntity player, Spell spell, ItemStack stack, float strength) {
-        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
-        if (powerLevel > 0) {
-            // power += (int)(powerLevel * 0.5f + 0.5f);
+    private boolean TriggerProjectile(World world, PlayerEntity player, Spell spell, ItemStack stack, float strength, float power, int punchLevel, boolean flame, boolean infinity) {
+        Entity entity = spell.ProjectileEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
+        entity.setNoGravity(false);
+        entity.setPosition(player.getEyePos());
+        entity.setVelocity(getProjectileVelocity(player, player.getPitch(), player.getYaw(), 0.0f, strength * spell.ProjectileVelocity, 1.0f));
+
+        //  Punch increases velocity
+        if (punchLevel > 0) {
+            entity.setVelocity(entity.getVelocity().multiply(1 + punchLevel * 0.5f));
         }
 
-        if (EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) > 0) {
+        //  Flame ignites
+        if (flame) {
+            entity.setFireTicks(Integer.MAX_VALUE);
         }
 
-        Entity projectile = spell.ProjectileEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
-        projectile.setNoGravity(false);
-        projectile.setPosition(player.getEyePos());
-        projectile.setVelocity(getProjectileVelocity(player, player.getPitch(), player.getYaw(), 0.0f, strength * spell.ProjectileVelocity, 1.0f));
+        //  Apply effects to living entities
+        if (entity instanceof LivingEntity) {
+            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity), player);
+        }
 
-        if (projectile instanceof ProjectileEntity) {
-            ((ProjectileEntity)projectile).setOwner(player);
+        //  Projectiles need to have their owner set and maintain a constant velocity
+        if (entity instanceof ProjectileEntity) {
+            ProjectileEntity projectileEntity = (ProjectileEntity)entity;
+            projectileEntity.setOwner(player);
+            SpellScheduler.SetEntityVelocity(projectileEntity, projectileEntity.getVelocity());
+
+            //  Power increases fireball explosion
+            if (entity instanceof FireballEntity) {
+                FireballEntity fireballEntity = (FireballEntity)entity;
+                try {
+                    FieldUtils.writeField(fireballEntity, "explosionPower", (int)(power * strength), true);
+                } catch (Exception ex) {}                
+            }
+
+            //  Flame charges wither skulls
+            else if (entity instanceof WitherSkullEntity) {
+                WitherSkullEntity witherSkullEntity = (WitherSkullEntity)entity;
+                witherSkullEntity.setCharged(flame);
+            }
+
+            //  Apply effects to potions
+            else if (entity instanceof PotionEntity) {
+                PotionEntity potionEntity = (PotionEntity)entity;
+                ItemStack potionItemStack = Items.SPLASH_POTION.getDefaultStack();
+                potionItemStack = PotionUtil.setCustomPotionEffects(potionItemStack, Arrays.asList(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity)));
+                potionEntity.setItem(potionItemStack);
+            }
         }
         
-        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-            projectile.setOnFire(true);
+        SpellScheduler.RemoveEntityAfterDistance(entity, getRange() * strength);
+        SpellScheduler.RemoveEntityAfterLifetime(entity, (int)(20 * power * strength));
+        world.spawnEntity(entity);
+        return true;
+    }
+
+    private boolean TriggerSummon(World world, PlayerEntity player, Vec3d targetPosition, Spell spell, ItemStack stack, float strength, float power, int punchLevel, boolean flame, boolean infinity) {
+        if (targetPosition == null) {
+            return false;
+        }
+        
+        Entity entity = spell.SummonEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
+        entity.setPosition(targetPosition);
+
+        
+        //  Apply effects to living entities
+        if (entity instanceof LivingEntity) {
+            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity), player);
         }
 
-        world.spawnEntity(projectile);
+        //  Lightning is cosmetic, use an instant damage effect
+        else if (entity instanceof LightningEntity) {
+            LightningEntity lightningEntity = (LightningEntity)entity;
+            lightningEntity.setCosmetic(true);
+            
+            try {
+                FieldUtils.writeField(lightningEntity, "ignoreCameraFrustum", true, true);
+                FieldUtils.writeField(lightningEntity, "ambientTick", 2, true);
+                FieldUtils.writeField(lightningEntity, "seed", EternalCraft.Random.nextLong(), true);
+                FieldUtils.writeField(lightningEntity, "remainingActions", EternalCraft.Random.nextInt(3) + 1, true);
+            } catch (Exception ex) {}
+            
+            //  TODO instant damage at target
+        }
+        
+        //  Flame ignites
+        if (flame) {
+            entity.setFireTicks(Integer.MAX_VALUE);
+        }
+        
+        SpellScheduler.RemoveEntityAfterLifetime(entity, (int)(300 * power * strength));
+        world.spawnEntity(entity);
+        return true;
+    }
+
+    private ItemStack TryGetSpellComponent(PlayerEntity player) {
+        Spell spell = SpellManager.TryGetFromComponent(player.getOffHandStack().getItem());
+        if (spell != null) {
+            return player.getOffHandStack();
+        }
+        else for (int i = 0; i < player.getInventory().size(); ++i) {
+            ItemStack inventoryStack = player.getInventory().getStack(i);
+
+            spell = SpellManager.TryGetFromComponent(inventoryStack.getItem());
+
+            if (spell != null) {
+                return inventoryStack;
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
+    private Vec3d TryGetTarget(PlayerEntity player) {
+        HitResult hitResult = player.raycast(getRange(), 1f, false);
+        Vec3d targetPosition;
+
+        switch (hitResult.getType()) {
+            case BLOCK:
+                targetPosition = hitResult.getPos();
+                break;
+            case ENTITY:
+                targetPosition = ((EntityHitResult)hitResult).getEntity().getPos();
+                break;
+            default:
+                targetPosition = null;
+        }
+
+        return targetPosition;
+    }
+
+    private StatusEffectInstance GetModifiedSpellEffect(Spell spell, float strength, float power, int punchLevel, boolean infinity) {
+        return new StatusEffectInstance(
+            spell.Effect,
+            infinity ? Integer.MAX_VALUE : (int)((spell.EffectDuration * power) * strength),
+            (int)((spell.EffectAmplifier + punchLevel) * strength),
+            spell.ShowEffectParticles,
+            spell.IsEffectVisible
+        );
     }
 
     private Vec3d getProjectileVelocity(Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {        

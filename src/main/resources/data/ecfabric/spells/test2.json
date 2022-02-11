@@ -5,7 +5,7 @@
     "Type": "PROJECTILE",
     "Projectile": {
         "Type": "minecraft:pig",
-        "Velocity": 2.5
+        "Velocity": 2
     },
     "Summon": {
         "Type": "minecraft:LIGHTNING_BOLT",
@@ -27,19 +27,19 @@
         "Enabled": true,
         "Target": "Self",
         "Type": "minecraft:SPEED",
-        "Duration": 20,
+        "Duration": 200,
         "Amplifier": 1,
         "Scale": 1.2,
         "Particles": true,
         "Visible": true
     },
     "OnCast": {
-        "Sound": "minecraft:ENTITY_ILLUSIONER_CAST_SPELL",
+        "Sound": "minecraft:entity.illusioner.cast_spell",
         "Particle": "minecraft:FLAME",
         "ParticleCount": 2
     },
     "OnHit": {
-        "Sound": "minecraft:ITEM_FIRECHARGE_USE",
+        "Sound": "minecraft:item.firecharge.use",
         "Particle": "minecraft:LAVA",
         "ParticleCount": 6
     }

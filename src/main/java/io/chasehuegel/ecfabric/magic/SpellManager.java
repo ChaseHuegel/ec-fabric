@@ -19,7 +19,7 @@ import net.minecraft.util.registry.Registry;
 public class SpellManager implements SimpleSynchronousResourceReloadListener {
     private static Map<Item, Spell> spells;
 
-    public static Spell GetFromComponent(Item component) {
+    public static Spell TryGetFromComponent(Item component) {
         return spells.get(component);
     }
 

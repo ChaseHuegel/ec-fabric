@@ -1,16 +1,20 @@
 package io.chasehuegel.ecfabric.item;
 
+import io.chasehuegel.ecfabric.magic.SpellScheduler;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.EndTick;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.StartTick;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 
-public class ItemEvents implements EndTick {
+public class ItemEvents implements EndTick, StartTick {
+    private ItemEvents() {}
+
     public static void Initialize() {
-        ItemEvents eventHandler = new ItemEvents();
-        
+        ItemEvents eventHandler = new ItemEvents();        
         ServerTickEvents.END_SERVER_TICK.register(eventHandler);
+        ServerTickEvents.START_SERVER_TICK.register(eventHandler);
     }
 
     @Override
@@ -21,14 +25,19 @@ public class ItemEvents implements EndTick {
             }
 
             if (player.isFreezing() &&
-                player.getEquippedStack(EquipmentSlot.HEAD).getItem() == CustomItems.FUR_HELMET ||
-                player.getEquippedStack(EquipmentSlot.CHEST).getItem() == CustomItems.FUR_CHESTPLATE ||
-                player.getEquippedStack(EquipmentSlot.LEGS).getItem() == CustomItems.FUR_LEGGINGS ||
-                player.getEquippedStack(EquipmentSlot.FEET).getItem() == CustomItems.FUR_BOOTS ||
+                player.getEquippedStack(EquipmentSlot.HEAD).getItem() == CustomItems.THICK_FUR_HELMET ||
+                player.getEquippedStack(EquipmentSlot.CHEST).getItem() == CustomItems.THICK_FUR_CHESTPLATE ||
+                player.getEquippedStack(EquipmentSlot.LEGS).getItem() == CustomItems.THICK_FUR_LEGGINGS ||
+                player.getEquippedStack(EquipmentSlot.FEET).getItem() == CustomItems.THICK_FUR_BOOTS ||
                 player.getEquippedStack(EquipmentSlot.HEAD).getItem() == CustomItems.SNOW_HELMET ||
                 player.getEquippedStack(EquipmentSlot.CHEST).getItem() == CustomItems.SNOW_CHESTPLATE) {
                     player.setFrozenTicks(0);
             }
         }
+    }
+
+    @Override
+    public void onStartTick(MinecraftServer server) {
+        SpellScheduler.Tick();
     }
 }

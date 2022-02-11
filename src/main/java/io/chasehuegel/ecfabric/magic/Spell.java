@@ -2,6 +2,7 @@ package io.chasehuegel.ecfabric.magic;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.sound.SoundEvent;
@@ -45,4 +46,8 @@ public class Spell {
     public SoundEvent HitSound;
     public ParticleType<?> HitParticle;
     public int HitParticleCount;
+
+    public StatusEffectInstance GetStatusEffectInstance() {
+        return new StatusEffectInstance(Effect, EffectDuration, EffectAmplifier, ShowEffectParticles, IsEffectVisible);
+    }
 }
