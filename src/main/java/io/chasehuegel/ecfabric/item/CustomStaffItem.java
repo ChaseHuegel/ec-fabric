@@ -137,6 +137,13 @@ public class CustomStaffItem extends BowItem {
                 world.playSound(null, e.getX(), e.getY(), e.getZ(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
                 
                 CreateSpellParticleEffect(world, e.getPos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
+
+                float distance = (float) e.getPos().distanceTo(player.getPos());
+                Vec3d direction = e.getPos().subtract(player.getEyePos()).normalize();
+                Vec3d origin = player.getEyePos().subtract(new Vec3d(0f, 0.5f, 0f));
+                for (float increment = 0f; increment < distance; increment += 0.5f) {
+                    CreateSpellParticleEffect(world, origin.add(direction.multiply(increment)), 0.5f, spell.HitParticle, (int)Math.min(1, spell.HitParticleCount*0.25f));
+                }
                 break;
             case SUMMON:
                 Vec3d p = hitResult.getType() == Type.ENTITY ? ((EntityHitResult)hitResult).getEntity().getPos() : hitResult.getPos();
