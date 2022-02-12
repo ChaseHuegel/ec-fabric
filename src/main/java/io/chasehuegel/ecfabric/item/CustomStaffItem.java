@@ -159,7 +159,7 @@ public class CustomStaffItem extends BowItem {
         
         CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
         world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
-        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(powerLevel)), true);
+        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(spell.GetLevel(powerLevel))), true);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 

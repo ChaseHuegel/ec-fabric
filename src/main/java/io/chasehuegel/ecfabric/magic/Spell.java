@@ -11,6 +11,10 @@ public class Spell {
     public String Name;
     public int MaxLevel;
     public Item Component;
+
+    public int GetLevel(int level) {
+        return Math.min(level, MaxLevel);
+    }
     
     public SpellType Type;
 
@@ -26,7 +30,7 @@ public class Spell {
     public float DamageScale;
 
     public float GetDamage(int level) {
-        return DamageAmount * (1f + (Math.min(level, MaxLevel) - 1) * DamageScale);
+        return DamageAmount * (1f + (GetLevel(level) - 1) * DamageScale);
     }
 
     public boolean HealEnabled;
@@ -35,7 +39,7 @@ public class Spell {
     public float HealScale;
 
     public float GetHeal(int level) {
-        return HealAmount * (1f + (Math.min(level, MaxLevel) - 1) * HealScale);
+        return HealAmount * (1f + (GetLevel(level) - 1) * HealScale);
     }
 
     public boolean EffectEnabled;
@@ -48,11 +52,11 @@ public class Spell {
     public boolean IsEffectVisible;
 
     public int GetEffectDuration(int level) {
-        return (int)(EffectDuration * (1f + (Math.min(level, MaxLevel) - 1) * EffectScale));
+        return (int)(EffectDuration * (1f + (GetLevel(level) - 1) * EffectScale));
     }
 
     public int GetEffectAmplifier(int level) {
-        return (int)(EffectAmplifier + Math.min(level, MaxLevel));
+        return (int)(EffectAmplifier + GetLevel(level));
     }
 
     public StatusEffectInstance GetStatusEffectInstance() {
