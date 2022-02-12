@@ -103,8 +103,8 @@ public class CustomStaffItem extends BowItem {
             return;
         }
 
-        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack) + staffPower;
-        int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) + staffPunch;
+        int powerLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.POWER, stack) + staffPower);
+        int punchLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) + staffPunch);
         boolean flame = EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0;
         boolean infinity = EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
         
@@ -299,23 +299,23 @@ public class CustomStaffItem extends BowItem {
 
         if (spell.DamageEnabled) {
             if (spell.DamageTarget == TargetMode.OTHER)
-                other.damage(DamageSource.magic(player, player), spell.GetDamage(powerLevel));
+                other.damage(DamageSource.magic(player, player), spell.GetDamage(powerLevel) * strength);
             else
-                player.damage(DamageSource.magic(player, player), spell.GetDamage(powerLevel));
+                player.damage(DamageSource.magic(player, player), spell.GetDamage(powerLevel) * strength);
             
             if (flame) {
                 if (spell.DamageTarget == TargetMode.OTHER)
-                    other.setFireTicks(100);
+                    other.setFireTicks((int) (100 * strength));
                 else
-                    player.setFireTicks(100);
+                    player.setFireTicks((int) (100 * strength));
             }
         }
 
         if (spell.HealEnabled) {
             if (spell.HealTarget == TargetMode.OTHER && other instanceof LivingEntity)
-                ((LivingEntity)other).heal(spell.GetHeal(powerLevel));
+                ((LivingEntity)other).heal(spell.GetHeal(powerLevel) * strength);
             else
-                player.heal(spell.GetHeal(powerLevel));
+                player.heal(spell.GetHeal(powerLevel) * strength);
         }
 
         if (spell.EffectEnabled) {
