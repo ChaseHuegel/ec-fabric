@@ -25,10 +25,18 @@ public class Spell {
     public float DamageAmount;
     public float DamageScale;
 
+    public float GetDamage(int level) {
+        return DamageAmount * (1f + (Math.min(level, MaxLevel) - 1) * DamageScale);
+    }
+
     public boolean HealEnabled;
     public TargetMode HealTarget;
     public float HealAmount;
     public float HealScale;
+
+    public float GetHeal(int level) {
+        return HealAmount * (1f + (Math.min(level, MaxLevel) - 1) * HealScale);
+    }
 
     public boolean EffectEnabled;
     public TargetMode EffectTarget;
@@ -39,6 +47,18 @@ public class Spell {
     public boolean ShowEffectParticles;
     public boolean IsEffectVisible;
 
+    public int GetEffectDuration(int level) {
+        return (int)(EffectDuration * (1f + (Math.min(level, MaxLevel) - 1) * EffectScale));
+    }
+
+    public int GetEffectAmplifier(int level) {
+        return (int)(EffectAmplifier * (1f + (Math.min(level, MaxLevel) - 1) * EffectScale));
+    }
+
+    public StatusEffectInstance GetStatusEffectInstance() {
+        return new StatusEffectInstance(Effect, EffectDuration, EffectAmplifier, ShowEffectParticles, IsEffectVisible);
+    }
+
     public SoundEvent CastSound;
     public ParticleType<?> CastParticle;
     public int CastParticleCount;
@@ -47,7 +67,4 @@ public class Spell {
     public ParticleType<?> HitParticle;
     public int HitParticleCount;
 
-    public StatusEffectInstance GetStatusEffectInstance() {
-        return new StatusEffectInstance(Effect, EffectDuration, EffectAmplifier, ShowEffectParticles, IsEffectVisible);
-    }
 }

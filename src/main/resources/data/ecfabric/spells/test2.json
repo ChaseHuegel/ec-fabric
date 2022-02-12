@@ -2,7 +2,7 @@
     "Name": "Test Spell 2",
     "MaxLevel": 1,
     "Component": "minecraft:redstone",
-    "Type": "PROJECTILE",
+    "Type": "INSTANT",
     "Projectile": {
         "Type": "minecraft:pig",
         "Velocity": 2
@@ -15,21 +15,21 @@
         "Enabled": true,
         "Target": "OTHER",
         "Value": 3.0,
-        "Scale": 1.2
+        "Scale": 0.2
     },
     "Heal": {
         "Enabled": true,
         "Target": "SELF",
         "Value": 3.0,
-        "Scale": 1.2
+        "Scale": 0.2
     },
     "Effect": {
         "Enabled": true,
-        "Target": "Self",
+        "Target": "SELF",
         "Type": "minecraft:SPEED",
         "Duration": 200,
         "Amplifier": 1,
-        "Scale": 1.2,
+        "Scale": 0.2,
         "Particles": true,
         "Visible": true
     },
