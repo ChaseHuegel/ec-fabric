@@ -42,6 +42,11 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener {
                 try(InputStream stream = manager.getResource(id).getInputStream()) {
                     JsonObject json = JsonParser.parseReader(new InputStreamReader(stream)).getAsJsonObject();
 
+                    var enabled = json.get("Enabled");
+                    if (enabled != null && enabled.getAsBoolean() == false) {
+                        continue;
+                    }
+
                     Spell spell = new Spell();
                     spell.Name = json.get("Name").getAsString();
                     spell.MaxLevel = json.get("MaxLevel").getAsInt();

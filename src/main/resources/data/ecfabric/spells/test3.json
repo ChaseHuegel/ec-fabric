@@ -1,4 +1,5 @@
 {
+    "Enabled": false,
     "Name": "Test Spell 3",
     "MaxLevel": 5,
     "Component": "minecraft:gunpowder",

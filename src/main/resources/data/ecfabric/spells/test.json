@@ -1,4 +1,5 @@
 {
+    "Enabled": false,
     "Name": "Withering Curse",
     "MaxLevel": 3,
     "Component": "minecraft:nether_wart",
