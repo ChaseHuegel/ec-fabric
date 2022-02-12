@@ -49,6 +49,11 @@ public class EternalCraft implements ModInitializer {
 
 	public static final Random Random = new Random();
 
+	public static final Identifier SPELL_RELOAD_PACKET = new Identifier(EternalCraft.Namespace, "spell_reload");
+	public static final Identifier SPELL_DATA_PACKET = new Identifier(EternalCraft.Namespace, "spell_data");
+	public static final Identifier SPELL_CAST_PACKET = new Identifier(EternalCraft.Namespace, "spell_cast");
+	public static final Identifier SPELL_HIT_PACKET = new Identifier(EternalCraft.Namespace, "spell_hit");
+
 	private static ConfiguredFeature<?, ?> PLATINUM_ORE_CONFIG = Feature.ORE.configure(new OreFeatureConfig(
 		OreConfiguredFeatures.STONE_ORE_REPLACEABLES,
 		CustomBlocks.PLATINUM_ORE.getDefaultState(),

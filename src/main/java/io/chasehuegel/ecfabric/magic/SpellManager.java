@@ -1,5 +1,6 @@
 package io.chasehuegel.ecfabric.magic;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
@@ -10,15 +11,28 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import io.chasehuegel.ecfabric.EternalCraft;
+import io.chasehuegel.ecfabric.NetworkingUtils;
+import io.netty.buffer.ByteBuf;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.ServerStarted;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents.Join;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class SpellManager implements SimpleSynchronousResourceReloadListener {
-    private static Map<Item, Spell> spells;
+public class SpellManager implements SimpleSynchronousResourceReloadListener, ServerStarted, Join {
+    private static Map<Item, Spell> spells = new HashMap<Item, Spell>();
+    private static MinecraftServer Server;
 
     public static Spell TryGetFromComponent(Item component) {
         return spells.get(component);
@@ -31,7 +45,7 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener {
 
     @Override
     public void reload(ResourceManager manager) {	 
-        spells = new HashMap<Item, Spell>();
+        spells.clear();
 
         Collection<Identifier> resourceIds = manager.findResources("spells", path -> path.endsWith(".json"));
         
@@ -113,6 +127,68 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener {
                     EternalCraft.LOGGER.error("Error occurred while loading resource json " + id.toString(), e);
                 }
             }
+        }
+
+        //  Try re-sending spell data to clients
+        SendSpellDataReload();
+    }
+
+    private void SendSpellDataReload() {
+        if (Server != null) {
+            for (ServerPlayerEntity player : PlayerLookup.all(Server)) {
+                ServerPlayNetworking.send(player, EternalCraft.SPELL_RELOAD_PACKET, PacketByteBufs.create());
+            }
+
+            for (Spell spell : spells.values()) {
+                try {
+                    PacketByteBuf packet = PacketByteBufs.create();
+                    packet.writeByteArray(NetworkingUtils.Serialize(spell));
+
+                    for (ServerPlayerEntity player : PlayerLookup.all(Server)) {
+                        ServerPlayNetworking.send(player, EternalCraft.SPELL_DATA_PACKET, packet);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void SendSpellDataTo(ServerPlayerEntity player) {
+        if (Server != null) {
+            for (Spell spell : spells.values()) {
+                try {
+                    PacketByteBuf packet = PacketByteBufs.create();
+                    packet.writeByteArray(NetworkingUtils.Serialize(spell));
+
+                    ServerPlayNetworking.send(player, EternalCraft.SPELL_DATA_PACKET, packet);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onServerStarted(MinecraftServer server) {
+        Server = server;
+    }
+
+    @Override
+    public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
+        SendSpellDataTo(handler.player);
+    }
+
+    public static void OnSpellReload() {
+        spells.clear();
+    }
+
+    public static void OnSpellRecieved(ByteBuf buffer) {
+        try {
+            Spell spell = (Spell)NetworkingUtils.Deserialize(buffer.array());
+            spells.put(spell.Component, spell);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     

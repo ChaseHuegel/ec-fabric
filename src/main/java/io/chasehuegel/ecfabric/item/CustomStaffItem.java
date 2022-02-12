@@ -31,6 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
@@ -129,31 +130,9 @@ public class CustomStaffItem extends BowItem {
             }
             
             stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
-        }
 
-        switch (spell.Type) {
-            case INSTANT:
-                Entity e = ((EntityHitResult)hitResult).getEntity();
-                world.playSound(null, e.getX(), e.getY(), e.getZ(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
-                
-                CreateSpellParticleEffect(world, e.getPos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
-
-                float distance = (float) e.getPos().distanceTo(player.getPos());
-                Vec3d direction = e.getPos().subtract(player.getEyePos()).normalize();
-                Vec3d origin = player.getEyePos().subtract(new Vec3d(0f, 0.5f, 0f));
-                for (float increment = 0f; increment < distance; increment += 0.5f) {
-                    CreateSpellParticleEffect(world, origin.add(direction.multiply(increment)), 0.5f, spell.HitParticle, (int)Math.min(1, spell.HitParticleCount*0.25f));
-                }
-                break;
-            case SUMMON:
-                Vec3d p = hitResult.getType() == Type.ENTITY ? ((EntityHitResult)hitResult).getEntity().getPos() : hitResult.getPos();
-                float s = hitResult.getType() == Type.ENTITY ? (float)((EntityHitResult)hitResult).getEntity().getBoundingBox().getAverageSideLength()*2f : 1.5f;
-
-                world.playSound(null, p.getX(), p.getY(), p.getZ(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
-                CreateSpellParticleEffect(world, p, s, spell.HitParticle, spell.HitParticleCount);
-                break;
-            default:
-                break;
+            TryPlayCastEffect((ServerWorld)world, (ServerPlayerEntity)player, spell);
+            TryPlayHitEffect((ServerWorld)world, (ServerPlayerEntity)player, spell, hitResult);
         }
 
         //  Don't consume components in creative mode
@@ -164,9 +143,6 @@ public class CustomStaffItem extends BowItem {
             }
         }
         
-        CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
-        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(spell.GetLevel(powerLevel))), true);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
@@ -420,13 +396,45 @@ public class CustomStaffItem extends BowItem {
         );
     }
 
-    private void CreateSpellParticleEffect(World world, Vec3d pos, float size, ParticleEffect particle, int particleCount) {
+    private void CreateSpellParticleEffect(ServerWorld world, Vec3d pos, float size, ParticleEffect particle, int particleCount) {
         double x = pos.getX();
         double y = pos.getY() + 0.5f;
         double z = pos.getZ();
         
-        for (int i = 0; i < particleCount; i++) {
-            world.addParticle(particle, true, x + (Math.random()-0.5f) * size, y + (Math.random()-0.5f) * size, z + (Math.random()-0.5f) * size, 0.0, 0.0, 0.0);
+        world.spawnParticles(particle, x, y, z, particleCount, (Math.random()-0.5f) * size, (Math.random()-0.5f) * size, (Math.random()-0.5f) * size, 0);
+    }
+
+    public void TryPlayCastEffect(ServerWorld world, ServerPlayerEntity player, Spell spell) {
+        CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
+        world.playSound(null, player.getBlockPos(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f));
+        int powerLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.POWER, player.getActiveItem()) + staffPower);
+        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(spell.GetLevel(powerLevel))), true);
+    }
+
+    public void TryPlayHitEffect(ServerWorld world, ServerPlayerEntity player, Spell spell, HitResult hitResult) {
+        switch (spell.Type) {
+            case INSTANT:
+                Entity e = ((EntityHitResult)hitResult).getEntity();
+                world.playSound(null, e.getBlockPos(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f));
+                
+                CreateSpellParticleEffect(world, e.getPos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
+
+                float distance = (float) e.getPos().distanceTo(player.getPos());
+                Vec3d direction = e.getPos().subtract(player.getEyePos()).normalize();
+                Vec3d origin = player.getEyePos().subtract(new Vec3d(0f, 0.5f, 0f));
+                for (float increment = 0f; increment < distance; increment += 0.5f) {
+                    CreateSpellParticleEffect(world, origin.add(direction.multiply(increment)), 0.5f, spell.HitParticle, (int)Math.min(1, spell.HitParticleCount*0.25f));
+                }
+                break;
+            case SUMMON:
+                Vec3d p = hitResult.getType() == Type.ENTITY ? ((EntityHitResult)hitResult).getEntity().getPos() : hitResult.getPos();
+                float s = hitResult.getType() == Type.ENTITY ? (float)((EntityHitResult)hitResult).getEntity().getBoundingBox().getAverageSideLength()*2f : 1.5f;
+
+                world.playSound(null, new BlockPos(p), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f));
+                CreateSpellParticleEffect(world, p, s, spell.HitParticle, spell.HitParticleCount);
+                break;
+            default:
+                break;
         }
     }
 

@@ -2,8 +2,10 @@ package io.chasehuegel.ecfabric;
 
 import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItems;
+import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
@@ -132,6 +134,9 @@ public class EternalCraftClient implements ClientModInitializer {
                 table.pool(poolBuilder);
             }
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(EternalCraft.SPELL_RELOAD_PACKET, (client, handler, buffer, sender) -> { SpellManager.OnSpellReload(); });
+		ClientPlayNetworking.registerGlobalReceiver(EternalCraft.SPELL_DATA_PACKET, (client, handler, buffer, sender) -> { SpellManager.OnSpellRecieved(buffer); });
     }
 
     private float chargePredicate(ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity) {
