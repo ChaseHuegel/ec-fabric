@@ -126,8 +126,8 @@ public class CustomStaffItem extends BowItem {
             stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
         
-        //  Don't consume components in creative mode or with infinity
-        if (!player.getAbilities().creativeMode && !infinity) {
+        //  Don't consume components in creative mode
+        if (!player.getAbilities().creativeMode) {
             componentStack.decrement(1);
             if (componentStack.isEmpty()) {
                 player.getInventory().removeOne(componentStack);
