@@ -48,30 +48,51 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener {
                     spell.Component = Registry.ITEM.get(Identifier.tryParse(json.get("Component").getAsString().toLowerCase()));
                     spell.Type = SpellType.valueOf(json.get("Type").getAsString().toUpperCase());
                     
-                    spell.ProjectileEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(json.getAsJsonObject("Projectile").get("Type").getAsString().toLowerCase()));
-                    spell.ProjectileVelocity = json.getAsJsonObject("Projectile").get("Velocity").getAsFloat();
+                    var projectile = json.getAsJsonObject("Projectile");
+                    if (projectile != null) {
+                        spell.ProjectileEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(projectile.get("Type").getAsString().toLowerCase()));
+                        spell.ProjectileVelocity = projectile.get("Velocity").getAsFloat();
+                    }
                     
-                    spell.SummonEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(json.getAsJsonObject("Summon").get("Type").getAsString().toLowerCase()));
-                    spell.SummonDuration = json.getAsJsonObject("Summon").get("Duration").getAsInt();
+                    var summon = json.getAsJsonObject("Summon");
+                    if (summon != null) {
+                        spell.SummonEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(summon.get("Type").getAsString().toLowerCase()));
+                        spell.SummonDuration = summon.get("Duration").getAsInt();
+                    }
                     
-                    spell.DamageEnabled = json.getAsJsonObject("Damage").get("Enabled").getAsBoolean();
-                    spell.DamageTarget = TargetMode.valueOf(json.getAsJsonObject("Damage").get("Target").getAsString().toUpperCase());
-                    spell.DamageAmount = json.getAsJsonObject("Damage").get("Value").getAsFloat();
-                    spell.DamageScale = json.getAsJsonObject("Damage").get("Scale").getAsFloat();
+                    var damage = json.getAsJsonObject("Damage");
+                    if (damage != null) {
+                        spell.DamageEnabled = damage.get("Enabled").getAsBoolean();
+                        spell.DamageTarget = TargetMode.valueOf(damage.get("Target").getAsString().toUpperCase());
+                        spell.DamageAmount = damage.get("Value").getAsFloat();
+                        spell.DamageScale = damage.get("Scale").getAsFloat();
+                    } else {
+                        spell.DamageEnabled = false;
+                    }
                     
-                    spell.HealEnabled = json.getAsJsonObject("Heal").get("Enabled").getAsBoolean();
-                    spell.HealTarget = TargetMode.valueOf(json.getAsJsonObject("Heal").get("Target").getAsString().toUpperCase());
-                    spell.HealAmount = json.getAsJsonObject("Heal").get("Value").getAsFloat();
-                    spell.HealScale = json.getAsJsonObject("Heal").get("Scale").getAsFloat();
+                    var heal = json.getAsJsonObject("Heal");
+                    if (heal != null) {
+                        spell.HealEnabled = heal.get("Enabled").getAsBoolean();
+                        spell.HealTarget = TargetMode.valueOf(heal.get("Target").getAsString().toUpperCase());
+                        spell.HealAmount = heal.get("Value").getAsFloat();
+                        spell.HealScale = heal.get("Scale").getAsFloat();
+                    } else {
+                        spell.HealEnabled = false;
+                    }
                     
-                    spell.EffectEnabled = json.getAsJsonObject("Effect").get("Enabled").getAsBoolean();
-                    spell.EffectTarget = TargetMode.valueOf(json.getAsJsonObject("Effect").get("Target").getAsString().toUpperCase());
-                    spell.Effect = Registry.STATUS_EFFECT.get(Identifier.tryParse(json.getAsJsonObject("Effect").get("Type").getAsString().toLowerCase()));
-                    spell.EffectDuration = json.getAsJsonObject("Effect").get("Duration").getAsInt();
-                    spell.EffectAmplifier = json.getAsJsonObject("Effect").get("Amplifier").getAsInt();
-                    spell.EffectScale = json.getAsJsonObject("Effect").get("Scale").getAsFloat();
-                    spell.ShowEffectParticles = json.getAsJsonObject("Effect").get("Particles").getAsBoolean();
-                    spell.IsEffectVisible = json.getAsJsonObject("Effect").get("Visible").getAsBoolean();
+                    var effect = json.getAsJsonObject("Effect");
+                    if (effect != null) {
+                        spell.EffectEnabled = effect.get("Enabled").getAsBoolean();
+                        spell.EffectTarget = TargetMode.valueOf(effect.get("Target").getAsString().toUpperCase());
+                        spell.Effect = Registry.STATUS_EFFECT.get(Identifier.tryParse(effect.get("Type").getAsString().toLowerCase()));
+                        spell.EffectDuration = effect.get("Duration").getAsInt();
+                        spell.EffectAmplifier = effect.get("Amplifier").getAsInt();
+                        spell.EffectScale = effect.get("Scale").getAsFloat();
+                        spell.ShowEffectParticles = effect.get("Particles").getAsBoolean();
+                        spell.IsEffectVisible = effect.get("Visible").getAsBoolean();
+                    } else {
+                        spell.EffectEnabled = false;
+                    }
                     
                     spell.CastSound = Registry.SOUND_EVENT.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Sound").getAsString().toLowerCase()));
                     spell.CastParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Particle").getAsString().toLowerCase()));

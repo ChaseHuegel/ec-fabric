@@ -2,13 +2,13 @@
     "Name": "Test Spell 2",
     "MaxLevel": 5,
     "Component": "minecraft:redstone",
-    "Type": "PROJECTILE",
+    "Type": "SUMMON",
     "Projectile": {
         "Type": "minecraft:pig",
         "Velocity": 2
     },
     "Summon": {
-        "Type": "minecraft:LIGHTNING_BOLT",
+        "Type": "minecraft:pig",
         "Duration": 0
     },
     "Damage": {
@@ -26,9 +26,9 @@
     "Effect": {
         "Enabled": true,
         "Target": "SELF",
-        "Type": "minecraft:SPEED",
-        "Duration": 200,
-        "Amplifier": 1,
+        "Type": "minecraft:regeneration",
+        "Duration": 2000000,
+        "Amplifier": 10,
         "Scale": 0.2,
         "Particles": true,
         "Visible": true

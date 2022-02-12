@@ -46,9 +46,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class CustomStaffItem extends BowItem {    
-    public CustomStaffItem(Settings settings) {
-        super(settings.maxCount(1));
+public class CustomStaffItem extends BowItem {
+    private int staffPower;
+    private int staffPunch;
+
+    public CustomStaffItem(int power, int punch, Settings settings) {
+        super(settings);
+        this.staffPower = power;
+        this.staffPunch = punch;
     }
 
     @Override
@@ -98,8 +103,8 @@ public class CustomStaffItem extends BowItem {
             return;
         }
 
-        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
-        int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
+        int powerLevel = EnchantmentHelper.getLevel(Enchantments.POWER, stack) + staffPower;
+        int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) + staffPunch;
         boolean flame = EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0;
         boolean infinity = EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
         
@@ -154,7 +159,7 @@ public class CustomStaffItem extends BowItem {
         
         CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
         world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
-        player.sendMessage(Text.of(spell.Name), true);
+        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(powerLevel)), true);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
@@ -230,7 +235,6 @@ public class CustomStaffItem extends BowItem {
         
         Entity entity = spell.SummonEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
         entity.setPosition(targetPosition);
-
         
         //  Apply effects to living entities
         if (spell.EffectEnabled && entity instanceof LivingEntity) {
@@ -435,5 +439,21 @@ public class CustomStaffItem extends BowItem {
     private Vec3d calculateProjectileVelocity(double x, double y, double z, float speed, float divergence) {
         Vec3d vec3d = new Vec3d(x, y, z).normalize().add(EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence).multiply(speed);
         return vec3d;
+    }
+
+    private String ToRomanNumeral(int number) {
+        return String.join("", "I".repeat(number))
+                .replace("IIIII", "V")
+                .replace("IIII", "IV")
+                .replace("VV", "X")
+                .replace("VIV", "IX")
+                .replace("XXXXX", "L")
+                .replace("XXXX", "XL")
+                .replace("LL", "C")
+                .replace("LXL", "XC")
+                .replace("CCCCC", "D")
+                .replace("CCCC", "CD")
+                .replace("DD", "M")
+                .replace("DCD", "CM");
     }
 }

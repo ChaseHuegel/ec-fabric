@@ -52,7 +52,7 @@ public class Spell {
     }
 
     public int GetEffectAmplifier(int level) {
-        return (int)(EffectAmplifier * (1f + (Math.min(level, MaxLevel) - 1) * EffectScale));
+        return (int)(EffectAmplifier + Math.min(level, MaxLevel));
     }
 
     public StatusEffectInstance GetStatusEffectInstance() {

@@ -1,46 +1,46 @@
 {
-    "Name": "Test Spell",
-    "MaxLevel": 5,
-    "Component": "minecraft:glowstone_dust",
-    "Type": "PROJECTILE",
+    "Name": "Withering Curse",
+    "MaxLevel": 3,
+    "Component": "minecraft:nether_wart",
+    "Type": "SUMMON",
     "Projectile": {
         "Type": "minecraft:FIREBALL",
         "Velocity": 2
     },
     "Summon": {
-        "Type": "minecraft:LIGHTNING_BOLT",
-        "Duration": 0
+        "Type": "minecraft:area_effect_cloud",
+        "Duration": 120
     },
     "Damage": {
-        "Enabled": true,
+        "Enabled": false,
         "Target": "OTHER",
-        "Value": 3.0,
+        "Value": 5.0,
         "Scale": 0.2
     },
     "Heal": {
-        "Enabled": true,
+        "Enabled": false,
         "Target": "SELF",
         "Value": 3.0,
         "Scale": 0.2
     },
     "Effect": {
         "Enabled": true,
-        "Target": "Self",
-        "Type": "minecraft:SPEED",
-        "Duration": 200,
-        "Amplifier": 1,
+        "Target": "Other",
+        "Type": "minecraft:wither",
+        "Duration": 100,
+        "Amplifier": 0,
         "Scale": 0.2,
         "Particles": true,
         "Visible": true
     },
     "OnCast": {
         "Sound": "minecraft:entity.illusioner.cast_spell",
-        "Particle": "minecraft:FLAME",
-        "ParticleCount": 20
+        "Particle": "minecraft:WITCH",
+        "ParticleCount": 40
     },
     "OnHit": {
         "Sound": "minecraft:item.firecharge.use",
-        "Particle": "minecraft:LAVA",
-        "ParticleCount": 6
+        "Particle": "minecraft:SQUID_INK",
+        "ParticleCount": 15
     }
 }

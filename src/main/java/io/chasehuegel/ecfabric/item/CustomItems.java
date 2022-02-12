@@ -189,19 +189,19 @@ public class CustomItems {
     public static final Item EASTERN_LEGGINGS = CustomItems.register("eastern_leggings", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.LEGS, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item EASTERN_BOOTS = CustomItems.register("eastern_boots", new ArmorItem(CustomArmorMaterials.EASTERN, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
-    public static final Item WOODEN_STAFF = CustomItems.register("wooden_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item COPPER_STAFF = CustomItems.register("copper_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item TIME_STAFF = CustomItems.register("time_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item EMERALD_STAFF = CustomItems.register("emerald_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item ENDER_STAFF = CustomItems.register("ender_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item STEEL_STAFF = CustomItems.register("steel_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item SOUL_STAFF = CustomItems.register("soul_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item FIRE_STAFF = CustomItems.register("fire_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item SEA_STAFF = CustomItems.register("sea_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item NETHERITE_STAFF = CustomItems.register("netherite_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
-    public static final Item STAR_STAFF = CustomItems.register("star_staff", new CustomStaffItem(new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item WOODEN_STAFF = CustomItems.register("wooden_staff", new CustomStaffItem(0, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(32)));
+    public static final Item BONE_STAFF = CustomItems.register("bone_staff", new CustomStaffItem(1, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(59)));
+    public static final Item COPPER_STAFF = CustomItems.register("copper_staff", new CustomStaffItem(0, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(59)));
+    public static final Item STEEL_STAFF = CustomItems.register("steel_staff", new CustomStaffItem(0, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
+    public static final Item AMETHYST_STAFF = CustomItems.register("amethyst_staff", new CustomStaffItem(0, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(59)));
+    public static final Item EMERALD_STAFF = CustomItems.register("emerald_staff", new CustomStaffItem(1, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(59)));
+    public static final Item TIME_STAFF = CustomItems.register("time_staff", new CustomStaffItem(1, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(131)));
+    public static final Item SOUL_STAFF = CustomItems.register("soul_staff", new CustomStaffItem(0, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(131)));
+    public static final Item ENDER_STAFF = CustomItems.register("ender_staff", new CustomStaffItem(0, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
+    public static final Item FIRE_STAFF = CustomItems.register("fire_staff", new CustomStaffItem(1, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
+    public static final Item SEA_STAFF = CustomItems.register("sea_staff", new CustomStaffItem(1, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(384)));
+    public static final Item NETHERITE_STAFF = CustomItems.register("netherite_staff", new CustomStaffItem(0, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(1561)));
+    public static final Item STAR_STAFF = CustomItems.register("star_staff", new CustomStaffItem(2, 2, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(450)));
     
     public static final Item PLATINUM_ORE  = CustomItems.register("platinum_ore", new BlockItem(CustomBlocks.PLATINUM_ORE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item PLATINUM_BLOCK  = CustomItems.register("platinum_block", new BlockItem(CustomBlocks.PLATINUM_BLOCK, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
@@ -355,8 +355,7 @@ public class CustomItems {
     public static final Item PRISMARINE_BOOTS = CustomItems.register("prismarine_boots", new ArmorItem(CustomArmorMaterials.PRISMARINE, EquipmentSlot.FEET, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
     public static final Item COPPER_REBREATHER = CustomItems.register("copper_rebreather", new ArmorItem(CustomArmorMaterials.COPPER_REBREATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
-    // public static final Item SCROLL_HOME  = CustomItems.register("scroll_home", new HomeTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
-    // public static final Item SCROLL_SPAWN  = CustomItems.register("scroll_spawn", new SpawnTpItem(new FabricItemSettings().group(CustomItemGroup.MISC).maxCount(16)));
+    public static final Item SPELL_TOME  = CustomItems.register("spell_tome", new Item(new FabricItemSettings().group(CustomItemGroup.MISC)));
 
     public static void Initialize() {}
 
