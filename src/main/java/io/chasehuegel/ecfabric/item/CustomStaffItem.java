@@ -29,6 +29,7 @@ import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -89,7 +90,11 @@ public class CustomStaffItem extends BowItem {
 
         float strength = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);    
         HitResult hitResult = TryGetTarget(player);
-        if (strength < 0.1f || (hitResult.getType() == null && spell.Type != SpellType.PROJECTILE)) {
+        if (strength < 0.1f || ((hitResult == null || hitResult.getType() == Type.MISS) && spell.Type != SpellType.PROJECTILE)) {
+            return;
+        }
+
+        if (!IsTargetValidForSpellType(spell.Type, hitResult)) {
             return;
         }
 
@@ -101,31 +106,44 @@ public class CustomStaffItem extends BowItem {
         if (!world.isClient) {
             float power = 1f + (powerLevel * 0.5f);
 
-            boolean success = false;
             switch (spell.Type) {
                 case PROJECTILE:
-                    success = TriggerProjectile(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerProjectile(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case INSTANT:
-                    success = TriggerInstant(world, player, (hitResult instanceof EntityHitResult) ? ((EntityHitResult)hitResult).getEntity() : null, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerInstant(world, player, (hitResult instanceof EntityHitResult) ? ((EntityHitResult)hitResult).getEntity() : null, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case SELF:
-                    success = TriggerSelf(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerSelf(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case SUMMON:
-                    success = TriggerSummon(world, player, hitResult, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerSummon(world, player, hitResult, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 default:
                     break;
             }
-
-            if (!success) {
-                return;
-            }
             
             stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
-        
+
+        switch (spell.Type) {
+            case INSTANT:
+                Entity e = ((EntityHitResult)hitResult).getEntity();
+                world.playSound(null, e.getX(), e.getY(), e.getZ(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
+                
+                CreateSpellParticleEffect(world, e.getPos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
+                break;
+            case SUMMON:
+                Vec3d p = hitResult.getType() == Type.ENTITY ? ((EntityHitResult)hitResult).getEntity().getPos() : hitResult.getPos();
+                float s = hitResult.getType() == Type.ENTITY ? (float)((EntityHitResult)hitResult).getEntity().getBoundingBox().getAverageSideLength()*2f : 1.5f;
+
+                world.playSound(null, p.getX(), p.getY(), p.getZ(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
+                CreateSpellParticleEffect(world, p, s, spell.HitParticle, spell.HitParticleCount);
+                break;
+            default:
+                break;
+        }
+
         //  Don't consume components in creative mode
         if (!player.getAbilities().creativeMode) {
             componentStack.decrement(1);
@@ -134,8 +152,9 @@ public class CustomStaffItem extends BowItem {
             }
         }
         
-        player.sendMessage(Text.of(spell.Name), true);
+        CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
         world.playSound(null, player.getX(), player.getY(), player.getZ(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f) + strength * 0.5f);
+        player.sendMessage(Text.of(spell.Name), true);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
@@ -163,7 +182,7 @@ public class CustomStaffItem extends BowItem {
 
         //  Apply effects to living entities
         if (spell.EffectEnabled && entity instanceof LivingEntity) {
-            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity), player);
+            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, infinity), player);
         }
 
         //  Projectiles need to have their owner set and maintain a constant velocity
@@ -190,7 +209,7 @@ public class CustomStaffItem extends BowItem {
             else if (spell.EffectEnabled && entity instanceof PotionEntity) {
                 PotionEntity potionEntity = (PotionEntity)entity;
                 ItemStack potionItemStack = Items.SPLASH_POTION.getDefaultStack();
-                potionItemStack = PotionUtil.setCustomPotionEffects(potionItemStack, Arrays.asList(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity)));
+                potionItemStack = PotionUtil.setCustomPotionEffects(potionItemStack, Arrays.asList(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, infinity)));
                 potionEntity.setItem(potionItemStack);
             }
         }
@@ -214,7 +233,7 @@ public class CustomStaffItem extends BowItem {
         
         //  Apply effects to living entities
         if (spell.EffectEnabled && entity instanceof LivingEntity) {
-            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity), player);
+            ((LivingEntity)entity).addStatusEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, infinity), player);
         }
 
         //  Cloud entities can apply effects or be instant aoe damage
@@ -232,7 +251,7 @@ public class CustomStaffItem extends BowItem {
                     TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
                 }
             } else if (spell.EffectEnabled) {
-                areaEffectCloudEntity.addEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity));
+                areaEffectCloudEntity.addEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, infinity));
             }
         }
 
@@ -296,9 +315,9 @@ public class CustomStaffItem extends BowItem {
 
         if (spell.EffectEnabled) {
             if (spell.EffectTarget == TargetMode.OTHER && other instanceof LivingEntity)
-                ((LivingEntity)other).addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, infinity), player);
+                ((LivingEntity)other).addStatusEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, infinity), player);
             else
-                player.addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, false), player);
+                player.addStatusEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, false), player);
         }
 
         return true;
@@ -314,7 +333,7 @@ public class CustomStaffItem extends BowItem {
         }
 
         if (spell.EffectEnabled) {
-            player.addStatusEffect(GetModifiedSpellEffect(spell, strength, power, punchLevel, false), player);
+            player.addStatusEffect(GetModifiedSpellEffect(spell, strength, powerLevel, punchLevel, false), player);
         }
 
         if (flame) {
@@ -322,6 +341,17 @@ public class CustomStaffItem extends BowItem {
         }
         
         return true;
+    }
+
+    private boolean IsTargetValidForSpellType(SpellType type, HitResult hitResult) {
+        switch (type) {
+            case INSTANT:
+                return hitResult.getType() == Type.ENTITY;
+            case SUMMON:
+                return hitResult.getType() != Type.MISS;
+            default:
+                return true;
+        }
     }
 
     private ItemStack TryGetSpellComponent(PlayerEntity player) {
@@ -347,29 +377,45 @@ public class CustomStaffItem extends BowItem {
         HitResult hitResult = RaycastEntity(player, getRange());
 
         //  ...on fail, try a block raycast
-        if (hitResult.getType() == Type.MISS) {
+        if (hitResult == null || hitResult.getType() == Type.MISS) {
             hitResult = player.raycast(getRange(), 1f, false);
         }
 
         return hitResult;
     }
 
-    public static EntityHitResult RaycastEntity(Entity entity, int maxDistance) {
-        Vec3d origin = entity.getEyePos();
-        Vec3d projection = origin.add(projection = entity.getRotationVec(1.0f).multiply(maxDistance));
-        EntityHitResult entityHitResult = ProjectileUtil.raycast(entity, origin, projection, entity.getBoundingBox().stretch(projection).expand(1.0), e -> !e.isSpectator() && e.collides(), maxDistance * maxDistance);
-        
+    public EntityHitResult RaycastEntity(Entity entity2, int maxDistance) {
+        Vec3d vec3d = entity2.getEyePos();
+        Vec3d vec3d2;
+        int i;
+
+        EntityHitResult entityHitResult = ProjectileUtil.raycast(entity2, vec3d, vec3d.add(vec3d2 = entity2.getRotationVec(1.0f).multiply(maxDistance)), entity2.getBoundingBox().stretch(vec3d2).expand(1.0), entity -> !entity.isSpectator() && entity.collides(), i = maxDistance * maxDistance);
+
+        if (entityHitResult != null && vec3d.squaredDistanceTo(entityHitResult.getPos()) > (double)i) {
+            return null;
+        }
+
         return entityHitResult;
     }
 
-    private StatusEffectInstance GetModifiedSpellEffect(Spell spell, float strength, float power, int punchLevel, boolean infinity) {
+    private StatusEffectInstance GetModifiedSpellEffect(Spell spell, float strength, int powerLevel, int punchLevel, boolean infinity) {
         return new StatusEffectInstance(
             spell.Effect,
-            infinity ? Integer.MAX_VALUE : (int)((spell.EffectDuration * power) * strength),
-            (int)((spell.EffectAmplifier + punchLevel) * strength),
+            infinity ? Integer.MAX_VALUE : (int)((spell.GetEffectDuration(powerLevel)) * strength),
+            (int)((spell.GetEffectAmplifier(punchLevel)) * strength),
             spell.ShowEffectParticles,
             spell.IsEffectVisible
         );
+    }
+
+    private void CreateSpellParticleEffect(World world, Vec3d pos, float size, ParticleEffect particle, int particleCount) {
+        double x = pos.getX();
+        double y = pos.getY() + 0.5f;
+        double z = pos.getZ();
+        
+        for (int i = 0; i < particleCount; i++) {
+            world.addParticle(particle, true, x + (Math.random()-0.5f) * size, y + (Math.random()-0.5f) * size, z + (Math.random()-0.5f) * size, 0.0, 0.0, 0.0);
+        }
     }
 
     private Vec3d getProjectileVelocity(Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {        

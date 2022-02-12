@@ -36,7 +36,7 @@
     "OnCast": {
         "Sound": "minecraft:entity.illusioner.cast_spell",
         "Particle": "minecraft:FLAME",
-        "ParticleCount": 2
+        "ParticleCount": 20
     },
     "OnHit": {
         "Sound": "minecraft:item.firecharge.use",

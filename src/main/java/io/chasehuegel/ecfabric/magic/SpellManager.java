@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import io.chasehuegel.ecfabric.EternalCraft;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -73,11 +74,11 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener {
                     spell.IsEffectVisible = json.getAsJsonObject("Effect").get("Visible").getAsBoolean();
                     
                     spell.CastSound = Registry.SOUND_EVENT.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Sound").getAsString().toLowerCase()));
-                    spell.CastParticle = Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Particle").getAsString().toLowerCase()));
+                    spell.CastParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Particle").getAsString().toLowerCase()));
                     spell.CastParticleCount = json.getAsJsonObject("OnCast").get("ParticleCount").getAsInt();
                     
                     spell.HitSound = Registry.SOUND_EVENT.get(Identifier.tryParse(json.getAsJsonObject("OnHit").get("Sound").getAsString().toLowerCase()));
-                    spell.HitParticle = Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnHit").get("Particle").getAsString().toLowerCase()));
+                    spell.HitParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnHit").get("Particle").getAsString().toLowerCase()));
                     spell.HitParticleCount = json.getAsJsonObject("OnHit").get("ParticleCount").getAsInt();
                     
                     spells.put(spell.Component, spell);

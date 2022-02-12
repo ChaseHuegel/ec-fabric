@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundEvent;
 
 public class Spell {
@@ -60,11 +60,11 @@ public class Spell {
     }
 
     public SoundEvent CastSound;
-    public ParticleType<?> CastParticle;
+    public ParticleEffect CastParticle;
     public int CastParticleCount;
 
     public SoundEvent HitSound;
-    public ParticleType<?> HitParticle;
+    public ParticleEffect HitParticle;
     public int HitParticleCount;
 
 }
