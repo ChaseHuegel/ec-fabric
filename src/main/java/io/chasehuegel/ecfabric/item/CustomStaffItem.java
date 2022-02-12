@@ -161,20 +161,22 @@ public class CustomStaffItem extends BowItem {
     private boolean TriggerProjectile(World world, PlayerEntity player, Spell spell, ItemStack stack, float strength, float power, int powerLevel, int punchLevel, boolean flame, boolean infinity) {
         Entity entity = spell.ProjectileEntity.create((ServerWorld) world, null, null, player, BlockPos.ORIGIN, SpawnReason.COMMAND, false, false);
         entity.setPosition(player.getEyePos());
+        entity.setVelocity(getProjectileVelocity(player, player.getPitch(), player.getYaw(), 0.0f, strength * spell.ProjectileVelocity, 1.0f));
         
         //  Infinity removes gravity
         entity.setNoGravity(infinity);
 
-        //  Infinity removes drag
-        if (infinity) {
-            entity.setVelocity(getProjectileVelocity(player, player.getPitch(), player.getYaw(), 0.0f, strength * spell.ProjectileVelocity, 1.0f));
-        }
-
+        
         //  Punch increases velocity
         if (punchLevel > 0) {
             entity.setVelocity(entity.getVelocity().multiply(1 + punchLevel * 0.5f));
         }
-
+        
+        //  Infinity removes drag
+        if (infinity) {
+            SpellScheduler.SetEntityVelocity(entity, entity.getVelocity());
+        }
+        
         //  Flame ignites
         if (flame) {
             entity.setFireTicks(infinity ? Integer.MAX_VALUE : 100);
@@ -189,7 +191,6 @@ public class CustomStaffItem extends BowItem {
         if (entity instanceof ProjectileEntity) {
             ProjectileEntity projectileEntity = (ProjectileEntity)entity;
             projectileEntity.setOwner(player);
-            SpellScheduler.SetEntityVelocity(projectileEntity, projectileEntity.getVelocity());
 
             //  Power increases fireball explosion
             if (entity instanceof FireballEntity) {

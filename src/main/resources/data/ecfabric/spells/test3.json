@@ -1,6 +1,6 @@
 {
     "Name": "Test Spell 3",
-    "MaxLevel": 1,
+    "MaxLevel": 5,
     "Component": "minecraft:gunpowder",
     "Type": "SUMMON",
     "Projectile": {

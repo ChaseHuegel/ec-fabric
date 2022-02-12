@@ -1,6 +1,6 @@
 {
     "Name": "Test Spell",
-    "MaxLevel": 1,
+    "MaxLevel": 5,
     "Component": "minecraft:glowstone_dust",
     "Type": "PROJECTILE",
     "Projectile": {

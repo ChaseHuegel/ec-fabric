@@ -1,8 +1,8 @@
 {
     "Name": "Test Spell 2",
-    "MaxLevel": 1,
+    "MaxLevel": 5,
     "Component": "minecraft:redstone",
-    "Type": "INSTANT",
+    "Type": "PROJECTILE",
     "Projectile": {
         "Type": "minecraft:pig",
         "Velocity": 2
