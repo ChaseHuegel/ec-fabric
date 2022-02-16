@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:stone_greataxe"
+    },
+
+    "addition": {
+        "item": "minecraft:crying_obsidian"
+    },
+
+    "result": {
+        "item": "ecfabric:obsidian_greataxe"
+    }
+}

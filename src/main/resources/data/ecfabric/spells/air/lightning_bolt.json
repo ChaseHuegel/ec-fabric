@@ -1,0 +1,26 @@
+{
+    "Name": "Lightning Bolt",
+    "MaxLevel": 10,
+    "Component": "minecraft:gunpowder",
+    "Type": "SUMMON",
+    "Summon": {
+        "Type": "minecraft:lightning_bolt",
+        "Duration": 0
+    },
+    "Damage": {
+        "Enabled": true,
+        "Target": "OTHER",
+        "Value": 4.0,
+        "Scale": 0.5
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:effect",
+        "ParticleCount": 40
+    },
+    "OnHit": {
+        "Sound": "minecraft:item.firecharge.use",
+        "Particle": "minecraft:large_smoke",
+        "ParticleCount": 10
+    }
+}

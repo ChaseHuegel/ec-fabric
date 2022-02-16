@@ -1,0 +1,6 @@
+{
+	"parent": "ecfabric:item/_generated_32",
+	"textures": {
+		"layer0": "ecfabric:item/amethyst_greataxe"
+	}
+}

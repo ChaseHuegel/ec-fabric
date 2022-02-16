@@ -157,7 +157,7 @@ public class CustomStaffItem extends BowItem {
         
         //  Punch increases velocity
         if (punchLevel > 0) {
-            entity.setVelocity(entity.getVelocity().multiply(1 + punchLevel * 0.5f));
+            entity.setVelocity(entity.getVelocity().multiply(1 + punchLevel * 0.25f));
         }
         
         //  Infinity removes drag
@@ -203,7 +203,7 @@ public class CustomStaffItem extends BowItem {
             }
         }
         
-        SpellScheduler.RemoveEntityAfterDistance(entity, getRange() * strength);
+        SpellScheduler.RemoveEntityAfterDistance(entity, getRange() * strength * 2f);
         SpellScheduler.RemoveEntityAfterLifetime(entity, (int)(20 * power * strength));
         world.spawnEntity(entity);
         return true;
@@ -231,6 +231,7 @@ public class CustomStaffItem extends BowItem {
             areaEffectCloudEntity.setRadius(3.0f);
             areaEffectCloudEntity.setRadiusOnUse(-0.5f);
             areaEffectCloudEntity.setWaitTime(10);
+            areaEffectCloudEntity.setDuration(spell.SummonDuration);
             areaEffectCloudEntity.setRadiusGrowth(-areaEffectCloudEntity.getRadius() / (float)areaEffectCloudEntity.getDuration());
 
             if (spell.DamageEnabled) {
@@ -257,6 +258,7 @@ public class CustomStaffItem extends BowItem {
             
             List<Entity> hitEntities = world.getOtherEntities(entity, new Box(entity.getX() - 3.0, entity.getY() - 3.0, entity.getZ() - 3.0, entity.getX() + 3.0, entity.getY() + 6.0 + 3.0, entity.getZ() + 3.0), Entity::isAlive);
             for (Entity hitEntity : hitEntities) {
+                hitEntity.onStruckByLightning((ServerWorld)world, lightningEntity);
                 TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
             }
         }
@@ -268,7 +270,7 @@ public class CustomStaffItem extends BowItem {
         
         //  Infinity allows summons to be permanent
         if (!infinity) {
-            SpellScheduler.RemoveEntityAfterLifetime(entity, (int)(300 * power * strength));
+            SpellScheduler.RemoveEntityAfterLifetime(entity, (int)(spell.SummonDuration * power * strength));
         }
 
         world.spawnEntity(entity);
@@ -417,10 +419,10 @@ public class CustomStaffItem extends BowItem {
                 Entity e = ((EntityHitResult)hitResult).getEntity();
                 world.playSound(null, e.getBlockPos(), spell.HitSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f));
                 
-                CreateSpellParticleEffect(world, e.getPos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
+                CreateSpellParticleEffect(world, e.getEyePos(), (float)e.getBoundingBox().getAverageSideLength()*2f, spell.HitParticle, spell.HitParticleCount);
 
-                float distance = (float) e.getPos().distanceTo(player.getPos());
-                Vec3d direction = e.getPos().subtract(player.getEyePos()).normalize();
+                float distance = (float) e.getEyePos().distanceTo(player.getEyePos());
+                Vec3d direction = e.getEyePos().subtract(player.getEyePos()).normalize();
                 Vec3d origin = player.getEyePos().subtract(new Vec3d(0f, 0.5f, 0f));
                 for (float increment = 0f; increment < distance; increment += 0.5f) {
                     CreateSpellParticleEffect(world, origin.add(direction.multiply(increment)), 0.5f, spell.HitParticle, (int)Math.min(1, spell.HitParticleCount*0.25f));

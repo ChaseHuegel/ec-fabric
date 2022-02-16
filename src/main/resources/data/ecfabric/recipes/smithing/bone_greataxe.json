@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:wooden_greataxe"
+    },
+
+    "addition": {
+        "item": "minecraft:bone"
+    },
+
+    "result": {
+        "item": "ecfabric:bone_greataxe"
+    }
+}

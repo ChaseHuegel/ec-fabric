@@ -24,19 +24,23 @@ import net.minecraft.util.registry.Registry;
 public class CustomItems {
     public static final int DAGGER_DAMAGE = 1;
     public static final float DAGGER_SPEED = -1f;
-    public static final float DAGGER_RANGE = -0.5f;
+    public static final float DAGGER_RANGE = 0.5f;
 
-    public static final int GREATSWORD_DAMAGE = 4;
-    public static final float GREATSWORD_SPEED = -3f;
-    public static final float GREATSWORD_RANGE = 0.5f;
+    public static final int GREATSWORD_DAMAGE = 5;
+    public static final float GREATSWORD_SPEED = -2.8f;
+    public static final float GREATSWORD_RANGE = 1f;
+
+    public static final int GREATAXE_DAMAGE = 7;
+    public static final float GREATAXE_SPEED = -3f;
+    public static final float GREATAXE_RANGE = 1f;
 
     public static final int MACE_DAMAGE = 2;
     public static final float MACE_SPEED = -2f;
     public static final float MACE_RANGE = 0f;
     
     public static final int SPEAR_DAMAGE = 2;
-    public static final float SPEAR_SPEED = -2.4f;
-    public static final float SPEAR_RANGE = 1f;
+    public static final float SPEAR_SPEED = -2.6f;
+    public static final float SPEAR_RANGE = 2f;
 
     public static final Item EMPTY_CAN = CustomItems.register("empty_can", new WaterCan(Fluids.EMPTY, new FabricItemSettings().group(CustomItemGroup.TOOLS).maxDamage(16)));
     public static final Item WATER_CAN = CustomItems.register("water_can", new WaterCan(Fluids.WATER, new FabricItemSettings().group(CustomItemGroup.TOOLS).maxDamage(16)));
@@ -48,29 +52,36 @@ public class CustomItems {
 
     public static final Item SLING = CustomItems.register("sling", new BowItem(new FabricItemSettings().group(CustomItemGroup.COMBAT).maxCount(1)));
     public static final Item LONGBOW = CustomItems.register("longbow", new BowItem(new FabricItemSettings().group(CustomItemGroup.COMBAT).maxCount(1)));
+
     
     public static final Item WOODEN_DAGGER = CustomItems.register("wooden_dagger", new CustomDaggerItem(ToolMaterials.WOOD, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item WOODEN_GREATSWORD = CustomItems.register("wooden_greatsword", new CustomGreatswordItem(ToolMaterials.WOOD, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item WOODEN_GREATAXE = CustomItems.register("wooden_greataxe", new CustomGreatswordItem(ToolMaterials.WOOD, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item WOODEN_MACE = CustomItems.register("wooden_mace", new CustomMaceItem(ToolMaterials.WOOD, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item WOODEN_SPEAR = CustomItems.register("wooden_spear", new CustomSpearItem(ToolMaterials.WOOD, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STONE_DAGGER = CustomItems.register("stone_dagger", new CustomDaggerItem(ToolMaterials.STONE, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STONE_GREATSWORD = CustomItems.register("stone_greatsword", new CustomGreatswordItem(ToolMaterials.STONE, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item STONE_GREATAXE = CustomItems.register("stone_greataxe", new CustomGreatswordItem(ToolMaterials.STONE, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STONE_MACE = CustomItems.register("stone_mace", new CustomMaceItem(ToolMaterials.STONE, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STONE_SPEAR = CustomItems.register("stone_spear", new CustomSpearItem(ToolMaterials.STONE, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item IRON_DAGGER = CustomItems.register("iron_dagger", new CustomDaggerItem(ToolMaterials.IRON, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item IRON_GREATSWORD = CustomItems.register("iron_greatsword", new CustomGreatswordItem(ToolMaterials.IRON, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item IRON_GREATAXE = CustomItems.register("iron_greataxe", new CustomGreatswordItem(ToolMaterials.IRON, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item IRON_MACE = CustomItems.register("iron_mace", new CustomMaceItem(ToolMaterials.IRON, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item IRON_SPEAR = CustomItems.register("iron_spear", new CustomSpearItem(ToolMaterials.IRON, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GOLDEN_DAGGER = CustomItems.register("golden_dagger", new CustomDaggerItem(ToolMaterials.GOLD, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GOLDEN_GREATSWORD = CustomItems.register("golden_greatsword", new CustomGreatswordItem(ToolMaterials.GOLD, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item GOLDEN_GREATAXE = CustomItems.register("golden_greataxe", new CustomGreatswordItem(ToolMaterials.GOLD, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GOLDEN_MACE = CustomItems.register("golden_mace", new CustomMaceItem(ToolMaterials.GOLD, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GOLDEN_SPEAR = CustomItems.register("golden_spear", new CustomSpearItem(ToolMaterials.GOLD, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item DIAMOND_DAGGER = CustomItems.register("diamond_dagger", new CustomDaggerItem(ToolMaterials.DIAMOND, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item DIAMOND_GREATSWORD = CustomItems.register("diamond_greatsword", new CustomGreatswordItem(ToolMaterials.DIAMOND, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item DIAMOND_GREATAXE = CustomItems.register("diamond_greataxe", new CustomGreatswordItem(ToolMaterials.DIAMOND, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item DIAMOND_MACE = CustomItems.register("diamond_mace", new CustomMaceItem(ToolMaterials.DIAMOND, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item DIAMOND_SPEAR = CustomItems.register("diamond_spear", new CustomSpearItem(ToolMaterials.DIAMOND, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item NETHERITE_DAGGER = CustomItems.register("netherite_dagger", new CustomDaggerItem(ToolMaterials.NETHERITE, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item NETHERITE_GREATSWORD = CustomItems.register("netherite_greatsword", new CustomGreatswordItem(ToolMaterials.NETHERITE, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item NETHERITE_GREATAXE = CustomItems.register("netherite_greataxe", new CustomGreatswordItem(ToolMaterials.NETHERITE, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item NETHERITE_MACE = CustomItems.register("netherite_mace", new CustomMaceItem(ToolMaterials.NETHERITE, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item NETHERITE_SPEAR = CustomItems.register("netherite_spear", new CustomSpearItem(ToolMaterials.NETHERITE, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item GOLDEN_SHIELD = CustomItems.register("golden_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.COMBAT), 60, 50, 0f, 0f, 0.1f, Items.GOLD_INGOT));
@@ -86,6 +97,7 @@ public class CustomItems {
     public static final Item COPPER_HOE = CustomItems.register("copper_hoe", new CustomHoeItem(CustomToolMaterials.COPPER, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item COPPER_DAGGER = CustomItems.register("copper_dagger", new CustomDaggerItem(CustomToolMaterials.COPPER, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item COPPER_GREATSWORD = CustomItems.register("copper_greatsword", new CustomGreatswordItem(CustomToolMaterials.COPPER, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item COPPER_GREATAXE = CustomItems.register("copper_greataxe", new CustomGreatswordItem(CustomToolMaterials.COPPER, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item COPPER_MACE = CustomItems.register("copper_mace", new CustomMaceItem(CustomToolMaterials.COPPER, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item COPPER_SPEAR = CustomItems.register("copper_spear", new CustomSpearItem(CustomToolMaterials.COPPER, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item COPPER_SHIELD = CustomItems.register("copper_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.COMBAT), 60, 20, 0f, 1f, 0f, Items.COPPER_INGOT));
@@ -102,6 +114,7 @@ public class CustomItems {
     public static final Item AMETHYST_HOE = CustomItems.register("amethyst_hoe", new CustomHoeItem(CustomToolMaterials.AMETHYST, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item AMETHYST_DAGGER = CustomItems.register("amethyst_dagger", new CustomDaggerItem(CustomToolMaterials.AMETHYST, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item AMETHYST_GREATSWORD = CustomItems.register("amethyst_greatsword", new CustomGreatswordItem(CustomToolMaterials.AMETHYST, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item AMETHYST_GREATAXE = CustomItems.register("amethyst_greataxe", new CustomGreatswordItem(CustomToolMaterials.AMETHYST, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item AMETHYST_MACE = CustomItems.register("amethyst_mace", new CustomMaceItem(CustomToolMaterials.AMETHYST, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item AMETHYST_SPEAR = CustomItems.register("amethyst_spear", new CustomSpearItem(CustomToolMaterials.AMETHYST, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item AMETHYST_SHIELD = CustomItems.register("amethyst_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(200).group(CustomItemGroup.COMBAT), 100, 22, 0f, 2f, 0f, Items.AMETHYST_SHARD));
@@ -118,6 +131,7 @@ public class CustomItems {
     public static final Item STEEL_HOE = CustomItems.register("steel_hoe", new CustomHoeItem(CustomToolMaterials.STEEL, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item STEEL_DAGGER = CustomItems.register("steel_dagger", new CustomDaggerItem(CustomToolMaterials.STEEL, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STEEL_GREATSWORD = CustomItems.register("steel_greatsword", new CustomGreatswordItem(CustomToolMaterials.STEEL, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item STEEL_GREATAXE = CustomItems.register("steel_greataxe", new CustomGreatswordItem(CustomToolMaterials.STEEL, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STEEL_MACE = CustomItems.register("steel_mace", new CustomMaceItem(CustomToolMaterials.STEEL, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STEEL_SPEAR = CustomItems.register("steel_spear", new CustomSpearItem(CustomToolMaterials.STEEL, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item STEEL_SHIELD = CustomItems.register("steel_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(400).group(CustomItemGroup.COMBAT), 200, 15, 1f, 0f, 0f, CustomItems.STEEL_INGOT));
@@ -133,6 +147,7 @@ public class CustomItems {
     public static final Item BONE_HOE = CustomItems.register("bone_hoe", new CustomHoeItem(CustomToolMaterials.BONE, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item BONE_DAGGER = CustomItems.register("bone_dagger", new CustomDaggerItem(CustomToolMaterials.BONE, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BONE_GREATSWORD = CustomItems.register("bone_greatsword", new CustomGreatswordItem(CustomToolMaterials.BONE, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item BONE_GREATAXE = CustomItems.register("bone_greataxe", new CustomGreatswordItem(CustomToolMaterials.BONE, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BONE_MACE = CustomItems.register("bone_mace", new CustomMaceItem(CustomToolMaterials.BONE, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BONE_SPEAR = CustomItems.register("bone_spear", new CustomSpearItem(CustomToolMaterials.BONE, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item BONE_SHIELD = CustomItems.register("bone_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(250).group(CustomItemGroup.COMBAT), 200, 30, 0f, 0f, 0.05f, Items.BONE));
@@ -148,6 +163,7 @@ public class CustomItems {
     public static final Item OBSIDIAN_HOE = CustomItems.register("obsidian_hoe", new CustomHoeItem(CustomToolMaterials.OBSIDIAN, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item OBSIDIAN_DAGGER = CustomItems.register("obsidian_dagger", new CustomDaggerItem(CustomToolMaterials.OBSIDIAN, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item OBSIDIAN_GREATSWORD = CustomItems.register("obsidian_greatsword", new CustomGreatswordItem(CustomToolMaterials.OBSIDIAN, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item OBSIDIAN_GREATAXE = CustomItems.register("obsidian_greataxe", new CustomGreatswordItem(CustomToolMaterials.OBSIDIAN, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item OBSIDIAN_MACE = CustomItems.register("obsidian_mace", new CustomMaceItem(CustomToolMaterials.OBSIDIAN, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item OBSIDIAN_SPEAR = CustomItems.register("obsidian_spear", new CustomSpearItem(CustomToolMaterials.OBSIDIAN, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     
@@ -176,6 +192,7 @@ public class CustomItems {
     public static final Item PLATINUM_HOE = CustomItems.register("platinum_hoe", new CustomHoeItem(CustomToolMaterials.PLATINUM, -2, 0.0f, new FabricItemSettings().group(CustomItemGroup.TOOLS)));
     public static final Item PLATINUM_DAGGER = CustomItems.register("platinum_dagger", new CustomDaggerItem(CustomToolMaterials.PLATINUM, DAGGER_DAMAGE, DAGGER_SPEED, DAGGER_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_GREATSWORD = CustomItems.register("platinum_greatsword", new CustomGreatswordItem(CustomToolMaterials.PLATINUM, GREATSWORD_DAMAGE, GREATSWORD_SPEED, GREATSWORD_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
+    public static final Item PLATINUM_GREATAXE = CustomItems.register("platinum_greataxe", new CustomGreatswordItem(CustomToolMaterials.PLATINUM, GREATAXE_DAMAGE, GREATAXE_SPEED, GREATAXE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_MACE = CustomItems.register("platinum_mace", new CustomMaceItem(CustomToolMaterials.PLATINUM, MACE_DAMAGE, MACE_SPEED, MACE_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_SPEAR = CustomItems.register("platinum_spear", new CustomSpearItem(CustomToolMaterials.PLATINUM, SPEAR_DAMAGE, SPEAR_SPEED, SPEAR_RANGE, new FabricItemSettings().group(CustomItemGroup.COMBAT)));
     public static final Item PLATINUM_SHIELD = CustomItems.register("platinum_shield", new CustomShieldItem(new FabricItemSettings().maxDamage(350).group(CustomItemGroup.COMBAT), 200, 25, 2f, 0f, 0f, CustomItems.PLATINUM));

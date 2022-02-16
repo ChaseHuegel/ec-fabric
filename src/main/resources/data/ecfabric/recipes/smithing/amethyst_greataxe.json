@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing",
+    
+    "base": {
+        "item": "ecfabric:golden_greataxe"
+    },
+
+    "addition": {
+        "item": "ecfabric:amethyst_ingot"
+    },
+
+    "result": {
+        "item": "ecfabric:amethyst_greataxe"
+    }
+}

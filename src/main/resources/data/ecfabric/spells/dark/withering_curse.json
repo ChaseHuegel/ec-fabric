@@ -1,0 +1,30 @@
+{
+    "Name": "Withering Curse",
+    "MaxLevel": 3,
+    "Component": "minecraft:fermented_spider_eye",
+    "Type": "SUMMON",
+    "Summon": {
+        "Type": "minecraft:area_effect_cloud",
+        "Duration": 100
+    },
+    "Effect": {
+        "Enabled": true,
+        "Target": "Other",
+        "Type": "minecraft:wither",
+        "Duration": 100,
+        "Amplifier": 0,
+        "Scale": 0.2,
+        "Particles": true,
+        "Visible": true
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:squid_ink",
+        "ParticleCount": 40
+    },
+    "OnHit": {
+        "Sound": "minecraft:item.firecharge.cast_spell",
+        "Particle": "minecraft:squid_ink",
+        "ParticleCount": 15
+    }
+}

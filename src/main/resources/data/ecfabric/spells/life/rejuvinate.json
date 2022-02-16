@@ -1,0 +1,22 @@
+{
+    "Name": "Rejuvinate",
+    "MaxLevel": 10,
+    "Component": "minecraft:glistering_melon_slice",
+    "Type": "INSTANT",
+    "Heal": {
+        "Enabled": false,
+        "Target": "OTHER",
+        "Value": 3.0,
+        "Scale": 0.5
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:composter",
+        "ParticleCount": 40
+    },
+    "OnHit": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:composter",
+        "ParticleCount": 1
+    }
+}

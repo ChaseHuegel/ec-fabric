@@ -1,0 +1,22 @@
+{
+    "Name": "Magic Blast",
+    "MaxLevel": 10,
+    "Component": "ecfabric:spell_tome",
+    "Type": "INSTANT",
+    "Damage": {
+        "Enabled": true,
+        "Target": "OTHER",
+        "Value": 6.0,
+        "Scale": 0.5
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:witch",
+        "ParticleCount": 40
+    },
+    "OnHit": {
+        "Sound": "minecraft:item.firecharge.use",
+        "Particle": "minecraft:witch",
+        "ParticleCount": 10
+    }
+}

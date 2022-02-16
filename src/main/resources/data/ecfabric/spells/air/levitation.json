@@ -1,0 +1,30 @@
+{
+    "Name": "Levitation",
+    "MaxLevel": 10,
+    "Component": "minecraft:ghast_tear",
+    "Type": "SUMMON",
+    "Summon": {
+        "Type": "minecraft:area_effect_cloud",
+        "Duration": 120
+    },
+    "Effect": {
+        "Enabled": true,
+        "Target": "Other",
+        "Type": "minecraft:levitation",
+        "Duration": 60,
+        "Amplifier": 0,
+        "Scale": 0.25,
+        "Particles": true,
+        "Visible": true
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:effect",
+        "ParticleCount": 40
+    },
+    "OnHit": {
+        "Sound": "minecraft:item.firecharge.use",
+        "Particle": "minecraft:cloud",
+        "ParticleCount": 10
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "Name": "Fireball",
+    "MaxLevel": 10,
+    "Component": "minecraft:fire_charge",
+    "Type": "PROJECTILE",
+    "Projectile": {
+        "Type": "minecraft:fireball",
+        "Velocity": 2
+    },
+    "OnCast": {
+        "Sound": "minecraft:entity.illusioner.cast_spell",
+        "Particle": "minecraft:large_smoke",
+        "ParticleCount": 20
+    },
+    "OnHit": {
+        "Sound": "minecraft:item.firecharge.use",
+        "Particle": "minecraft:lava",
+        "ParticleCount": 10
+    }
+}
