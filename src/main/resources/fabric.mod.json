@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ecfabric",
-  "version": "v1.0.0",
+  "version": "1.1.0",
 
   "name": "EternalCraft",
   "description": "A private SMP mod.",
@@ -25,14 +25,11 @@
       "io.chasehuegel.ecfabric.EternalCraftClient"
     ]
   },
-  "mixins": [
-    "ecfabric.mixins.json"
-  ],
 
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.14.8",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17"
   },
   "suggests": {

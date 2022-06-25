@@ -5,7 +5,7 @@
     "Type": "SUMMON",
     "Summon": {
         "Type": "minecraft:lightning_bolt",
-        "Duration": 0
+        "Duration": 20
     },
     "Damage": {
         "Enabled": true,

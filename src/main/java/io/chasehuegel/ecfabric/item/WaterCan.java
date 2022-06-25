@@ -1,5 +1,6 @@
 package io.chasehuegel.ecfabric.item;
 
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 import io.chasehuegel.ecfabric.EternalCraft;
 import net.fabricmc.fabric.impl.transfer.fluid.CauldronStorage;
@@ -104,7 +105,7 @@ public class WaterCan extends Item {
                     Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)player, blockPos, itemStack);
                 }
                 
-                if (itemStack.damage(1, EternalCraft.Random, (player instanceof ServerPlayerEntity) ? (ServerPlayerEntity)player : null)) {
+                if (itemStack.damage(1, EternalCraft.MinecraftRandom, (player instanceof ServerPlayerEntity) ? (ServerPlayerEntity)player : null)) {
                     itemStack = WaterCan.getEmptiedStack(itemStack, player);
                 }
                 
@@ -124,7 +125,7 @@ public class WaterCan extends Item {
     }
 
     public boolean pourFluid(@Nullable PlayerEntity player, World world, BlockPos pos) {
-        if (world.getDimension().isUltrawarm() && this.fluid == Fluids.WATER) {
+        if (world.getDimension().ultrawarm() && this.fluid == Fluids.WATER) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();
@@ -175,7 +176,7 @@ public class WaterCan extends Item {
                     CropBlock cropBlock = (CropBlock)blockStateAbove.getBlock();
 
                     if (this.fluid.isIn(FluidTags.WATER)) {
-                        if (cropBlock.canGrow(world, EternalCraft.Random, blockPos.up(), blockStateAbove)) {
+                        if (cropBlock.canGrow(world, EternalCraft.MinecraftRandom, blockPos.up(), blockStateAbove)) {
                             cropBlock.applyGrowth(world, blockPos.up(), blockStateAbove);
                         }
                     } else if (this.fluid.isIn(FluidTags.LAVA)) {

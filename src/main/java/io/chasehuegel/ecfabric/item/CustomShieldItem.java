@@ -1,6 +1,6 @@
 package io.chasehuegel.ecfabric.item;
 
-import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShieldItem;
+//import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShieldItem;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -10,12 +10,14 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ShieldItem;
 
-public class CustomShieldItem extends FabricShieldItem {
+//  TODO support shield lib when it updates to 1.19
+public class CustomShieldItem extends ShieldItem {
     private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public CustomShieldItem(Settings settings, int cooldownTicks, int enchantability, float armor, float toughness, float knockbackResistance, Item... repairItems) {
-        super(settings, cooldownTicks, enchantability, repairItems);
+        super(settings);
 
         attributeModifiers = ArrayListMultimap.create();
 

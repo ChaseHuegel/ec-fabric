@@ -3,6 +3,7 @@ package io.chasehuegel.ecfabric.item;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.particle.ParticleTypes;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import io.chasehuegel.ecfabric.EternalCraft;
@@ -256,7 +257,7 @@ public class CustomStaffItem extends BowItem {
                 FieldUtils.writeField(lightningEntity, "remainingActions", EternalCraft.Random.nextInt(3) + 1, true);
             } catch (Exception ex) {}
             
-            List<Entity> hitEntities = world.getOtherEntities(entity, new Box(entity.getX() - 3.0, entity.getY() - 3.0, entity.getZ() - 3.0, entity.getX() + 3.0, entity.getY() + 6.0 + 3.0, entity.getZ() + 3.0), Entity::isAlive);
+            List<Entity> hitEntities = world.getOtherEntities(entity, new Box(entity.getX() - 3.0 - punchLevel, entity.getY() - 3.0 - punchLevel, entity.getZ() - 3.0 - punchLevel, entity.getX() + 3.0 + punchLevel, entity.getY() + 3.0 + punchLevel, entity.getZ() + 3.0 + punchLevel), Entity::isAlive);
             for (Entity hitEntity : hitEntities) {
                 hitEntity.onStruckByLightning((ServerWorld)world, lightningEntity);
                 TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);

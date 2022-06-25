@@ -22,7 +22,7 @@
     },
     "OnHit": {
         "Sound": "minecraft:item.firecharge.cast_spell",
-        "Particle": "minecraft:crimson_spore",
+        "Particle": "minecraft:squid_ink",
         "ParticleCount": 20
     }
 }

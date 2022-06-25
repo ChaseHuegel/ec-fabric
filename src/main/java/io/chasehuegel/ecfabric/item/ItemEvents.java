@@ -24,7 +24,7 @@ public class ItemEvents implements EndTick, StartTick {
                 player.setAir(player.getAir()+1);
             }
 
-            if (player.isFreezing() &&
+            if (player.getFrozenTicks() > 0 &&
                 player.getEquippedStack(EquipmentSlot.HEAD).getItem() == CustomItems.THICK_FUR_HELMET ||
                 player.getEquippedStack(EquipmentSlot.CHEST).getItem() == CustomItems.THICK_FUR_CHESTPLATE ||
                 player.getEquippedStack(EquipmentSlot.LEGS).getItem() == CustomItems.THICK_FUR_LEGGINGS ||

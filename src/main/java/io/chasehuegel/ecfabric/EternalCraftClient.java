@@ -6,14 +6,14 @@ import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.loot.v2.*;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
@@ -75,12 +75,12 @@ public class EternalCraftClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.COPPER_VANE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.LAMP, RenderLayer.getTranslucent());
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
             if (PILLAGER_LOOT_TABLE_ID.equals(id)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .withCondition(KilledByPlayerLootCondition.builder().build())
-                        .withCondition(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
                         .with(ItemEntry.builder(CustomItems.PILLAGER_HELMET))
                         .with(ItemEntry.builder(CustomItems.PILLAGER_CHESTPLATE))
                         .with(ItemEntry.builder(CustomItems.PILLAGER_LEGGINGS))
@@ -90,12 +90,12 @@ public class EternalCraftClient implements ClientModInitializer {
             }
         });
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
             if (PIGLIN_LOOT_TABLE_ID.equals(id)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .withCondition(KilledByPlayerLootCondition.builder().build())
-                        .withCondition(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
                         .with(ItemEntry.builder(CustomItems.PIGLIN_HELMET))
                         .with(ItemEntry.builder(CustomItems.PIGLIN_CHESTPLATE))
                         .with(ItemEntry.builder(CustomItems.PIGLIN_LEGGINGS))
@@ -105,12 +105,12 @@ public class EternalCraftClient implements ClientModInitializer {
             }
         });
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
             if (BLAZE_LOOT_TABLE_ID.equals(id)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .withCondition(KilledByPlayerLootCondition.builder().build())
-                        .withCondition(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
                         .with(ItemEntry.builder(CustomItems.BLAZE_HELMET))
                         .with(ItemEntry.builder(CustomItems.BLAZE_CHESTPLATE))
                         .with(ItemEntry.builder(CustomItems.BLAZE_LEGGINGS))
@@ -120,12 +120,12 @@ public class EternalCraftClient implements ClientModInitializer {
             }
         });
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
             if (DROWNED_LOOT_TABLE_ID.equals(id)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .withCondition(KilledByPlayerLootCondition.builder().build())
-                        .withCondition(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_HELMET))
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_CHESTPLATE))
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_LEGGINGS))
