@@ -45,16 +45,16 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
     }
 
     @Override
-    public void reload(ResourceManager manager) {	 
+    public void reload(ResourceManager manager) {
         spells.clear();
 
-        Map<Identifier, Resource> resourceIds = manager.findResources("spells", path -> true);
-        
+        Collection<Identifier> resourceIds = manager.findResources("spells", path -> true);
+
         if (resourceIds.size() > 0) {
             EternalCraft.LOGGER.info("Loading spells...");
 
-            for(Identifier id : resourceIds.keySet()) {
-                try(InputStream stream = manager.getResource(id).get().getInputStream()) {
+            for (Identifier id : resourceIds) {
+                try (InputStream stream = manager.getResource(id).getInputStream()) {
                     JsonObject json = JsonParser.parseReader(new InputStreamReader(stream)).getAsJsonObject();
 
                     var enabled = json.get("Enabled");
@@ -65,21 +65,24 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
                     Spell spell = new Spell();
                     spell.Name = json.get("Name").getAsString();
                     spell.MaxLevel = json.get("MaxLevel").getAsInt();
-                    spell.Component = Registry.ITEM.get(Identifier.tryParse(json.get("Component").getAsString().toLowerCase()));
+                    spell.Component = Registry.ITEM
+                            .get(Identifier.tryParse(json.get("Component").getAsString().toLowerCase()));
                     spell.Type = SpellType.valueOf(json.get("Type").getAsString().toUpperCase());
-                    
+
                     var projectile = json.getAsJsonObject("Projectile");
                     if (projectile != null) {
-                        spell.ProjectileEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(projectile.get("Type").getAsString().toLowerCase()));
+                        spell.ProjectileEntity = Registry.ENTITY_TYPE
+                                .get(Identifier.tryParse(projectile.get("Type").getAsString().toLowerCase()));
                         spell.ProjectileVelocity = projectile.get("Velocity").getAsFloat();
                     }
-                    
+
                     var summon = json.getAsJsonObject("Summon");
                     if (summon != null) {
-                        spell.SummonEntity = Registry.ENTITY_TYPE.get(Identifier.tryParse(summon.get("Type").getAsString().toLowerCase()));
+                        spell.SummonEntity = Registry.ENTITY_TYPE
+                                .get(Identifier.tryParse(summon.get("Type").getAsString().toLowerCase()));
                         spell.SummonDuration = summon.get("Duration").getAsInt();
                     }
-                    
+
                     var damage = json.getAsJsonObject("Damage");
                     if (damage != null) {
                         spell.DamageEnabled = damage.get("Enabled").getAsBoolean();
@@ -89,7 +92,7 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
                     } else {
                         spell.DamageEnabled = false;
                     }
-                    
+
                     var heal = json.getAsJsonObject("Heal");
                     if (heal != null) {
                         spell.HealEnabled = heal.get("Enabled").getAsBoolean();
@@ -99,12 +102,13 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
                     } else {
                         spell.HealEnabled = false;
                     }
-                    
+
                     var effect = json.getAsJsonObject("Effect");
                     if (effect != null) {
                         spell.EffectEnabled = effect.get("Enabled").getAsBoolean();
                         spell.EffectTarget = TargetMode.valueOf(effect.get("Target").getAsString().toUpperCase());
-                        spell.Effect = Registry.STATUS_EFFECT.get(Identifier.tryParse(effect.get("Type").getAsString().toLowerCase()));
+                        spell.Effect = Registry.STATUS_EFFECT
+                                .get(Identifier.tryParse(effect.get("Type").getAsString().toLowerCase()));
                         spell.EffectDuration = effect.get("Duration").getAsInt();
                         spell.EffectAmplifier = effect.get("Amplifier").getAsInt();
                         spell.EffectScale = effect.get("Scale").getAsFloat();
@@ -113,24 +117,28 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
                     } else {
                         spell.EffectEnabled = false;
                     }
-                    
-                    spell.CastSound = Registry.SOUND_EVENT.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Sound").getAsString().toLowerCase()));
-                    spell.CastParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnCast").get("Particle").getAsString().toLowerCase()));
+
+                    spell.CastSound = Registry.SOUND_EVENT.get(Identifier
+                            .tryParse(json.getAsJsonObject("OnCast").get("Sound").getAsString().toLowerCase()));
+                    spell.CastParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier
+                            .tryParse(json.getAsJsonObject("OnCast").get("Particle").getAsString().toLowerCase()));
                     spell.CastParticleCount = json.getAsJsonObject("OnCast").get("ParticleCount").getAsInt();
-                    
-                    spell.HitSound = Registry.SOUND_EVENT.get(Identifier.tryParse(json.getAsJsonObject("OnHit").get("Sound").getAsString().toLowerCase()));
-                    spell.HitParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier.tryParse(json.getAsJsonObject("OnHit").get("Particle").getAsString().toLowerCase()));
+
+                    spell.HitSound = Registry.SOUND_EVENT.get(Identifier
+                            .tryParse(json.getAsJsonObject("OnHit").get("Sound").getAsString().toLowerCase()));
+                    spell.HitParticle = (ParticleEffect) Registry.PARTICLE_TYPE.get(Identifier
+                            .tryParse(json.getAsJsonObject("OnHit").get("Particle").getAsString().toLowerCase()));
                     spell.HitParticleCount = json.getAsJsonObject("OnHit").get("ParticleCount").getAsInt();
-                    
+
                     spells.put(spell.Component, spell);
                     EternalCraft.LOGGER.info("- " + spell.Name);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     EternalCraft.LOGGER.error("Error occurred while loading resource json " + id.toString(), e);
                 }
             }
         }
 
-        //  Try re-sending spell data to clients
+        // Try re-sending spell data to clients
         SendSpellDataReload();
     }
 
@@ -186,11 +194,11 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
 
     public static void OnSpellRecieved(ByteBuf buffer) {
         try {
-            Spell spell = (Spell)NetworkingUtils.Deserialize(buffer.array());
+            Spell spell = (Spell) NetworkingUtils.Deserialize(buffer.array());
             spells.put(spell.Component, spell);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
 }

@@ -40,7 +40,7 @@ public class EternalCraft implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger(Namespace);
 
 	public static final Random Random = new Random();
-	public static final net.minecraft.util.math.random.Random MinecraftRandom = net.minecraft.util.math.random.Random.create();
+	public static final Random MinecraftRandom = new Random();
 
 	public static final Identifier SPELL_RELOAD_PACKET = new Identifier(EternalCraft.Namespace, "spell_reload");
 	public static final Identifier SPELL_DATA_PACKET = new Identifier(EternalCraft.Namespace, "spell_data");
@@ -64,7 +64,7 @@ public class EternalCraft implements ModInitializer {
 
 	public static RegistryEntry<ConfiguredFeature<SurfacePatchFeatureConfig, ?>> FUNGUS_CONFIG;
 	public static RegistryEntry<PlacedFeature> FUNGUS_PLACED;
-	
+
 	public static RegistryEntry<ConfiguredFeature<SurfacePatchFeatureConfig, ?>> CLOVER_CONFIG;
 	public static RegistryEntry<PlacedFeature> CLOVER_PLACED;
 
@@ -79,27 +79,28 @@ public class EternalCraft implements ModInitializer {
 		ItemEvents.Initialize();
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SpellManager());
 
-		//	PLATINUM ORE
+		// PLATINUM ORE
 		PLATINUM_ORE_CONFIG = ConfiguredFeatures.register("platinum_ore", Feature.ORE, new OreFeatureConfig(
-			OreConfiguredFeatures.STONE_ORE_REPLACEABLES,
-			CustomBlocks.PLATINUM_ORE.getDefaultState(),
-			4));
+				OreConfiguredFeatures.STONE_ORE_REPLACEABLES,
+				CustomBlocks.PLATINUM_ORE.getDefaultState(),
+				4));
 		PLATINUM_ORE_PLACED = PlacedFeatures.register("platinum_ore",
-			PLATINUM_ORE_CONFIG,
-			CountPlacementModifier.of(1),
-			SquarePlacementModifier.of(),
-			HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.aboveBottom(60)));
+				PLATINUM_ORE_CONFIG,
+				CountPlacementModifier.of(1),
+				SquarePlacementModifier.of(),
+				HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.aboveBottom(60)));
 		BiomeModifications.addFeature(
-			BiomeSelectors.foundInOverworld(),
-			GenerationStep.Feature.UNDERGROUND_ORES,
-			PLATINUM_ORE_PLACED.getKey().get());
+				BiomeSelectors.foundInOverworld(),
+				GenerationStep.Feature.UNDERGROUND_ORES,
+				PLATINUM_ORE_PLACED.getKey().get());
 
-		//	ICICLES
-		ICICLES_CONFIG = ConfiguredFeatures.register("icicles", CustomFeatures.HANGING_BLOCK, new HangingBlockFeatureConfig(
-				UniformIntProvider.create(4, 8),
-				UniformFloatProvider.create(0.3f, 0.5f),
-				ConstantIntProvider.create(1),
-				BlockStateProvider.of(CustomBlocks.ICICLES)));
+		// ICICLES
+		ICICLES_CONFIG = ConfiguredFeatures.register("icicles", CustomFeatures.HANGING_BLOCK,
+				new HangingBlockFeatureConfig(
+						UniformIntProvider.create(4, 8),
+						UniformFloatProvider.create(0.3f, 0.5f),
+						ConstantIntProvider.create(1),
+						BlockStateProvider.of(CustomBlocks.ICICLES)));
 		ICICLES_PLACED = PlacedFeatures.register("icicles",
 				ICICLES_CONFIG,
 				CountPlacementModifier.of(30),
@@ -110,7 +111,7 @@ public class EternalCraft implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				ICICLES_PLACED.getKey().get());
 
-		//	FROST
+		// FROST
 		FROST_CONFIG = ConfiguredFeatures.register("frost", CustomFeatures.SURFACE_PATCH, new SurfacePatchFeatureConfig(
 				new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD),
 				UniformIntProvider.create(8, 16),
@@ -126,27 +127,28 @@ public class EternalCraft implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				FROST_PLACED.getKey().get());
 
-		//	HANGING MOSS
-		HANGING_MOSS_CONFIG = ConfiguredFeatures.register("hanging_moss", CustomFeatures.HANGING_BLOCK, new HangingBlockFeatureConfig(
-				UniformIntProvider.create(1, 4),
-				UniformFloatProvider.create(0.4f, 0.75f),
-				ConstantIntProvider.create(2),
-				BlockStateProvider.of(CustomBlocks.HANGING_MOSS)));
+		// HANGING MOSS
+		HANGING_MOSS_CONFIG = ConfiguredFeatures.register("hanging_moss", CustomFeatures.HANGING_BLOCK,
+				new HangingBlockFeatureConfig(
+						UniformIntProvider.create(1, 4),
+						UniformFloatProvider.create(0.4f, 0.75f),
+						ConstantIntProvider.create(2),
+						BlockStateProvider.of(CustomBlocks.HANGING_MOSS)));
 		HANGING_MOSS_PLACED = PlacedFeatures.register("hanging_moss",
 				HANGING_MOSS_CONFIG,
 				CountPlacementModifier.of(30),
 				SquarePlacementModifier.of(),
 				HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.getTop()));
 		BiomeModifications.addFeature(
-				BiomeSelectors.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
+				BiomeSelectors.tag(BiomeTags.IS_JUNGLE)
 						.or(BiomeSelectors.tag(BiomeTags.IS_TAIGA))
 						.or(BiomeSelectors.tag(BiomeTags.IS_RIVER))
-						.or(BiomeSelectors.tag(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS))
+						.or(BiomeSelectors.tag(BiomeTags.SWAMP_HUT_HAS_STRUCTURE))
 						.or(BiomeSelectors.tag(BiomeTags.WOODLAND_MANSION_HAS_STRUCTURE)),
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				HANGING_MOSS_PLACED.getKey().get());
 
-		//	MOSS
+		// MOSS
 		MOSS_CONFIG = ConfiguredFeatures.register("moss", CustomFeatures.SURFACE_PATCH, new SurfacePatchFeatureConfig(
 				new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD),
 				UniformIntProvider.create(0, 4),
@@ -158,58 +160,60 @@ public class EternalCraft implements ModInitializer {
 				SquarePlacementModifier.of(),
 				HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.getTop()));
 		BiomeModifications.addFeature(
-				BiomeSelectors.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
+				BiomeSelectors.tag(BiomeTags.IS_JUNGLE)
 						.or(BiomeSelectors.tag(BiomeTags.IS_TAIGA))
 						.or(BiomeSelectors.tag(BiomeTags.IS_RIVER))
-						.or(BiomeSelectors.tag(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS))
+						.or(BiomeSelectors.tag(BiomeTags.SWAMP_HUT_HAS_STRUCTURE))
 						.or(BiomeSelectors.tag(BiomeTags.WOODLAND_MANSION_HAS_STRUCTURE)),
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				MOSS_PLACED.getKey().get());
 
-		//	FUNGUS
-		FUNGUS_CONFIG = ConfiguredFeatures.register("fungus", CustomFeatures.SURFACE_PATCH, new SurfacePatchFeatureConfig(
-				new TagMatchRuleTest(BlockTags.MOSS_REPLACEABLE),
-				UniformIntProvider.create(0, 4),
-				UniformFloatProvider.create(0.1f, 0.3f),
-				BlockStateProvider.of(CustomBlocks.FUNGUS)));
+		// FUNGUS
+		FUNGUS_CONFIG = ConfiguredFeatures.register("fungus", CustomFeatures.SURFACE_PATCH,
+				new SurfacePatchFeatureConfig(
+						new TagMatchRuleTest(BlockTags.MOSS_REPLACEABLE),
+						UniformIntProvider.create(0, 4),
+						UniformFloatProvider.create(0.1f, 0.3f),
+						BlockStateProvider.of(CustomBlocks.FUNGUS)));
 		FUNGUS_PLACED = PlacedFeatures.register("fungus",
 				FUNGUS_CONFIG,
 				CountPlacementModifier.of(30),
 				SquarePlacementModifier.of(),
 				HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.getTop()));
 		BiomeModifications.addFeature(
-				BiomeSelectors.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
+				BiomeSelectors.tag(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
 						.or(BiomeSelectors.tag(BiomeTags.IS_TAIGA))
 						.or(BiomeSelectors.tag(BiomeTags.IS_RIVER))
-						.or(BiomeSelectors.tag(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS))
 						.or(BiomeSelectors.tag(BiomeTags.WOODLAND_MANSION_HAS_STRUCTURE)),
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				FUNGUS_PLACED.getKey().get());
 
-		//	CLOVER
-		CLOVER_CONFIG = ConfiguredFeatures.register("clover", CustomFeatures.SURFACE_PATCH, new SurfacePatchFeatureConfig(
-				new TagMatchRuleTest(BlockTags.DIRT),
-				UniformIntProvider.create(0, 6),
-				UniformFloatProvider.create(0.1f, 0.3f),
-				BlockStateProvider.of(CustomBlocks.CLOVER)));
+		// CLOVER
+		CLOVER_CONFIG = ConfiguredFeatures.register("clover", CustomFeatures.SURFACE_PATCH,
+				new SurfacePatchFeatureConfig(
+						new TagMatchRuleTest(BlockTags.DIRT),
+						UniformIntProvider.create(0, 6),
+						UniformFloatProvider.create(0.1f, 0.3f),
+						BlockStateProvider.of(CustomBlocks.CLOVER)));
 		CLOVER_PLACED = PlacedFeatures.register("clover",
 				CLOVER_CONFIG,
 				CountPlacementModifier.of(10),
 				SquarePlacementModifier.of(),
 				HeightRangePlacementModifier.uniform(YOffset.fixed(60), YOffset.getTop()));
 		BiomeModifications.addFeature(
-				BiomeSelectors.tag(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
+				BiomeSelectors.tag(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
 						.or(BiomeSelectors.tag(BiomeTags.IS_RIVER))
 						.or(BiomeSelectors.tag(BiomeTags.IS_FOREST)),
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				CLOVER_PLACED.getKey().get());
 
-		//	FLOWERING
-		FLOWERING_CONFIG = ConfiguredFeatures.register("flowering", CustomFeatures.SURFACE_PATCH, new SurfacePatchFeatureConfig(
-				new TagMatchRuleTest(BlockTags.DIRT),
-				UniformIntProvider.create(0, 6),
-				UniformFloatProvider.create(0.1f, 0.3f),
-				BlockStateProvider.of(CustomBlocks.FLOWER_COVER)));
+		// FLOWERING
+		FLOWERING_CONFIG = ConfiguredFeatures.register("flowering", CustomFeatures.SURFACE_PATCH,
+				new SurfacePatchFeatureConfig(
+						new TagMatchRuleTest(BlockTags.DIRT),
+						UniformIntProvider.create(0, 6),
+						UniformFloatProvider.create(0.1f, 0.3f),
+						BlockStateProvider.of(CustomBlocks.FLOWER_COVER)));
 		FLOWERING_PLACED = PlacedFeatures.register("flowering",
 				FLOWERING_CONFIG,
 				CountPlacementModifier.of(10),
