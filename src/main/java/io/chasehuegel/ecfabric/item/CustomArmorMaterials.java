@@ -11,6 +11,7 @@ import net.minecraft.util.Lazy;
 
 public enum CustomArmorMaterials implements ArmorMaterial
 {
+    WOODEN("wooden", 5, new int[]{1, 2, 3, 1}, 50, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     ARMORER("armorer", 5, new int[]{1, 2, 3, 1}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     BUTCHER("butcher", 5, new int[]{1, 2, 3, 1}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     DESERT("desert", 5, new int[]{1, 2, 3, 1}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
@@ -36,10 +37,15 @@ public enum CustomArmorMaterials implements ArmorMaterial
     ANGEL("angel", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     AZALEA("azalea", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     WIZARD("wizard", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
+    APPRENTICE("apprentice", 5, new int[]{1, 1, 2, 1}, 35, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(CustomItems.THREAD)),
     PILLAGER("pillager", 15, new int[]{4, 7, 9, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.IRON_INGOT)),
     PIGLIN("piglin", 15, new int[]{2, 5, 7, 2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 4.0f, 0.0f, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
+    RABBIT("rabbit", 15, new int[]{1, 1, 1, 2}, 30, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 4.0f, 0.0f, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
     BLAZE("blaze", 15, new int[]{3, 6, 8, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0f, 0.25f, () -> Ingredient.ofItems(Items.BLAZE_ROD)),
+    FROZEN("frozen", 15, new int[]{3, 6, 8, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0f, 0.25f, () -> Ingredient.ofItems(Items.BLAZE_ROD)),
     PRISMARINE("prismarine", 15, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0f, 0f, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),
+    TERRIBLE("terrible", 15, new int[]{3, 6, 8, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0f, 0.25f, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),
+    WITHER("wither", 15, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0f, 0f, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)),
     COPPER_REBREATHER("copper_rebreather", 15, new int[]{0, 0, 0, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
     // LEATHER("leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.LEATHER)),
     BONE("bone", 10, new int[]{1, 3, 4, 2}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.1f, () -> Ingredient.ofItems(Items.BONE)),

@@ -5,11 +5,9 @@
     "itemGroup.ecfabric.combat": "Eternalcraft Combat",
     "itemGroup.ecfabric.trinkets": "Eternalcraft Trinkets",
     "itemGroup.ecfabric.misc": "Eternalcraft Misc",
-    
     "item.ecfabric.empty_can": "Empty Can",
     "item.ecfabric.water_can": "Water Can",
     "item.ecfabric.lava_can": "Lava Can",
-
     "item.ecfabric.wooden_dagger": "Wooden Dagger",
     "item.ecfabric.wooden_greatsword": "Wooden Greatsword",
     "item.ecfabric.wooden_mace": "Wooden Mace",
@@ -39,7 +37,6 @@
     "item.ecfabric.turtle_chestplate": "Turtle Chestplate",
     "item.ecfabric.turtle_leggings": "Turtle Leggings",
     "item.ecfabric.turtle_boots": "Turtle Boots",
-
     "item.ecfabric.copper_dagger": "Copper Dagger",
     "item.ecfabric.copper_greatsword": "Copper Greatsword",
     "item.ecfabric.copper_mace": "Copper Mace",
@@ -56,7 +53,6 @@
     "item.ecfabric.copper_leggings": "Copper Leggings",
     "item.ecfabric.copper_boots": "Copper Boots",
     "item.ecfabric.copper_cog": "Copper Cog",
-
     "item.ecfabric.platinum": "Platinum",
     "item.ecfabric.platinum_ingot": "Platinum Ingot",
     "item.ecfabric.platinum_dagger": "Platinum Dagger",
@@ -74,7 +70,6 @@
     "item.ecfabric.platinum_chestplate": "Platinum Chestplate",
     "item.ecfabric.platinum_leggings": "Platinum Leggings",
     "item.ecfabric.platinum_boots": "Platinum Boots",
-
     "item.ecfabric.amethyst_ingot": "Amethyst Ingot",
     "item.ecfabric.amethyst_dagger": "Amethyst Dagger",
     "item.ecfabric.amethyst_greatsword": "Amethyst Greatsword",
@@ -91,7 +86,6 @@
     "item.ecfabric.amethyst_leggings": "Amethyst Leggings",
     "item.ecfabric.amethyst_boots": "Amethyst Boots",
     "item.ecfabric.amethyst_amulet": "Amethyst Amulet",
-    
     "item.ecfabric.steel_ingot": "Steel Ingot",
     "item.ecfabric.steel_dagger": "Steel Dagger",
     "item.ecfabric.steel_greatsword": "Steel Greatsword",
@@ -108,7 +102,6 @@
     "item.ecfabric.steel_leggings": "Steel Leggings",
     "item.ecfabric.steel_boots": "Steel Boots",
     "item.ecfabric.steel_link": "Steel Link",
-    
     "item.ecfabric.bone_dagger": "Bone Dagger",
     "item.ecfabric.bone_greatsword": "Bone Greatsword",
     "item.ecfabric.bone_mace": "Bone Mace",
@@ -124,7 +117,6 @@
     "item.ecfabric.bone_leggings": "Bone Leggings",
     "item.ecfabric.bone_boots": "Bone Boots",
     "item.ecfabric.bone_idol": "Bone Idol",
-
     "item.ecfabric.obsidian_dagger": "Obsidian Dagger",
     "item.ecfabric.obsidian_greatsword": "Obsidian Greatsword",
     "item.ecfabric.obsidian_mace": "Obsidian Mace",
@@ -135,7 +127,6 @@
     "item.ecfabric.obsidian_shovel": "Obsidian Shovel",
     "item.ecfabric.obsidian_sword": "Obsidian Sword",
     "item.ecfabric.obsidian_pearl": "Obsidian Pearl",
-    
     "item.ecfabric.wooden_staff": "Wooden Staff",
     "item.ecfabric.amethyst_staff": "Amethyst Staff",
     "item.ecfabric.steel_staff": "Steel Staff",
@@ -148,7 +139,6 @@
     "item.ecfabric.soul_staff": "Soul Staff",
     "item.ecfabric.ender_staff": "Ender Staff",
     "item.ecfabric.time_staff": "Time Staff",
-
     "block.ecfabric.platinum_ore": "Platinum Ore",
     "block.ecfabric.platinum_block": "Block of Platinum",
     "block.ecfabric.platinum_bricks": "Platinum Bricks",
@@ -201,7 +191,6 @@
     "block.ecfabric.fungus": "Fungus",
     "block.ecfabric.clover": "Clover",
     "block.ecfabric.flower_cover": "Flowering Buds",
-    
     "item.ecfabric.bo_staff": "Bow Staff",
     "item.ecfabric.blowgun": "Blowgun",
     "block.ecfabric.copper_vane": "Copper Weather Vane",
@@ -297,7 +286,30 @@
     "item.ecfabric.prismarine_chestplate": "Prismarine Chestplate",
     "item.ecfabric.prismarine_leggings": "Prismarine Leggings",
     "item.ecfabric.prismarine_boots": "Prismarine Boots",
-
+    "item.ecfabric.frozen_helmet": "Stray King Helmet",
+    "item.ecfabric.frozen_chestplate": "Stray King Chestplate",
+    "item.ecfabric.frozen_leggings": "Stray King Leggings",
+    "item.ecfabric.frozen_boots": "Stray King Boots",
+    "item.ecfabric.wooden_helmet": "Wooden Helmet",
+    "item.ecfabric.wooden_chestplate": "Wooden Chestplate",
+    "item.ecfabric.wooden_leggings": "Wooden Leggings",
+    "item.ecfabric.wooden_boots": "Wooden Boots",
+    "item.ecfabric.apprentice_helmet": "Apprentice Helmet",
+    "item.ecfabric.apprentice_chestplate": "Apprentice Chestplate",
+    "item.ecfabric.apprentice_leggings": "Apprentice Leggings",
+    "item.ecfabric.apprentice_boots": "Apprentice Boots",
+    "item.ecfabric.terrible_helmet": "Lost Helmet",
+    "item.ecfabric.terrible_chestplate": "Lost Chestplate",
+    "item.ecfabric.terrible_leggings": "Lost Leggings",
+    "item.ecfabric.terrible_boots": "Lost Boots",
+    "item.ecfabric.wither_helmet": "Wither Helmet",
+    "item.ecfabric.wither_chestplate": "Wither Chestplate",
+    "item.ecfabric.wither_leggings": "Wither Leggings",
+    "item.ecfabric.wither_boots": "Wither Boots",
+    "item.ecfabric.burning_staff": "Staff of Embers",
+    "item.ecfabric.diamond_staff": "Diamond Staff",
+    "item.ecfabric.mystic_staff": "Mystic Staff",
+    "item.ecfabric.golden_staff": "Golden Staff",
     "item.ecfabric.copper_rebreather": "Rebreather",
     "item.ecfabric.eastern_helmet": "Eastern Helmet",
     "item.ecfabric.eastern_chestplate": "Eastern Chestplate",

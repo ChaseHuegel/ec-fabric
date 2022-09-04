@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "a a",
+        "a a",
+        "   "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:rabbit_hide"
+        }
+    },
+    "result": {
+        "item": "ecfabric:rabbit_boots",
+        "count": 1
+    }
+}

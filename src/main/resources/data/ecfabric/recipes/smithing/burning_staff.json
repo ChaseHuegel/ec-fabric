@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "ecfabric:wooden_staff"
+    },
+    "addition": {
+        "item": "minecraft:fire_charge"
+    },
+    "result": {
+        "item": "ecfabric:burning_staff"
+    }
+}

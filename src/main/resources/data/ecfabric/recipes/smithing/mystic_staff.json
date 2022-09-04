@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "ecfabric:wooden_staff"
+    },
+    "addition": {
+        "item": "minecraft:lapis_block"
+    },
+    "result": {
+        "item": "ecfabric:mystic_staff"
+    }
+}

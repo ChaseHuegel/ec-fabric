@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "ecfabric:fabric"
+    },
+    "result": "ecfabric:apprentice_boots",
+    "count": 1
+}

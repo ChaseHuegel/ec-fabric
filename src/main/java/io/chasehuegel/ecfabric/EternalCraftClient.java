@@ -25,6 +25,9 @@ public class EternalCraftClient implements ClientModInitializer {
     private static final Identifier PIGLIN_LOOT_TABLE_ID = EntityType.PIGLIN.getLootTableId();
     private static final Identifier BLAZE_LOOT_TABLE_ID = EntityType.BLAZE.getLootTableId();
     private static final Identifier DROWNED_LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
+    private static final Identifier STRAY_LOOT_TABLE_ID = EntityType.STRAY.getLootTableId();
+    private static final Identifier WITHER_LOOT_TABLE_ID = EntityType.WITHER_SKELETON.getLootTableId();
+    private static final Identifier ENDERMAN_LOOT_TABLE_ID = EntityType.ENDERMAN.getLootTableId();
 
     @Override
     public void onInitializeClient() {
@@ -54,6 +57,14 @@ public class EternalCraftClient implements ClientModInitializer {
         FabricModelPredicateProviderRegistry.register(CustomItems.TIME_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.COPPER_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.COPPER_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.BURNING_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.BURNING_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.GOLDEN_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.GOLDEN_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.DIAMOND_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.DIAMOND_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.MYSTIC_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
+        FabricModelPredicateProviderRegistry.register(CustomItems.MYSTIC_STAFF, new Identifier("casting"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
         
         FabricModelPredicateProviderRegistry.register(CustomItems.BLOWGUN, new Identifier("pull"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
         FabricModelPredicateProviderRegistry.register(CustomItems.BLOWGUN, new Identifier("pulling"), (itemStack, clientWorld, livingEntity, i) -> chargingPredicate(itemStack, clientWorld, livingEntity));
@@ -130,6 +141,51 @@ public class EternalCraftClient implements ClientModInitializer {
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_CHESTPLATE))
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_LEGGINGS))
                         .with(ItemEntry.builder(CustomItems.PRISMARINE_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (STRAY_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.FROZEN_HELMET))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (WITHER_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.WITHER_HELMET))
+                        .with(ItemEntry.builder(CustomItems.WITHER_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.WITHER_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.WITHER_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (ENDERMAN_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.02f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_HELMET))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_BOOTS));
          
                 table.pool(poolBuilder);
             }

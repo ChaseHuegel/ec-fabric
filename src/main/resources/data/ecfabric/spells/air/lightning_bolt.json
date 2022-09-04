@@ -1,7 +1,7 @@
 {
     "Name": "Lightning Bolt",
     "MaxLevel": 10,
-    "Component": "minecraft:gunpowder",
+    "Component": "minecraft:raw_copper",
     "Type": "SUMMON",
     "Summon": {
         "Type": "minecraft:lightning_bolt",
