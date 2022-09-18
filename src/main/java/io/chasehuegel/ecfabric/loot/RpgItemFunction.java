@@ -14,7 +14,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
@@ -29,7 +28,6 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.function.LootFunctionType;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.MessageType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
@@ -159,12 +157,15 @@ public class RpgItemFunction implements LootFunction {
             roll = value;
       }
 
+      LivingEntity attacker = (LivingEntity) context.get(LootContextParameters.DAMAGE_SOURCE).getAttacker();
+      LivingEntity victim = (LivingEntity) context.get(LootContextParameters.THIS_ENTITY);
+
       int looting = 0;
-      for (ItemStack itemInHand : context.get(LootContextParameters.KILLER_ENTITY).getItemsHand()) {
-         looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, itemInHand) : looting;     
+      if (attacker != null) {
+         for (ItemStack itemInHand : attacker.getItemsHand())
+            looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, itemInHand) : looting;
       }
 
-      LivingEntity victim = (LivingEntity) context.get(LootContextParameters.THIS_ENTITY);
       float dropChance = victim.getMaxHealth() * 0.005f + (looting * 0.01f);
       if (roll > dropChance)
          return stack;
@@ -256,7 +257,6 @@ public class RpgItemFunction implements LootFunction {
          stack.setDamage(EternalCraft.Random.nextInt(stack.getItem().getMaxDamage()));
 
       if (tier >= 6) {
-         PlayerEntity attacker = (PlayerEntity) context.get(LootContextParameters.DAMAGE_SOURCE).getAttacker();
          TranslatableText mutableText = new TranslatableText("");
          mutableText.append(attacker.getName());
          mutableText.append(Text.of(" found a legendary ["));
