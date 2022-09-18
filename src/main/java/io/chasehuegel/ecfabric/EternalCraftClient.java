@@ -2,12 +2,14 @@ package io.chasehuegel.ecfabric;
 
 import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItems;
+import io.chasehuegel.ecfabric.loot.RpgItemFunction;
 import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.loot.v2.*;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityType;
@@ -16,7 +18,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition;
+import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.LootTableEntry;
+import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.util.Identifier;
 
@@ -189,6 +194,10 @@ public class EternalCraftClient implements ClientModInitializer {
          
                 table.pool(poolBuilder);
             }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            table.apply(new RpgItemFunction());
         });
 
         ClientPlayNetworking.registerGlobalReceiver(EternalCraft.SPELL_RELOAD_PACKET, (client, handler, buffer, sender) -> { SpellManager.OnSpellReload(); });

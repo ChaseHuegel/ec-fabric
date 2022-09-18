@@ -34,7 +34,7 @@ public class CustomItems {
     public static final float GREATAXE_SPEED = -3f;
     public static final float GREATAXE_RANGE = 1f;
 
-    public static final int MACE_DAMAGE = 2;
+    public static final int MACE_DAMAGE = 3;
     public static final float MACE_SPEED = -2f;
     public static final float MACE_RANGE = 0f;
     
