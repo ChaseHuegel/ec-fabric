@@ -149,47 +149,45 @@ public class WaterCan extends Item {
         else if (this.fluid == Fluids.LAVA)
             farmlandParticle = ParticleTypes.FLAME;
 
-        // for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 0,
-        // 1)))
         boolean didPour = false;
-        BlockPos blockPos = pos;
-        if (world.getBlockState(blockPos).getBlock() instanceof FarmlandBlock) {
-            BlockState blockState = world.getBlockState(blockPos);
+        for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+            if (world.getBlockState(blockPos).getBlock() instanceof FarmlandBlock) {
+                BlockState blockState = world.getBlockState(blockPos);
 
-            if ((this.fluid == Fluids.LAVA && blockState.get(Properties.MOISTURE) > 0) ||
-                    (this.fluid == Fluids.WATER && blockState.get(Properties.MOISTURE) < FarmlandBlock.MAX_MOISTURE)) {
-                if (this.fluid == Fluids.WATER)
-                    world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, FarmlandBlock.MAX_MOISTURE),
-                            Block.NOTIFY_LISTENERS);
-                else if (this.fluid == Fluids.LAVA)
-                    world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, 0), Block.NOTIFY_LISTENERS);
+                if ((this.fluid == Fluids.LAVA && blockState.get(Properties.MOISTURE) > 0) || (this.fluid == Fluids.WATER && blockState.get(Properties.MOISTURE) < FarmlandBlock.MAX_MOISTURE)) {
+                    if (this.fluid == Fluids.WATER)
+                        world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, FarmlandBlock.MAX_MOISTURE), Block.NOTIFY_LISTENERS);
+                    else if (this.fluid == Fluids.LAVA)
+                        world.setBlockState(blockPos, blockState.with(Properties.MOISTURE, 0), Block.NOTIFY_LISTENERS);
 
-                world.emitGameEvent((Entity) player, GameEvent.BLOCK_CHANGE, blockPos);
+                    world.emitGameEvent((Entity) player, GameEvent.BLOCK_CHANGE, blockPos);
 
-                int i = blockPos.getX();
-                int j = blockPos.getY() + 1;
-                int k = blockPos.getZ();
+                    int i = blockPos.getX();
+                    int j = blockPos.getY() + 1;
+                    int k = blockPos.getZ();
 
-                for (int l = 0; l < 8; ++l) {
-                    world.addParticle(farmlandParticle, (double) i + Math.random(), (double) j + Math.random(),
-                            (double) k + Math.random(), 0.0, 0.0, 0.0);
-                }
-
-                BlockState blockStateAbove = world.getBlockState(blockPos.up());
-
-                if (blockStateAbove.getBlock() instanceof CropBlock) {
-                    CropBlock cropBlock = (CropBlock) blockStateAbove.getBlock();
-
-                    if (this.fluid.isIn(FluidTags.WATER)) {
-                        if (cropBlock.canGrow(world, EternalCraft.MinecraftRandom, blockPos.up(), blockStateAbove)) {
-                            cropBlock.applyGrowth(world, blockPos.up(), blockStateAbove);
-                        }
-                    } else if (this.fluid.isIn(FluidTags.LAVA)) {
-                        world.breakBlock(blockPos.up(), false);
+                    for (int l = 0; l < 8; ++l) {
+                        world.addParticle(farmlandParticle, (double) i + Math.random(), (double) j + Math.random(),
+                                (double) k + Math.random(), 0.0, 0.0, 0.0);
                     }
-                }
 
-                didPour = true;
+                    BlockState blockStateAbove = world.getBlockState(blockPos.up());
+
+                    if (blockStateAbove.getBlock() instanceof CropBlock) {
+                        CropBlock cropBlock = (CropBlock) blockStateAbove.getBlock();
+
+                        if (this.fluid.isIn(FluidTags.WATER)) {
+                            if (cropBlock.canGrow(world, EternalCraft.MinecraftRandom, blockPos.up(),
+                                    blockStateAbove)) {
+                                cropBlock.applyGrowth(world, blockPos.up(), blockStateAbove);
+                            }
+                        } else if (this.fluid.isIn(FluidTags.LAVA)) {
+                            world.breakBlock(blockPos.up(), false);
+                        }
+                    }
+
+                    didPour = true;
+                }
             }
         }
 
