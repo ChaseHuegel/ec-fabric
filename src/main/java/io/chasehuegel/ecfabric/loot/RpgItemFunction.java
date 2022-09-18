@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 import io.chasehuegel.ecfabric.EternalCraft;
 import io.chasehuegel.ecfabric.item.CustomStaffItem;
 import io.chasehuegel.ecfabric.loot.modifiers.LootModifiers;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -157,28 +159,19 @@ public class RpgItemFunction implements LootFunction {
             roll = value;
       }
 
+      int looting = 0;
+      for (ItemStack itemInHand : context.get(LootContextParameters.KILLER_ENTITY).getItemsHand()) {
+         looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, itemInHand) : looting;     
+      }
+
       LivingEntity victim = (LivingEntity) context.get(LootContextParameters.THIS_ENTITY);
-      float dropChance = victim.getMaxHealth() * 0.005f;
+      float dropChance = victim.getMaxHealth() * 0.005f + (looting * 0.01f);
       if (roll > dropChance)
          return stack;
       
       // Only loot mobs, unless we have a looting enchant
-      if (!(context.get(LootContextParameters.THIS_ENTITY) instanceof MobEntity)) {
-         boolean hasLooting = false;
-         for (ItemStack itemInHand : context.get(LootContextParameters.DAMAGE_SOURCE).getAttacker().getItemsHand()) {
-            for (NbtElement nbt : itemInHand.getEnchantments()) {
-               if (nbt.asString().contains("looting")) {
-                  hasLooting = true;
-                  break;
-               }
-            }
-
-            if (hasLooting)
-               break;
-         }
-
-         if (!hasLooting)
-            return stack;
+      if (!(victim instanceof MobEntity) && looting == 0) {
+         return stack;
       }
       
       // Lazily collect lootable items from the registry
