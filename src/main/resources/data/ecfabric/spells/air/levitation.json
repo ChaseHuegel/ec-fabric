@@ -1,7 +1,7 @@
 {
     "Name": "Levitation",
     "MaxLevel": 10,
-    "Component": "minecraft:ghast_tear",
+    "Component": "minecraft:feather",
     "Type": "SUMMON",
     "Summon": {
         "Type": "minecraft:area_effect_cloud",

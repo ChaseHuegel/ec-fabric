@@ -1,11 +1,13 @@
 {
-    "Name": "Fireball",
+    "Name": "Fire Blast",
     "MaxLevel": 10,
-    "Component": "minecraft:blaze_powder",
-    "Type": "PROJECTILE",
-    "Projectile": {
-        "Type": "minecraft:fireball",
-        "Velocity": 1
+    "Component": "minecraft:gunpowder",
+    "Type": "INSTANT",
+    "Damage": {
+        "Enabled": true,
+        "Target": "OTHER",
+        "Value": 10.0,
+        "Scale": 0.5
     },
     "OnCast": {
         "Sound": "minecraft:entity.illusioner.cast_spell",

@@ -1,10 +1,10 @@
 {
-    "Name": "Fireball",
+    "Name": "Firebolt",
     "MaxLevel": 10,
-    "Component": "minecraft:blaze_powder",
+    "Component": "minecraft:flint",
     "Type": "PROJECTILE",
     "Projectile": {
-        "Type": "minecraft:fireball",
+        "Type": "minecraft:small_fireball",
         "Velocity": 1
     },
     "OnCast": {

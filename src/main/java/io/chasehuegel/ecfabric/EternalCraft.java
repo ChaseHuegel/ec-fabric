@@ -11,7 +11,16 @@ import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.entity.EntityType;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.condition.KilledByPlayerLootCondition;
+import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.tag.BiomeTags;
@@ -41,6 +50,14 @@ public class EternalCraft implements ModInitializer {
 
 	public static final Random Random = new Random();
 	public static final Random MinecraftRandom = new Random();
+
+	private static final Identifier PILLAGER_LOOT_TABLE_ID = EntityType.PILLAGER.getLootTableId();
+    private static final Identifier PIGLIN_LOOT_TABLE_ID = EntityType.PIGLIN.getLootTableId();
+    private static final Identifier BLAZE_LOOT_TABLE_ID = EntityType.BLAZE.getLootTableId();
+    private static final Identifier DROWNED_LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
+    private static final Identifier STRAY_LOOT_TABLE_ID = EntityType.STRAY.getLootTableId();
+    private static final Identifier WITHER_LOOT_TABLE_ID = EntityType.WITHER_SKELETON.getLootTableId();
+    private static final Identifier ENDERMAN_LOOT_TABLE_ID = EntityType.ENDERMAN.getLootTableId();
 
 	public static final Identifier SPELL_RELOAD_PACKET = new Identifier(EternalCraft.Namespace, "spell_reload");
 	public static final Identifier SPELL_DATA_PACKET = new Identifier(EternalCraft.Namespace, "spell_data");
@@ -78,6 +95,111 @@ public class EternalCraft implements ModInitializer {
 		CustomItemGroup.Initialize();
 		ItemEvents.Initialize();
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SpellManager());
+
+		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (PILLAGER_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.PILLAGER_HELMET))
+                        .with(ItemEntry.builder(CustomItems.PILLAGER_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.PILLAGER_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.PILLAGER_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (PIGLIN_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.PIGLIN_HELMET))
+                        .with(ItemEntry.builder(CustomItems.PIGLIN_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.PIGLIN_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.PIGLIN_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (BLAZE_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.BLAZE_HELMET))
+                        .with(ItemEntry.builder(CustomItems.BLAZE_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.BLAZE_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.BLAZE_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (DROWNED_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.PRISMARINE_HELMET))
+                        .with(ItemEntry.builder(CustomItems.PRISMARINE_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.PRISMARINE_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.PRISMARINE_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (STRAY_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.FROZEN_HELMET))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.FROZEN_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (WITHER_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.WITHER_HELMET))
+                        .with(ItemEntry.builder(CustomItems.WITHER_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.WITHER_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.WITHER_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+        });
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            if (ENDERMAN_LOOT_TABLE_ID.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(KilledByPlayerLootCondition.builder().build())
+                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.02f, 0.02f).build())
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_HELMET))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_CHESTPLATE))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_LEGGINGS))
+                        .with(ItemEntry.builder(CustomItems.TERRIBLE_BOOTS));
+         
+                table.pool(poolBuilder);
+            }
+		});
 
 		// PLATINUM ORE
 		PLATINUM_ORE_CONFIG = ConfiguredFeatures.register("platinum_ore", Feature.ORE, new OreFeatureConfig(

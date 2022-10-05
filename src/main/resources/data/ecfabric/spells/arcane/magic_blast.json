@@ -6,7 +6,7 @@
     "Damage": {
         "Enabled": true,
         "Target": "OTHER",
-        "Value": 6.0,
+        "Value": 10.0,
         "Scale": 0.5
     },
     "OnCast": {

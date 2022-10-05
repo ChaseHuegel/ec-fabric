@@ -6,29 +6,14 @@ import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.loot.v2.*;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.condition.KilledByPlayerLootCondition;
-import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.util.Identifier;
 
 public class EternalCraftClient implements ClientModInitializer {
-    private static final Identifier PILLAGER_LOOT_TABLE_ID = EntityType.PILLAGER.getLootTableId();
-    private static final Identifier PIGLIN_LOOT_TABLE_ID = EntityType.PIGLIN.getLootTableId();
-    private static final Identifier BLAZE_LOOT_TABLE_ID = EntityType.BLAZE.getLootTableId();
-    private static final Identifier DROWNED_LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
-    private static final Identifier STRAY_LOOT_TABLE_ID = EntityType.STRAY.getLootTableId();
-    private static final Identifier WITHER_LOOT_TABLE_ID = EntityType.WITHER_SKELETON.getLootTableId();
-    private static final Identifier ENDERMAN_LOOT_TABLE_ID = EntityType.ENDERMAN.getLootTableId();
-
     @Override
     public void onInitializeClient() {
         FabricModelPredicateProviderRegistry.register(CustomItems.WOODEN_STAFF, new Identifier("charge"), (itemStack, clientWorld, livingEntity, i) -> chargePredicate(itemStack, clientWorld, livingEntity));
@@ -85,111 +70,6 @@ public class EternalCraftClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.FLOWER_COVER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.COPPER_VANE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.LAMP, RenderLayer.getTranslucent());
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (PILLAGER_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.PILLAGER_HELMET))
-                        .with(ItemEntry.builder(CustomItems.PILLAGER_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.PILLAGER_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.PILLAGER_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (PIGLIN_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.PIGLIN_HELMET))
-                        .with(ItemEntry.builder(CustomItems.PIGLIN_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.PIGLIN_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.PIGLIN_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (BLAZE_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.BLAZE_HELMET))
-                        .with(ItemEntry.builder(CustomItems.BLAZE_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.BLAZE_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.BLAZE_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (DROWNED_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.PRISMARINE_HELMET))
-                        .with(ItemEntry.builder(CustomItems.PRISMARINE_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.PRISMARINE_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.PRISMARINE_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (STRAY_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.FROZEN_HELMET))
-                        .with(ItemEntry.builder(CustomItems.FROZEN_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.FROZEN_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.FROZEN_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (WITHER_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.05f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.WITHER_HELMET))
-                        .with(ItemEntry.builder(CustomItems.WITHER_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.WITHER_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.WITHER_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
-            if (ENDERMAN_LOOT_TABLE_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(KilledByPlayerLootCondition.builder().build())
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(0.02f, 0.02f).build())
-                        .with(ItemEntry.builder(CustomItems.TERRIBLE_HELMET))
-                        .with(ItemEntry.builder(CustomItems.TERRIBLE_CHESTPLATE))
-                        .with(ItemEntry.builder(CustomItems.TERRIBLE_LEGGINGS))
-                        .with(ItemEntry.builder(CustomItems.TERRIBLE_BOOTS));
-         
-                table.pool(poolBuilder);
-            }
-        });
 
         ClientPlayNetworking.registerGlobalReceiver(EternalCraft.SPELL_RELOAD_PACKET, (client, handler, buffer, sender) -> { SpellManager.OnSpellReload(); });
 		ClientPlayNetworking.registerGlobalReceiver(EternalCraft.SPELL_DATA_PACKET, (client, handler, buffer, sender) -> { SpellManager.OnSpellRecieved(buffer); });

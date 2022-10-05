@@ -6,13 +6,13 @@
     "Damage": {
         "Enabled": true,
         "Target": "OTHER",
-        "Value": 3.0,
+        "Value": 7.0,
         "Scale": 0.5
     },
     "Heal": {
         "Enabled": true,
         "Target": "SELF",
-        "Value": 1.5,
+        "Value": 2.0,
         "Scale": 0.5
     },
     "OnCast": {

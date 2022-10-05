@@ -259,8 +259,12 @@ public class CustomStaffItem extends BowItem {
             
             List<Entity> hitEntities = world.getOtherEntities(entity, new Box(entity.getX() - 3.0 - punchLevel, entity.getY() - 3.0 - punchLevel, entity.getZ() - 3.0 - punchLevel, entity.getX() + 3.0 + punchLevel, entity.getY() + 3.0 + punchLevel, entity.getZ() + 3.0 + punchLevel), Entity::isAlive);
             for (Entity hitEntity : hitEntities) {
-                hitEntity.onStruckByLightning((ServerWorld)world, lightningEntity);
-                TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                if (hitEntities instanceof LivingEntity)
+                {
+                    hitEntity.onStruckByLightning((ServerWorld) world, lightningEntity);
+                    TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel,
+                            flame, infinity);
+                }
             }
         }
         
@@ -346,17 +350,25 @@ public class CustomStaffItem extends BowItem {
     }
 
     private ItemStack TryGetSpellComponent(PlayerEntity player) {
-        Spell spell = SpellManager.TryGetFromComponent(player.getOffHandStack().getItem());
-        if (spell != null) {
-            return player.getOffHandStack();
-        }
-        else for (int i = 0; i < player.getInventory().size(); ++i) {
-            ItemStack inventoryStack = player.getInventory().getStack(i);
+        ItemStack componentStack = player.getOffHandStack();
+        Spell spell = SpellManager.TryGetFromComponent(componentStack.getItem());
 
-            spell = SpellManager.TryGetFromComponent(inventoryStack.getItem());
+        if (spell == null) {
+            componentStack = player.getMainHandStack();
+            spell = SpellManager.TryGetFromComponent(componentStack.getItem());
+        }
+        
+        if (spell != null) {
+            return componentStack;
+        }
+
+        for (int i = 0; i < player.getInventory().size(); ++i) {
+            componentStack = player.getInventory().getStack(i);
+
+            spell = SpellManager.TryGetFromComponent(componentStack.getItem());
 
             if (spell != null) {
-                return inventoryStack;
+                return componentStack;
             }
         }
 

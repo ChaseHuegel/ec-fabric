@@ -1,19 +1,21 @@
 {
-    "Name": "Withering Curse",
-    "MaxLevel": 3,
-    "Component": "minecraft:amethyst_shard",
-    "Type": "SUMMON",
-    "Summon": {
-        "Type": "minecraft:area_effect_cloud",
-        "Duration": 100
+    "Name": "Hex",
+    "MaxLevel": 10,
+    "Component": "minecraft:quartz",
+    "Type": "INSTANT",
+    "Damage": {
+        "Enabled": true,
+        "Target": "OTHER",
+        "Value": 8.0,
+        "Scale": 0.5
     },
     "Effect": {
         "Enabled": true,
         "Target": "Other",
-        "Type": "minecraft:wither",
-        "Duration": 100,
+        "Type": "minecraft:poison",
+        "Duration": 60,
         "Amplifier": 0,
-        "Scale": 0.2,
+        "Scale": 0.25,
         "Particles": true,
         "Visible": true
     },
@@ -25,6 +27,6 @@
     "OnHit": {
         "Sound": "minecraft:item.firecharge.cast_spell",
         "Particle": "minecraft:squid_ink",
-        "ParticleCount": 15
+        "ParticleCount": 20
     }
 }

@@ -1,11 +1,11 @@
 {
-    "Name": "Fireball",
+    "Name": "Dragonfire",
     "MaxLevel": 10,
-    "Component": "minecraft:blaze_powder",
+    "Component": "minecraft:blaze_rod",
     "Type": "PROJECTILE",
     "Projectile": {
-        "Type": "minecraft:fireball",
-        "Velocity": 1
+        "Type": "minecraft:dragon_fireball",
+        "Velocity": 1.25
     },
     "OnCast": {
         "Sound": "minecraft:entity.illusioner.cast_spell",

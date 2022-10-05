@@ -1,12 +1,12 @@
 {
-    "Name": "Rejuvinate",
+    "Name": "Heal",
     "MaxLevel": 10,
-    "Component": "minecraft:gold_ingot",
-    "Type": "INSTANT",
+    "Component": "minecraft:glowstone_dust",
+    "Type": "SELF",
     "Heal": {
         "Enabled": true,
-        "Target": "OTHER",
-        "Value": 6.0,
+        "Target": "SELF",
+        "Value": 4.0,
         "Scale": 0.5
     },
     "OnCast": {
