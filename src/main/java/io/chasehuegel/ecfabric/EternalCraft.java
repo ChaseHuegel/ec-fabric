@@ -7,6 +7,7 @@ import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItemGroup;
 import io.chasehuegel.ecfabric.item.CustomItems;
 import io.chasehuegel.ecfabric.item.ItemEvents;
+import io.chasehuegel.ecfabric.loot.RpgItemFunction;
 import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -19,8 +20,6 @@ import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceWithLootingLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.tag.BiomeTags;
@@ -210,6 +209,10 @@ public class EternalCraft implements ModInitializer {
                 table.pool(poolBuilder);
             }
 		});
+
+		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, table, setter) -> {
+            table.apply(new RpgItemFunction());
+        });
 
 		// PLATINUM ORE
 		PLATINUM_ORE_CONFIG = ConfiguredFeatures.register("platinum_ore", Feature.ORE, new OreFeatureConfig(
