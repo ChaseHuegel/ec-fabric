@@ -95,7 +95,8 @@ public class CustomStaffItem extends BowItem {
             return;
         }
 
-        float strength = BowItem.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks);    
+        ItemStack castingStack = GetCastingStack(player);
+        float strength = BowItem.getPullProgress(this.getMaxUseTime(castingStack) - remainingUseTicks);
         HitResult hitResult = TryGetTarget(player);
         if (strength < 0.1f || ((hitResult == null || hitResult.getType() == Type.MISS) && spell.Type != SpellType.PROJECTILE)) {
             return;
@@ -105,32 +106,32 @@ public class CustomStaffItem extends BowItem {
             return;
         }
 
-        int powerLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.POWER, stack) + staffPower);
-        int punchLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.PUNCH, stack) + staffPunch);
-        boolean flame = EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0;
-        boolean infinity = EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
+        int powerLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.POWER, castingStack) + staffPower);
+        int punchLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.PUNCH, castingStack) + staffPunch);
+        boolean flame = EnchantmentHelper.getLevel(Enchantments.FLAME, castingStack) > 0;
+        boolean infinity = EnchantmentHelper.getLevel(Enchantments.INFINITY, castingStack) > 0;
         
         if (!world.isClient) {
             float power = 1f + (powerLevel * 0.5f);
 
             switch (spell.Type) {
                 case PROJECTILE:
-                    TriggerProjectile(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerProjectile(world, player, spell, castingStack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case INSTANT:
-                    TriggerInstant(world, player, (hitResult instanceof EntityHitResult) ? ((EntityHitResult)hitResult).getEntity() : null, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerInstant(world, player, (hitResult instanceof EntityHitResult) ? ((EntityHitResult)hitResult).getEntity() : null, spell, castingStack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case SELF:
-                    TriggerSelf(world, player, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerSelf(world, player, spell, castingStack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 case SUMMON:
-                    TriggerSummon(world, player, hitResult, spell, stack, strength, power, powerLevel, punchLevel, flame, infinity);
+                    TriggerSummon(world, player, hitResult, spell, castingStack, strength, power, powerLevel, punchLevel, flame, infinity);
                     break;
                 default:
                     break;
             }
             
-            stack.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
+            castingStack.damage(1, player, p -> p.sendToolBreakStatus(GetCastingHand(player)));
 
             TryPlayCastEffect((ServerWorld)world, (ServerPlayerEntity)player, spell);
             TryPlayHitEffect((ServerWorld)world, (ServerPlayerEntity)player, spell, hitResult);
@@ -259,7 +260,7 @@ public class CustomStaffItem extends BowItem {
             
             List<Entity> hitEntities = world.getOtherEntities(entity, new Box(entity.getX() - 3.0 - punchLevel, entity.getY() - 3.0 - punchLevel, entity.getZ() - 3.0 - punchLevel, entity.getX() + 3.0 + punchLevel, entity.getY() + 3.0 + punchLevel, entity.getZ() + 3.0 + punchLevel), Entity::isAlive);
             for (Entity hitEntity : hitEntities) {
-                if (hitEntities instanceof LivingEntity)
+                if (hitEntity instanceof LivingEntity)
                 {
                     hitEntity.onStruckByLightning((ServerWorld) world, lightningEntity);
                     TriggerInstant(world, player, hitEntity, spell, stack, strength, power, powerLevel, punchLevel,
@@ -357,7 +358,7 @@ public class CustomStaffItem extends BowItem {
             componentStack = player.getMainHandStack();
             spell = SpellManager.TryGetFromComponent(componentStack.getItem());
         }
-        
+
         if (spell != null) {
             return componentStack;
         }
@@ -373,6 +374,20 @@ public class CustomStaffItem extends BowItem {
         }
 
         return ItemStack.EMPTY;
+    }
+
+    private ItemStack GetCastingStack(PlayerEntity player) {        
+        if (player.getMainHandStack().getItem() instanceof CustomStaffItem)
+            return player.getMainHandStack();
+
+        return player.getOffHandStack();
+    }
+    
+    private Hand GetCastingHand(PlayerEntity player) {        
+        if (player.getMainHandStack().getItem() instanceof CustomStaffItem)
+            return Hand.MAIN_HAND;
+
+        return Hand.OFF_HAND;
     }
 
     private HitResult TryGetTarget(PlayerEntity player) {
