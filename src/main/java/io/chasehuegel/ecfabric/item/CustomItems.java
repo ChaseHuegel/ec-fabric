@@ -219,10 +219,10 @@ public class CustomItems {
     public static final Item SEA_STAFF = CustomItems.register("sea_staff", new CustomStaffItem(1, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(384)));
     public static final Item NETHERITE_STAFF = CustomItems.register("netherite_staff", new CustomStaffItem(0, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(1561)));
     public static final Item STAR_STAFF = CustomItems.register("star_staff", new CustomStaffItem(2, 2, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(450)));
-    public static final Item BURNING_STAFF = CustomItems.register("burning_staff", new CustomStaffItem(2, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
+    public static final Item BURNING_STAFF = CustomItems.register("burning_staff", new CustomStaffItem(1, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
     public static final Item DIAMOND_STAFF = CustomItems.register("diamond_staff", new CustomStaffItem(0, 0, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(800)));
     public static final Item GOLDEN_STAFF = CustomItems.register("golden_staff", new CustomStaffItem(2, 2, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(48)));
-    public static final Item MYSTIC_STAFF = CustomItems.register("mystic_staff", new CustomStaffItem(0, 2, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
+    public static final Item MYSTIC_STAFF = CustomItems.register("mystic_staff", new CustomStaffItem(1, 1, new FabricItemSettings().group(CustomItemGroup.COMBAT).maxDamage(250)));
     
     public static final Item PLATINUM_ORE  = CustomItems.register("platinum_ore", new BlockItem(CustomBlocks.PLATINUM_ORE, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));
     public static final Item PLATINUM_BLOCK  = CustomItems.register("platinum_block", new BlockItem(CustomBlocks.PLATINUM_BLOCK, new FabricItemSettings().group(CustomItemGroup.BLOCKS)));

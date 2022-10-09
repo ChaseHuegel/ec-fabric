@@ -97,19 +97,25 @@ public class CustomStaffItem extends BowItem {
         }
 
         ItemStack castingStack = GetCastingStack(player);
-        float strength = BowItem.getPullProgress(this.getMaxUseTime(castingStack) - remainingUseTicks);
+        float pullProgress = BowItem.getPullProgress(this.getMaxUseTime(castingStack) - remainingUseTicks);
+        float strength = pullProgress;
 
         if (!player.hasStackEquipped(EquipmentSlot.HEAD))
-            strength += 0.05f;
+            strength -= 0.05f;
         if (!player.hasStackEquipped(EquipmentSlot.CHEST))
-            strength += 0.25f;
+            strength -= 0.25f;
         if (!player.hasStackEquipped(EquipmentSlot.LEGS))
-            strength += 0.15f;
+            strength -= 0.15f;
         if (!player.hasStackEquipped(EquipmentSlot.FEET))
-            strength += 0.05f;
+            strength -= 0.05f;
 
         HitResult hitResult = TryGetTarget(player);
-        if (strength < 0.1f || ((hitResult == null || hitResult.getType() == Type.MISS) && spell.Type != SpellType.PROJECTILE)) {
+        if (pullProgress <= 0.1f || ((hitResult == null || hitResult.getType() == Type.MISS) && spell.Type != SpellType.PROJECTILE)) {
+            return;
+        }
+        
+        if (strength <= 0.1f) {
+            player.sendMessage(Text.of("Spell failed!"), true);
             return;
         }
 
@@ -150,7 +156,7 @@ public class CustomStaffItem extends BowItem {
 
         //  Don't consume components in creative mode
         if (!player.getAbilities().creativeMode) {
-            componentStack.decrement(1);
+            componentStack.setCount(componentStack.getCount() - 1);
             if (componentStack.isEmpty()) {
                 player.getInventory().removeOne(componentStack);
             }
@@ -449,7 +455,8 @@ public class CustomStaffItem extends BowItem {
         CreateSpellParticleEffect(world, player.getPos(), (float)player.getBoundingBox().getAverageSideLength()*2f, spell.CastParticle, spell.CastParticleCount);
         world.playSound(null, player.getBlockPos(), spell.CastSound, SoundCategory.PLAYERS, 1.0f, 1.0f / (EternalCraft.Random.nextFloat() * 0.4f + 1.2f));
         int powerLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.POWER, player.getActiveItem()) + staffPower);
-        player.sendMessage(Text.of(spell.Name + " " + ToRomanNumeral(spell.GetLevel(powerLevel))), true);
+        int punchLevel = spell.GetLevel(EnchantmentHelper.getLevel(Enchantments.PUNCH, player.getActiveItem()) + staffPunch);
+        player.sendMessage(Text.of(GetTier(punchLevel) + " " + spell.Name + " " + ToRomanNumeral(spell.GetLevel(powerLevel))), true);
     }
 
     public void TryPlayHitEffect(ServerWorld world, ServerPlayerEntity player, Spell spell, HitResult hitResult) {
@@ -493,8 +500,33 @@ public class CustomStaffItem extends BowItem {
     }
 
     private Vec3d calculateProjectileVelocity(double x, double y, double z, float speed, float divergence) {
-        Vec3d vec3d = new Vec3d(x, y, z).normalize().add(EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence, EternalCraft.Random.nextGaussian() * (double)0.0075f * (double)divergence).multiply(speed);
+        Vec3d vec3d = new Vec3d(x, y, z).normalize()
+                .add(EternalCraft.Random.nextGaussian() * (double) 0.0075f * (double) divergence,
+                        EternalCraft.Random.nextGaussian() * (double) 0.0075f * (double) divergence,
+                        EternalCraft.Random.nextGaussian() * (double) 0.0075f * (double) divergence)
+                .multiply(speed);
         return vec3d;
+    }
+    
+    private String GetTier(int number) {
+        switch (number) {
+            case 1:
+                return "Apprentice";
+            case 2:
+                return "Initiate";
+            case 3:
+                return "Disciple";
+            case 4:
+                return "Adept";
+            case 5:
+                return "Lesser";
+            case 6:
+                return "Greater";
+            case 7:
+                return "Master";
+        }
+
+        return "";
     }
 
     private String ToRomanNumeral(int number) {
