@@ -1,14 +1,11 @@
 {
     "type": "minecraft:smithing",
-    
     "base": {
-        "item": "minecraft:iron_greataxe"
+        "item": "ecfabric:iron_greataxe"
     },
-
     "addition": {
         "item": "ecfabric:steel_ingot"
     },
-
     "result": {
         "item": "ecfabric:steel_greataxe"
     }

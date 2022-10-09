@@ -2,11 +2,13 @@ package io.chasehuegel.ecfabric;
 
 import io.chasehuegel.ecfabric.block.CustomBlocks;
 import io.chasehuegel.ecfabric.item.CustomItems;
+import io.chasehuegel.ecfabric.loot.RpgItemFunction;
 import io.chasehuegel.ecfabric.magic.SpellManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;

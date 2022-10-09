@@ -41,7 +41,9 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
+import java.util.UUID;
 
 public class EternalCraft implements ModInitializer {
 	public static final String Namespace = "ecfabric";
@@ -87,6 +89,14 @@ public class EternalCraft implements ModInitializer {
 
 	public static RegistryEntry<ConfiguredFeature<SurfacePatchFeatureConfig, ?>> FLOWERING_CONFIG;
 	public static RegistryEntry<PlacedFeature> FLOWERING_PLACED;
+
+	public static UUID generateUuid(String seed) {
+        try {
+            return UUID.nameUUIDFromBytes(seed.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(String.format("UnsupportedEncodingException: %f", e.getMessage()));
+        }
+    }
 
 	@Override
 	public void onInitialize() {
