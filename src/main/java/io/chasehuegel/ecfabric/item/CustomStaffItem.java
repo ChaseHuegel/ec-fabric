@@ -16,6 +16,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -97,6 +98,16 @@ public class CustomStaffItem extends BowItem {
 
         ItemStack castingStack = GetCastingStack(player);
         float strength = BowItem.getPullProgress(this.getMaxUseTime(castingStack) - remainingUseTicks);
+
+        if (!player.hasStackEquipped(EquipmentSlot.HEAD))
+            strength += 0.05f;
+        if (!player.hasStackEquipped(EquipmentSlot.CHEST))
+            strength += 0.25f;
+        if (!player.hasStackEquipped(EquipmentSlot.LEGS))
+            strength += 0.15f;
+        if (!player.hasStackEquipped(EquipmentSlot.FEET))
+            strength += 0.05f;
+
         HitResult hitResult = TryGetTarget(player);
         if (strength < 0.1f || ((hitResult == null || hitResult.getType() == Type.MISS) && spell.Type != SpellType.PROJECTILE)) {
             return;
