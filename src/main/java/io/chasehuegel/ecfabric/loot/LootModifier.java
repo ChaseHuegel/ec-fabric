@@ -3,10 +3,10 @@ package io.chasehuegel.ecfabric.loot;
 import io.chasehuegel.ecfabric.EternalCraft;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Style;
-import net.minecraft.text.TranslatableText;
 
 public abstract class LootModifier {
     
@@ -34,41 +34,45 @@ public abstract class LootModifier {
 
     public void applyName(ItemStack stack, int tier)
     {
-        MutableText name = new LiteralText("").setStyle(Style.EMPTY);
-        String prefix = getPrefix();
-        String suffix = getSuffix();
-        boolean usePrefix = !prefix.isEmpty() && (suffix.isEmpty() || EternalCraft.Random.nextBoolean());
-        
-        if (usePrefix)
-            name.append(prefix + " ");
+        try {
+            MutableText name = new LiteralTextContent("").parse(null, null, 0).setStyle(Style.EMPTY);
+            String prefix = getPrefix();
+            String suffix = getSuffix();
+            boolean usePrefix = !prefix.isEmpty() && (suffix.isEmpty() || EternalCraft.Random.nextBoolean());
+            
+            if (usePrefix)
+                name.append(prefix + " ");
 
-        name.append(new TranslatableText(stack.getTranslationKey()));
+            name.append(new TranslatableTextContent(stack.getTranslationKey()).parse(null, null, 0));
 
-        if (!usePrefix && !suffix.isEmpty())
-            name.append(" " + suffix);
+            if (!usePrefix && !suffix.isEmpty())
+                name.append(" " + suffix);
 
-        switch (tier) {
-            case 1:
-                name.formatted(LootRarity.COMMON.formatting);
-                break;
-            case 2:
-                name.formatted(LootRarity.UNCOMMON.formatting);
-                break;
-            case 3:
-                name.formatted(LootRarity.RARE.formatting);
-                break;
-            case 4:
-                name.formatted(LootRarity.VERY_RARE.formatting);
-                break;
-            case 5:
-                name.formatted(LootRarity.EPIC.formatting);
-                break;
-            case 6:
-                name.formatted(LootRarity.LEGENDARY.formatting);
-                break;
+            switch (tier) {
+                case 1:
+                    name.formatted(LootRarity.COMMON.formatting);
+                    break;
+                case 2:
+                    name.formatted(LootRarity.UNCOMMON.formatting);
+                    break;
+                case 3:
+                    name.formatted(LootRarity.RARE.formatting);
+                    break;
+                case 4:
+                    name.formatted(LootRarity.VERY_RARE.formatting);
+                    break;
+                case 5:
+                    name.formatted(LootRarity.EPIC.formatting);
+                    break;
+                case 6:
+                    name.formatted(LootRarity.LEGENDARY.formatting);
+                    break;
+            }
+            
+            stack.setCustomName(name);
+        } catch (Exception e) {
+            //  do nothing
         }
-        
-        stack.setCustomName(name);
     }
 
     @Override

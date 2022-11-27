@@ -424,7 +424,7 @@ public class CustomStaffItem extends BowItem {
         Vec3d vec3d2;
         int i;
 
-        EntityHitResult entityHitResult = ProjectileUtil.raycast(entity2, vec3d, vec3d.add(vec3d2 = entity2.getRotationVec(1.0f).multiply(maxDistance)), entity2.getBoundingBox().stretch(vec3d2).expand(1.0), entity -> !entity.isSpectator() && entity.collides(), i = maxDistance * maxDistance);
+        EntityHitResult entityHitResult = ProjectileUtil.raycast(entity2, vec3d, vec3d.add(vec3d2 = entity2.getRotationVec(1.0f).multiply(maxDistance)), entity2.getBoundingBox().stretch(vec3d2).expand(1.0), entity -> !entity.isSpectator() && entity.canHit(), i = maxDistance * maxDistance);
 
         if (entityHitResult != null && vec3d.squaredDistanceTo(entityHitResult.getPos()) > (double)i) {
             return null;

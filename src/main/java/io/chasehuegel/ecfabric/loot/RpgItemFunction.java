@@ -28,12 +28,11 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.function.LootFunctionType;
-import net.minecraft.network.MessageType;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
@@ -78,53 +77,57 @@ public class RpgItemFunction implements LootFunction {
    }
 
    private void applyNameFromModifiers(ItemStack stack, int tier, List<LootModifier> modifiers) {
-      List<String> prefixes = new ArrayList<String>();
-      List<String> suffixes = new ArrayList<String>();
-      for (LootModifier modifier : modifiers)
-      {
-         String prefix = modifier.getPrefix();
-         String suffix = modifier.getSuffix();
-         boolean usePrefix = !prefix.isEmpty() && (suffix.isEmpty() || EternalCraft.Random.nextBoolean());
+      try {
+         List<String> prefixes = new ArrayList<String>();
+         List<String> suffixes = new ArrayList<String>();
+         for (LootModifier modifier : modifiers)
+         {
+            String prefix = modifier.getPrefix();
+            String suffix = modifier.getSuffix();
+            boolean usePrefix = !prefix.isEmpty() && (suffix.isEmpty() || EternalCraft.Random.nextBoolean());
 
-         if (usePrefix)
-            prefixes.add(prefix);
+            if (usePrefix)
+               prefixes.add(prefix);
 
-         if (!usePrefix && !suffix.isEmpty())
-            suffixes.add(suffix);
+            if (!usePrefix && !suffix.isEmpty())
+               suffixes.add(suffix);
+         }
+         
+         MutableText name = new LiteralTextContent("").parse(null, null, 0).setStyle(Style.EMPTY);
+
+         for (String prefix : prefixes)
+            name.append(prefix + " ");
+
+         name.append(new TranslatableTextContent(stack.getTranslationKey()).parse(null, null, 0));
+
+         if (suffixes.size() > 0)
+            name.append(" " + suffixes.get(EternalCraft.Random.nextInt(suffixes.size())));
+
+         switch (tier) {
+            case 1:
+                  name.formatted(LootRarity.COMMON.formatting);
+                  break;
+            case 2:
+                  name.formatted(LootRarity.UNCOMMON.formatting);
+                  break;
+            case 3:
+                  name.formatted(LootRarity.RARE.formatting);
+                  break;
+            case 4:
+                  name.formatted(LootRarity.VERY_RARE.formatting);
+                  break;
+            case 5:
+                  name.formatted(LootRarity.EPIC.formatting);
+                  break;
+            case 6:
+                  name.formatted(LootRarity.LEGENDARY.formatting);
+                  break;
+         }
+
+         stack.setCustomName(name);
+      } catch (Exception e) {
+         // do nothing
       }
-      
-      MutableText name = new LiteralText("").setStyle(Style.EMPTY);
-
-      for (String prefix : prefixes)
-         name.append(prefix + " ");
-
-      name.append(new TranslatableText(stack.getTranslationKey()));
-
-      if (suffixes.size() > 0)
-         name.append(" " + suffixes.get(EternalCraft.Random.nextInt(suffixes.size())));
-
-      switch (tier) {
-         case 1:
-               name.formatted(LootRarity.COMMON.formatting);
-               break;
-         case 2:
-               name.formatted(LootRarity.UNCOMMON.formatting);
-               break;
-         case 3:
-               name.formatted(LootRarity.RARE.formatting);
-               break;
-         case 4:
-               name.formatted(LootRarity.VERY_RARE.formatting);
-               break;
-         case 5:
-               name.formatted(LootRarity.EPIC.formatting);
-               break;
-         case 6:
-               name.formatted(LootRarity.LEGENDARY.formatting);
-               break;
-      }
-
-      stack.setCustomName(name);
    }
 
    private int rarityToTier(float rarity) {
@@ -146,126 +149,130 @@ public class RpgItemFunction implements LootFunction {
 
    @Override
    public ItemStack apply(ItemStack stack, LootContext context) {
-      if (!context.hasParameter(LootContextParameters.LAST_DAMAGE_PLAYER))
-         return stack;
-      
-      // Reroll a # of times based off luck
-      float roll = EternalCraft.Random.nextFloat();
-      for (int i = 0; i < context.getLuck(); i++) {
-         float value = EternalCraft.Random.nextFloat();
-         if (value < roll)
-            roll = value;
-      }
-
-      LivingEntity attacker = (LivingEntity) context.get(LootContextParameters.DAMAGE_SOURCE).getAttacker();
-      LivingEntity victim = (LivingEntity) context.get(LootContextParameters.THIS_ENTITY);
-
-      int looting = 0;
-      if (attacker != null) {
-         for (ItemStack itemInHand : attacker.getItemsHand())
-            looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, itemInHand) : looting;
-      }
-
-      float dropChance = victim.getMaxHealth() * 0.005f + (looting * 0.01f);
-      if (roll > dropChance)
-         return stack;
-      
-      // Only loot mobs, unless we have a looting enchant
-      if (!(victim instanceof MobEntity) && looting == 0) {
-         return stack;
-      }
-      
-      // Lazily collect lootable items from the registry
-      if (ArmorItems == null) {
-         ArmorItems = new ArrayList<Item>();
-         ToolItems = new ArrayList<Item>();
-         MeleeWeaponItems = new ArrayList<Item>();
-         MagicItems = new ArrayList<Item>();
-         RangedWeaponItems = new ArrayList<Item>();
-         ShieldItems = new ArrayList<Item>();
-         TreasureItems = new ArrayList<Item>();
-
-         Registry.ITEM.forEach((item) -> {
-            if (item.getRarity(item.getDefaultStack()) == Rarity.COMMON) {
-
-               if (item instanceof ArmorItem)
-                  ArmorItems.add(item);
-               else if (item instanceof CustomStaffItem)
-                  MagicItems.add(item);
-               else if (item instanceof RangedWeaponItem)
-                  RangedWeaponItems.add(item);
-               else if (item instanceof ShieldItem)
-                  ShieldItems.add(item);
-               else if (item instanceof SwordItem || item instanceof AxeItem || item instanceof TridentItem)
-                  MeleeWeaponItems.add(item);
-               else if (item instanceof ToolItem)
-                  ToolItems.add(item);
-               else if (!(item instanceof BlockItem))
-                  TreasureItems.add(item);
-            }
-         });
-      }
-      
-      if (EternalCraft.Random.nextFloat() < 0.8) {
-         List<Item> lootList = ArmorItems;
-
-         float tableRoll = EternalCraft.Random.nextFloat();
-         if (tableRoll <= 0.05f)
-            lootList = TreasureItems;
-         else if (tableRoll <= 0.15f)
-            lootList = MagicItems;
-         else if (tableRoll <= 0.35f)
-            lootList = RangedWeaponItems;
-         else if (tableRoll <= 0.50f)
-            lootList = ShieldItems;
-         else if (tableRoll <= 0.75f)
-            lootList = ArmorItems;
-         else if (tableRoll <= 0.95f)
-            lootList = MeleeWeaponItems;
-         else if (tableRoll <= 1f)
-            lootList = ToolItems;
-
-         stack = lootList.get(EternalCraft.Random.nextInt(lootList.size())).getDefaultStack();
-      }
-
-      stack.setCount(1);
-
-      for (EquipmentSlot slot : EquipmentSlot.values()) {
-         for (Entry<EntityAttribute, EntityAttributeModifier> entry : stack.getItem().getAttributeModifiers(slot)
-               .entries()) {
-            stack.addAttributeModifier(entry.getKey(), entry.getValue(), slot);
+      try {
+         if (!context.hasParameter(LootContextParameters.LAST_DAMAGE_PLAYER))
+            return stack;
+         
+         // Reroll a # of times based off luck
+         float roll = EternalCraft.Random.nextFloat();
+         for (int i = 0; i < context.getLuck(); i++) {
+            float value = EternalCraft.Random.nextFloat();
+            if (value < roll)
+               roll = value;
          }
-      }
-      
-      int tier = 0;
-      if (stack.getItem() instanceof ArmorItem) {
-         ArmorItem armor = (ArmorItem) stack.getItem();
-         tier = addModifiers(stack, armor.getSlotType(), context.getLuck());
-      } else if (stack.getItem() instanceof ShieldItem) {
-         tier = addModifiers(stack, EquipmentSlot.OFFHAND, context.getLuck());
-      } else if (stack.getItem() instanceof ToolItem) {
-         tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
-      } else if (stack.getItem() instanceof RangedWeaponItem) {
-         tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
-      } else if (stack.getItem() instanceof TridentItem) {
-         tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
-      } else {
-         tier = addModifiers(stack, EquipmentSlot.OFFHAND, context.getLuck());
-      }
 
-      if (stack.getItem().getMaxDamage() > 0)
-         stack.setDamage(EternalCraft.Random.nextInt(stack.getItem().getMaxDamage()));
+         LivingEntity attacker = (LivingEntity) context.get(LootContextParameters.DAMAGE_SOURCE).getAttacker();
+         LivingEntity victim = (LivingEntity) context.get(LootContextParameters.THIS_ENTITY);
 
-      if (tier >= 6) {
-         TranslatableText mutableText = new TranslatableText("");
-         mutableText.append(attacker.getName());
-         mutableText.append(Text.of(" found a legendary ["));
-         mutableText.append(stack.getName());
-         mutableText.append(Text.of("]!"));
-         attacker.getServer().getPlayerManager().broadcast(mutableText, MessageType.CHAT, Util.NIL_UUID);
+         int looting = 0;
+         if (attacker != null) {
+            looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, attacker.getMainHandStack()) : looting;
+            looting = looting == 0 ? EnchantmentHelper.getLevel(Enchantments.LOOTING, attacker.getOffHandStack()) : looting;
+         }
+
+         float dropChance = victim.getMaxHealth() * 0.005f + (looting * 0.01f);
+         if (roll > dropChance)
+            return stack;
+         
+         // Only loot mobs, unless we have a looting enchant
+         if (!(victim instanceof MobEntity) && looting == 0) {
+            return stack;
+         }
+         
+         // Lazily collect lootable items from the registry
+         if (ArmorItems == null) {
+            ArmorItems = new ArrayList<Item>();
+            ToolItems = new ArrayList<Item>();
+            MeleeWeaponItems = new ArrayList<Item>();
+            MagicItems = new ArrayList<Item>();
+            RangedWeaponItems = new ArrayList<Item>();
+            ShieldItems = new ArrayList<Item>();
+            TreasureItems = new ArrayList<Item>();
+
+            Registry.ITEM.forEach((item) -> {
+               if (item.getRarity(item.getDefaultStack()) == Rarity.COMMON) {
+
+                  if (item instanceof ArmorItem)
+                     ArmorItems.add(item);
+                  else if (item instanceof CustomStaffItem)
+                     MagicItems.add(item);
+                  else if (item instanceof RangedWeaponItem)
+                     RangedWeaponItems.add(item);
+                  else if (item instanceof ShieldItem)
+                     ShieldItems.add(item);
+                  else if (item instanceof SwordItem || item instanceof AxeItem || item instanceof TridentItem)
+                     MeleeWeaponItems.add(item);
+                  else if (item instanceof ToolItem)
+                     ToolItems.add(item);
+                  else if (!(item instanceof BlockItem))
+                     TreasureItems.add(item);
+               }
+            });
+         }
+         
+         if (EternalCraft.Random.nextFloat() < 0.8) {
+            List<Item> lootList = ArmorItems;
+
+            float tableRoll = EternalCraft.Random.nextFloat();
+            if (tableRoll <= 0.05f)
+               lootList = TreasureItems;
+            else if (tableRoll <= 0.15f)
+               lootList = MagicItems;
+            else if (tableRoll <= 0.35f)
+               lootList = RangedWeaponItems;
+            else if (tableRoll <= 0.50f)
+               lootList = ShieldItems;
+            else if (tableRoll <= 0.75f)
+               lootList = ArmorItems;
+            else if (tableRoll <= 0.95f)
+               lootList = MeleeWeaponItems;
+            else if (tableRoll <= 1f)
+               lootList = ToolItems;
+
+            stack = lootList.get(EternalCraft.Random.nextInt(lootList.size())).getDefaultStack();
+         }
+
+         stack.setCount(1);
+
+         for (EquipmentSlot slot : EquipmentSlot.values()) {
+            for (Entry<EntityAttribute, EntityAttributeModifier> entry : stack.getItem().getAttributeModifiers(slot)
+                  .entries()) {
+               stack.addAttributeModifier(entry.getKey(), entry.getValue(), slot);
+            }
+         }
+         
+         int tier = 0;
+         if (stack.getItem() instanceof ArmorItem) {
+            ArmorItem armor = (ArmorItem) stack.getItem();
+            tier = addModifiers(stack, armor.getSlotType(), context.getLuck());
+         } else if (stack.getItem() instanceof ShieldItem) {
+            tier = addModifiers(stack, EquipmentSlot.OFFHAND, context.getLuck());
+         } else if (stack.getItem() instanceof ToolItem) {
+            tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
+         } else if (stack.getItem() instanceof RangedWeaponItem) {
+            tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
+         } else if (stack.getItem() instanceof TridentItem) {
+            tier = addModifiers(stack, EquipmentSlot.MAINHAND, context.getLuck());
+         } else {
+            tier = addModifiers(stack, EquipmentSlot.OFFHAND, context.getLuck());
+         }
+
+         if (stack.getItem().getMaxDamage() > 0)
+            stack.setDamage(EternalCraft.Random.nextInt(stack.getItem().getMaxDamage()));
+
+         if (tier >= 6) {
+            MutableText mutableText = new LiteralTextContent("").parse(null, null, 0);
+            mutableText.append(attacker.getName());
+            mutableText.append(Text.of(" found a legendary ["));
+            mutableText.append(stack.getName());
+            mutableText.append(Text.of("]!"));
+            attacker.getServer().getPlayerManager().broadcast(mutableText, false);
+         }
+
+         return stack;
+      } catch (Exception e) {
+         return stack;
       }
-
-      return stack;
    }
 
    @Override

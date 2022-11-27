@@ -126,7 +126,7 @@ public class WaterCan extends Item {
     }
 
     public boolean pourFluid(@Nullable PlayerEntity player, World world, BlockPos pos) {
-        if (world.getDimension().isUltrawarm() && this.fluid == Fluids.WATER) {
+        if (world.getDimension().ultrawarm() && this.fluid == Fluids.WATER) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();

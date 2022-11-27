@@ -23,6 +23,7 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -47,13 +48,13 @@ public class SpellManager implements SimpleSynchronousResourceReloadListener, Se
     public void reload(ResourceManager manager) {
         spells.clear();
 
-        Collection<Identifier> resourceIds = manager.findResources("spells", path -> true);
+        Map<Identifier, Resource> resourceIds = manager.findResources("spells", path -> true);
 
         if (resourceIds.size() > 0) {
             EternalCraft.LOGGER.info("Loading spells...");
 
-            for (Identifier id : resourceIds) {
-                try (InputStream stream = manager.getResource(id).getInputStream()) {
+            for (Identifier id : resourceIds.keySet()) {
+                try (InputStream stream = manager.getResource(id).get().getInputStream()) {
                     JsonObject json = JsonParser.parseReader(new InputStreamReader(stream)).getAsJsonObject();
 
                     var enabled = json.get("Enabled");

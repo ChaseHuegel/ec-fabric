@@ -86,7 +86,7 @@ public class MagicModifier extends LootModifier {
     public ItemStack modify(ItemStack stack, EquipmentSlot slot, float strength, int tier) {
         int value = (int) (strength * tier * 5);
         value = value == 0 ? 1 : value;
-        EnchantmentHelper.enchant(EternalCraft.Random, stack, value, true);
+        EnchantmentHelper.enchant(EternalCraft.MinecraftRandom, stack, value, true);
         return stack;
     }
 

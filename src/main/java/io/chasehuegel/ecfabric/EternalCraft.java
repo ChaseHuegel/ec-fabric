@@ -50,7 +50,7 @@ public class EternalCraft implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger(Namespace);
 
 	public static final Random Random = new Random();
-	public static final Random MinecraftRandom = new Random();
+	public static final net.minecraft.util.math.random.Random MinecraftRandom = net.minecraft.util.math.random.Random.create();
 
 	private static final Identifier PILLAGER_LOOT_TABLE_ID = EntityType.PILLAGER.getLootTableId();
     private static final Identifier PIGLIN_LOOT_TABLE_ID = EntityType.PIGLIN.getLootTableId();
